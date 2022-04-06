@@ -27,7 +27,7 @@ while (true) {
         }
     }
 
-    //check total length of progression and decide to continue or not
+    //checks total length of progression and decides to continue or not
     if (chordCounter >= 8) {
         if (Math.round(Math.random()) == 0) {
             break;
