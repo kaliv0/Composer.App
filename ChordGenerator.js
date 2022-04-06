@@ -1,7 +1,7 @@
 const functions = [
-    [1, 6], //Tonic chords
-    [4, 2], //Subdominant chords
-    [7, 5], //Dominant chords
+    [8, 6],  //Tonic => main tonic written as 8 instead of 1 for computational reasons
+    [4, 2],  //Subdominant
+    [7, 5],  //Dominant
 ];
 
 let progression = [];
@@ -13,12 +13,13 @@ while (true) {
     for (let chord of functions[funcIndex]) {
         //decides to include new chord in progression
         if (Math.round(Math.random()) == 1) {
-            //avoids duplicates
-            if (progression.length > 0 && progression[progression.length - 1] == chord) {
+            //avoids duplicates and reversing functional logic from subsidiary to main chords
+            if (progression.length > 0 &&
+                (progression[progression.length - 1] === chord || progression[progression.length - 1] === chord - 2)) {
                 continue;
             }
 
-            if (progression.length >= 2 && progression[progression.length - 2] == chord) {
+            if (progression.length >= 2 && progression[progression.length - 2] === chord) {
                 continue;
             }
 
@@ -29,16 +30,16 @@ while (true) {
 
     //checks total length of progression and decides to continue or not
     if (chordCounter >= 8) {
-        if (Math.round(Math.random()) == 0) {
+        if (Math.round(Math.random()) === 0) {
             break;
         }
     }
 
-    if (chordCounter == 24) {
+    if (chordCounter === 24) {
         break;
     }
 
-    //decides to go next chord function or skip one
+    //decides to go to next chord function or skip one
     funcIndex += Math.round(Math.random() + 1);
     if (funcIndex >= functions.length) {
         funcIndex = 0;
@@ -47,24 +48,24 @@ while (true) {
 
 //maps progression to chords in particular key
 //could be modified to any major or minor tonality
-var tonalChords = {
+const tonalChords = {
     //A minor
-    //[1] = "Am",
-    //[2] = "Bdim",
-    //[3] = "C",
-    //[4] = "Dm",
-    //[5] = "E7",
-    //[6] = "F",
-    //[7] = "G",
+    [8] : "Am",
+    [2] : "Bdim",
+    [3] : "C",
+    [4] : "Dm",
+    [5] : "E7",
+    [6] : "F",
+    [7] : "G",
 
     //F minor
-    [1]: "F min",
-    [2]: "G dim",
-    [3]: "Ab",
-    [4]: "Bb min",
-    [5]: "C7",
-    [6]: "Db",
-    [7]: "Eb",
+    // [8]: "F min",
+    // [2]: "G dim",
+    // [3]: "Ab",
+    // [4]: "Bb min",
+    // [5]: "C7",
+    // [6]: "Db",
+    // [7]: "Eb",
 };
 
 let result = '';
