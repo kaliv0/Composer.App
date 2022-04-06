@@ -14,7 +14,7 @@ while (true) {
         //decides to include new chord in progression
         if (Math.round(Math.random()) == 1) {
             //avoids duplicates
-            if (progression.length > 0 && //avoids C after Am
+            if (progression.length > 0 && 
                 (progression[progression.length - 1] === chord || progression[progression.length - 1] === chord - 2)) {
                 continue;
             }
