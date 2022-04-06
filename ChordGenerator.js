@@ -7,14 +7,13 @@ const functions = [
 let progression = [];
 
 let funcIndex = 0;
-let chordCounter = 0;
 
 while (true) {
     for (let chord of functions[funcIndex]) {
         //decides to include new chord in progression
         if (Math.round(Math.random()) == 1) {
             //avoids duplicates
-            if (progression.length > 0 && 
+            if (progression.length > 0 &&
                 (progression[progression.length - 1] === chord || progression[progression.length - 1] === chord - 2)) {
                 continue;
             }
@@ -24,19 +23,19 @@ while (true) {
                 continue;
             }
 
-            progression.push(chord);
-            chordCounter++;
+            progression.push(chord);            
         }
     }
 
     //checks total length of progression and decides to continue or not
-    if (chordCounter >= 8) {
-        if (Math.round(Math.random()) === 0) {
-            break;
-        }
-    }
+    //not working for some reason!!!???
+    // if (progression.length >= 8) {
+    //     if (Math.round(Math.random()) === 0) {
+    //         break;
+    //     }
+    // }
 
-    if (chordCounter === 24) {
+    if (progression.length === 24) {
         break;
     }
 
@@ -44,6 +43,17 @@ while (true) {
     funcIndex += Math.round(Math.random() + 1);
     if (funcIndex >= functions.length) {
         funcIndex = 0;
+    }
+}
+
+let colorizedProgression = [];
+colorizedProgression.push(progression[0]);
+
+//adds applied dominants 
+for (let i = 1; i < progression.length - 1; i++) {
+    if (Math.round(Math.random()) === 1 && progression[i] !== 8) {
+        colorizedProgression.push(progression[i] * 10);
+        colorizedProgression.push(progression[i]);
     }
 }
 
@@ -58,8 +68,12 @@ const tonalChords = {
     [5]: "G",
     [6]: "Am",
     //[7]: "Bdim",
-    [50]: "Gsus",
-    [80]: "C/G"
+    [20]: "A7",
+    [40]: "C7",
+    [50]: "D7",
+    [60]: "E7",
+    [80]: "C/G",
+    [90]: "Gsus",
 
     //F minor
     // [8]: "F min",
@@ -73,17 +87,17 @@ const tonalChords = {
 
 let result = '';
 
-for (let chord of progression) {
+for (let chord of colorizedProgression) {
     result += `${tonalChords[chord]}, `;
 }
 
 //creates final authentic cadence
-if (progression[progression.length - 1] !== 5) {
+if (colorizedProgression[colorizedProgression.length - 1] !== 5) {
 
     if (Math.round(Math.random()) === 0) {
-        result += `${tonalChords[50]}, `;
-    } else {
         result += `${tonalChords[80]}, `;
+    } else {
+        result += `${tonalChords[90]}, `;
     }
 
     result += `${tonalChords[5]}, `;
