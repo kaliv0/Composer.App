@@ -12,8 +12,6 @@ let funcIndex = 0;
 let chordCounter = 0;
 
 while (true) {
-
-
     for (let chord of functions[funcIndex]) {
         //decides to include new chord in progression
         if (Math.round(Math.random()) == 1) {
