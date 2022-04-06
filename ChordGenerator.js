@@ -36,7 +36,7 @@ while (true) {
         }
     }
 
-    if (chordCounter >= 24) {
+    if (chordCounter === 24) {
         break;
     }
 
