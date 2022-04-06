@@ -1,7 +1,7 @@
 const functions = [
-    [1, 6],
-    [4, 2],
-    [7, 5],
+    [1, 6], //Tonic chords
+    [4, 2], //Subdominant chords
+    [7, 5], //Dominant chords
 ];
 
 let progression = [];
