@@ -75,7 +75,7 @@ const tonalChords = {
     [4]: "F",
     [5]: "G",
     [6]: "Am",
-    [7]: "Bdim",
+    //[7]: "Bdim",
     //[80]: "G9 C",
     [20]: "A7, Dm",
     //[30]: "Bdim, Em",
