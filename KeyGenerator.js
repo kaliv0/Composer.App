@@ -1,3 +1,6 @@
+//todo => throw error when non-existing key is entered!
+//signCount exceeds 7
+
 function generateKey(tonality) {
     const pitches = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
 
@@ -18,14 +21,12 @@ function generateKey(tonality) {
 
         counter++;
     }
-
-    //todo => doesn't work for (sharp) minor keys with no parallel major
+    
     newKey = addChromaticSigns(newKey);
     console.log(newKey.join(' '));
 
     //helper function => adds key signature
     function addChromaticSigns(scale) {
-
         const chromaticSigns = ['F', 'C', 'G', 'D', 'A', 'E', 'B'];
         const majorCircleOfFifts = {
             'C': 0,
@@ -42,7 +43,11 @@ function generateKey(tonality) {
             'Ab': 4,
             'Eb': 3,
             'Bb': 2,
-            'F': 1
+            'F': 1,
+            //non-existimg, added here for computational reasons
+            'G#': 8,
+            'D#': 9,
+            'A#': 10
         }
 
         let signCount = majorCircleOfFifts[tonic];
@@ -81,4 +86,4 @@ function generateKey(tonality) {
     }
 }
 
-generateKey('F# minor')
+generateKey('Db major')
