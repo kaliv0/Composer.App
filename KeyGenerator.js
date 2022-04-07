@@ -1,6 +1,3 @@
-//todo => throw error when non-existing key is entered!
-//signCount exceeds 7
-
 function generateKey(tonality) {
     const pitches = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
 
@@ -21,9 +18,13 @@ function generateKey(tonality) {
 
         counter++;
     }
-    
-    newKey = addChromaticSigns(newKey);
-    console.log(newKey.join(' '));
+
+    try {
+        newKey = addChromaticSigns(newKey);
+        console.log(newKey.join(' '));
+    }catch(err){
+        console.log(err.message)
+    }
 
     //helper function => adds key signature
     function addChromaticSigns(scale) {
@@ -61,6 +62,10 @@ function generateKey(tonality) {
             }
         }
 
+        if (signCount > 7) {
+            throw new Error("Invalid key");
+        }
+
         //todo => too verbose?! don't repeat yourself
         if (tonic.charAt(1) === 'b' || tonic === 'F' || signCount < 0) {
             if (signCount < 0) {
@@ -86,4 +91,4 @@ function generateKey(tonality) {
     }
 }
 
-generateKey('Db major')
+generateKey('Db minor')
