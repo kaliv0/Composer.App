@@ -2,7 +2,7 @@ function generate(tonalChords) {
     const functions = [
         [8, 6],  //Tonic => main tonic written as 8 instead of 1 for computational reasons   
         [4, 2],  //Subdominant    
-        [5]     //Dominant  
+        [5]      //Dominant  
     ];
 
     const finalCadence = [80, 90, 100] //final cadence
@@ -97,7 +97,7 @@ function generate(tonalChords) {
     return result.toString().trim();
 }
 
-const tonalChords = {
+const Cmajor = {
     //C major
     [8]: "C",
     [2]: "Dm",
@@ -115,4 +115,4 @@ const tonalChords = {
     [100]: "G7",
 };
 
-console.log(generate(tonalChords));
+console.log(generate(Cmajor));
