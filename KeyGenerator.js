@@ -1,5 +1,6 @@
-function generateKey(tonic) {
+function generateKey(tonality) {
     const pitches = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+    const [tonic, mode] = tonality.split(' ');
     let newKey = [];
     let counter = 0;
     let firstDegree = tonic.charAt(0);
@@ -18,6 +19,7 @@ function generateKey(tonic) {
         counter++;
     }
 
+    //todo => how we decide if it has sharps or flats?
     newKey = addSharps(newKey);
     console.log(newKey.join(' '));
 
@@ -36,7 +38,12 @@ function generateKey(tonic) {
             'C#': 7,
         }
 
-        const sharpCount = majorCircleOfFifts[tonic];//todo
+        let sharpCount = majorCircleOfFifts[tonic];
+
+        if (mode === 'minor') {
+            sharpCount -= 3;
+        }
+
         for (let i = 0; i < sharpCount; i++) {
             let degreeIndex = newKey.indexOf(sharps[i]);
             newKey[degreeIndex] += '#';
@@ -46,4 +53,4 @@ function generateKey(tonic) {
     }
 }
 
-generateKey('G')
+generateKey('B major')
