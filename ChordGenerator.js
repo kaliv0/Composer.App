@@ -14,7 +14,7 @@ while (true) {
         //decides to include new chord in progression
         if (Math.round(Math.random()) == 1) {
             //avoids duplicates
-            if (progression.length > 0 &&
+            if (progression.length > 0 &&             //avoids putting main chord after subsidiary one e.g. F after D min
                 (progression[progression.length - 1] === chord || progression[progression.length - 1] === chord - 2)) {
                 continue;
             }
@@ -59,25 +59,24 @@ for (let i = 1; i <= progression.length - 1; i++) {
 
 //creates final authentic cadence
 if (colorizedProgression[colorizedProgression.length - 1] !== 5) {
-    if (Math.round(Math.random()) === 0) {
-        //result += `${tonalChords[80]}, `;
+    if (Math.round(Math.random()) === 0) { 
+        //adds single leaning tone to dominant five chord     
         colorizedProgression.push(finalCadence[1]);
         colorizedProgression.push(functions[2][0]);
-    } else {
-        //result += `${tonalChords[90]}, `;
+
+    } else {   
+        //adds double appoggiatura to dominant seventh chord  
         colorizedProgression.push(finalCadence[0]);
         colorizedProgression.push(finalCadence[2]);
     }
-    //result += `${tonalChords[5]}, `;
 }
 
 if (colorizedProgression[colorizedProgression.length - 1] === 5) {
     colorizedProgression[colorizedProgression.length - 1] = finalCadence[2];
 }
 
-//result += `${tonalChords[8]}`;
-colorizedProgression.push(functions[0][0])
-
+//adds final tonic
+colorizedProgression.push(functions[0][0]);
 
 //maps progression to chords in particular key
 //could be modified to any major or minor tonality
@@ -110,10 +109,6 @@ const tonalChords = {
 
 let result = '';
 
-// for (let chord of colorizedProgression) {
-//     result += `${tonalChords[chord]}, `;
-//}
-
 for (let i = 0; i < colorizedProgression.length - 1; i++) {
     let chord = colorizedProgression[i]
     result += `${tonalChords[chord]}, `;
@@ -121,21 +116,6 @@ for (let i = 0; i < colorizedProgression.length - 1; i++) {
 
 finalChord = colorizedProgression[colorizedProgression.length - 1];
 result += `${tonalChords[finalChord]}`;
-
-
-
-//creates final authentic cadence
-// if (colorizedProgression[colorizedProgression.length - 1] !== 5) {
-
-//     if (Math.round(Math.random()) === 0) {
-//         result += `${tonalChords[80]}, `;
-//     } else {
-//         result += `${tonalChords[90]}, `;
-//     }
-
-//     result += `${tonalChords[5]}, `;
-// }
-// result += `${tonalChords[8]}`;
 
 //prints progression
 console.log(result.toString().trim());
