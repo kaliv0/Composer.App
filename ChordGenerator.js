@@ -1,4 +1,5 @@
 /*
+- add constraint no K64 after Tonic
 - colorization with applied subdominant and dominant => only one
 - colorization with dominant should be 1 or 2?
 - add phrase boundaries
