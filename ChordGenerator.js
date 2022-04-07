@@ -15,7 +15,7 @@ function generate(tonalChords) {
             //decides to include new chord in progression
             if (Math.round(Math.random()) == 1) {
                 //avoids duplicates
-                if (progression.length > 0 &&             //avoids putting main chord after subsidiary one e.g. F after D min
+                if (progression.length > 0 &&           //avoids putting main chord after subsidiary one e.g. F after D min
                     (progression[progression.length - 1] === chord || progression[progression.length - 1] === chord - 2)) {
                     continue;
                 }
@@ -52,13 +52,17 @@ function generate(tonalChords) {
     colorizedProgression.push(progression[0]);
 
     //adds up to two applied dominants
-    for (let i = 1; i <= progression.length - 1; i++) {
-        if (colorizationIndex < 2 && progression[i] !== 8 && Math.round(Math.random()) === 1) {
-            colorizedProgression.push(progression[i] * 10);
+    progression.forEach((chord, index) => {
+        if (index === 0) {
+            return;
+        }
+
+        if (colorizationIndex < 2 && chord !== 8 && Math.round(Math.random()) === 1) {
+            colorizedProgression.push(chord * 10);
             colorizationIndex++;
         }
-        colorizedProgression.push(progression[i]);
-    }
+        colorizedProgression.push(chord);
+    });
 
     //creates final authentic cadence
     if (colorizedProgression[colorizedProgression.length - 1] !== 5) {
@@ -83,18 +87,14 @@ function generate(tonalChords) {
     colorizedProgression.push(functions[0][0]);
 
     //maps progression to chords in particular key
-    //could be modified to any major or minor tonality
-    let result = '';
+    //could be modified to any major or minor tonality    
 
-    for (let i = 0; i < colorizedProgression.length - 1; i++) {
-        let chord = colorizedProgression[i]
-        result += `${tonalChords[chord]}, `;
-    }
+    let result = colorizedProgression.reduce((acc, val) => {
+        return acc += `${tonalChords[val]}, `;
+    }, '');
 
-    finalChord = colorizedProgression[colorizedProgression.length - 1];
-    result += `${tonalChords[finalChord]}`;
-  
-    return result.toString().trim();
+    result = result.substring(0, result.length - 2);
+    return result.toString();
 }
 
 const Cmajor = {
