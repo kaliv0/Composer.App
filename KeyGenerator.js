@@ -1,10 +1,10 @@
 function generateKey(tonality) {
     const pitches = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+
     const [tonic, mode] = tonality.split(' ');
+    let pitchIndex = pitches.indexOf(tonic.charAt(0)); //??
     let newKey = [];
     let counter = 0;
-    let firstDegree = tonic.charAt(0);
-    let pitchIndex = pitches.indexOf(firstDegree);
 
     //populates scale degrees
     while (counter < 7) {
@@ -19,14 +19,14 @@ function generateKey(tonality) {
         counter++;
     }
 
-    //todo => how we decide if it has sharps or flats?
-    newKey = addSharps(newKey);
+    //todo => doesn't work for (sharp) minor keys with no parallel major
+    newKey = addChromaticSigns(newKey);
     console.log(newKey.join(' '));
 
     //helper function => adds key signature
-    function addSharps(scale) {
+    function addChromaticSigns(scale) {
 
-        const sharps = ['F', 'C', 'G', 'D', 'A', 'E', 'B'];
+        const chromaticSigns = ['F', 'C', 'G', 'D', 'A', 'E', 'B'];
         const majorCircleOfFifts = {
             'C': 0,
             'G': 1,
@@ -36,21 +36,49 @@ function generateKey(tonality) {
             'B': 5,
             'F#': 6,
             'C#': 7,
+            'Cb': 7,
+            'Gb': 6,
+            'Db': 5,
+            'Ab': 4,
+            'Eb': 3,
+            'Bb': 2,
+            'F': 1
         }
 
-        let sharpCount = majorCircleOfFifts[tonic];
+        let signCount = majorCircleOfFifts[tonic];
 
         if (mode === 'minor') {
-            sharpCount -= 3;
+            if (tonic.charAt(1) === 'b' || tonic === 'F') {
+                signCount += 3;
+            }
+            else {
+                signCount -= 3;
+            }
         }
 
-        for (let i = 0; i < sharpCount; i++) {
-            let degreeIndex = newKey.indexOf(sharps[i]);
-            newKey[degreeIndex] += '#';
+        //todo => too verbose?! don't repeat yourself
+        if (tonic.charAt(1) === 'b' || tonic === 'F' || signCount < 0) {
+            if (signCount < 0) {
+                signCount = Math.abs(signCount);
+            }
+
+            //ads flats
+            for (let i = signCount; i > 0; i--) {
+                let currNote = chromaticSigns[chromaticSigns.length - i];
+                let degreeIndex = newKey.indexOf(currNote);
+                newKey[degreeIndex] += 'b';
+            }
+        }
+        else {
+            //adds sharps
+            for (let i = 0; i < signCount; i++) {
+                let degreeIndex = newKey.indexOf(chromaticSigns[i]);
+                newKey[degreeIndex] += '#';
+            }
         }
 
         return scale;
     }
 }
 
-generateKey('B major')
+generateKey('F# minor')
