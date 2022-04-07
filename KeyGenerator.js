@@ -1,6 +1,5 @@
-function generateKey(tonality) {
+function generateKey(tonic) {
     const pitches = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
-    const tonic = tonality.substring(2);
     let newKey = [];
     let counter = 0;
     let firstDegree = tonic.charAt(0);
@@ -17,10 +16,6 @@ function generateKey(tonality) {
         }
 
         counter++;
-    }
-
-    if (tonality.contains('minor')) {
-        //todo
     }
 
     newKey = addSharps(newKey);
