@@ -1,11 +1,12 @@
 const functions = [
-    [8, 6], //Tonic => main tonic written as 8 instead of 1 for computational reasons   
-    [4, 2], //Subdominant    
-    [5], //Dominant  
+    [8, 6],  //Tonic => main tonic written as 8 instead of 1 for computational reasons   
+    [4, 2],  //Subdominant    
+    [5]     //Dominant  
 ];
 
-let progression = [];
+const finalCadence = [80, 90, 100] //final cadence
 
+let progression = [];
 let funcIndex = 0;
 
 while (true) {
@@ -23,17 +24,16 @@ while (true) {
                 continue;
             }
 
-            progression.push(chord);            
+            progression.push(chord);
         }
     }
 
     //checks total length of progression and decides to continue or not
-    //not working for some reason!!!???
-    // if (progression.length >= 8) {
-    //     if (Math.round(Math.random()) === 0) {
-    //         break;
-    //     }
-    // }
+    if (progression.length >= 8) {
+        if (Math.round(Math.random()) === 0) {
+            break;
+        }
+    }
 
     if (progression.length === 24) {
         break;
@@ -50,12 +50,34 @@ let colorizedProgression = [];
 colorizedProgression.push(progression[0]);
 
 //adds applied dominants 
-for (let i = 1; i < progression.length - 1; i++) {
+for (let i = 1; i <= progression.length - 1; i++) {
     if (Math.round(Math.random()) === 1 && progression[i] !== 8) {
         colorizedProgression.push(progression[i] * 10);
-        colorizedProgression.push(progression[i]);
     }
+    colorizedProgression.push(progression[i]);
 }
+
+//creates final authentic cadence
+if (colorizedProgression[colorizedProgression.length - 1] !== 5) {
+    if (Math.round(Math.random()) === 0) {
+        //result += `${tonalChords[80]}, `;
+        colorizedProgression.push(finalCadence[1]);
+        colorizedProgression.push(functions[2][0]);
+    } else {
+        //result += `${tonalChords[90]}, `;
+        colorizedProgression.push(finalCadence[0]);
+        colorizedProgression.push(finalCadence[2]);
+    }
+    //result += `${tonalChords[5]}, `;
+}
+
+if (colorizedProgression[colorizedProgression.length - 1] === 5) {
+    colorizedProgression[colorizedProgression.length - 1] = finalCadence[2];
+}
+
+//result += `${tonalChords[8]}`;
+colorizedProgression.push(functions[0][0])
+
 
 //maps progression to chords in particular key
 //could be modified to any major or minor tonality
@@ -74,6 +96,7 @@ const tonalChords = {
     [60]: "E7",
     [80]: "C/G",
     [90]: "Gsus",
+    [100]: "G7",
 
     //F minor
     // [8]: "F min",
@@ -87,22 +110,32 @@ const tonalChords = {
 
 let result = '';
 
-for (let chord of colorizedProgression) {
+// for (let chord of colorizedProgression) {
+//     result += `${tonalChords[chord]}, `;
+//}
+
+for (let i = 0; i < colorizedProgression.length - 1; i++) {
+    let chord = colorizedProgression[i]
     result += `${tonalChords[chord]}, `;
 }
 
+finalChord = colorizedProgression[colorizedProgression.length - 1];
+result += `${tonalChords[finalChord]}`;
+
+
+
 //creates final authentic cadence
-if (colorizedProgression[colorizedProgression.length - 1] !== 5) {
+// if (colorizedProgression[colorizedProgression.length - 1] !== 5) {
 
-    if (Math.round(Math.random()) === 0) {
-        result += `${tonalChords[80]}, `;
-    } else {
-        result += `${tonalChords[90]}, `;
-    }
+//     if (Math.round(Math.random()) === 0) {
+//         result += `${tonalChords[80]}, `;
+//     } else {
+//         result += `${tonalChords[90]}, `;
+//     }
 
-    result += `${tonalChords[5]}, `;
-}
-result += `${tonalChords[8]}`;
+//     result += `${tonalChords[5]}, `;
+// }
+// result += `${tonalChords[8]}`;
 
 //prints progression
 console.log(result.toString().trim());
