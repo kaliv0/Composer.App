@@ -93,9 +93,7 @@ function generate(tonalChords) {
 
     finalChord = colorizedProgression[colorizedProgression.length - 1];
     result += `${tonalChords[finalChord]}`;
-
-    //prints progression
-    //console.log(result.toString().trim());
+  
     return result.toString().trim();
 }
 
