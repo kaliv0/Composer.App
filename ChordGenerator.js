@@ -1,3 +1,13 @@
+/*
+- colorization with applied subdominant and dominant => only one
+- colorization with dominant should be 1 or 2?
+- add phrase boundaries
+- add sequences
+- add modal interchange (Neapolitan chord)
+- add random key implementation
+- add key creator
+*/
+
 function generate(tonalChords) {
     const functions = [
         [8, 6],  //Tonic => main tonic written as 8 instead of 1 for computational reasons   
