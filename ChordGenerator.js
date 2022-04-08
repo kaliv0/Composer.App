@@ -6,7 +6,7 @@
 - add sequences
 - add modal interchange (Neapolitan chord)
 - add random key implementation
-- add key creator
+- integrate creator
 */
 
 function generate(tonalChords) {
