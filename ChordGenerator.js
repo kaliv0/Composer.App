@@ -1,5 +1,4 @@
 /*
-- add constraint no K64 after Tonic
 - colorization with applied subdominant and dominant => only one
 - colorization with dominant should be 1 or 2?
 - add phrase boundaries
@@ -72,14 +71,14 @@ function generate(tonalChords) {
 
     //creates final authentic cadence
     if (colorizedProgression[colorizedProgression.length - 1] !== 5) {
-        if (Math.round(Math.random()) === 0) {
-            //adds single leaning tone to dominant five chord     
+        if (Math.round(Math.random()) === 0 && colorizedProgression[colorizedProgression.length - 1] !== 8) {
+             //adds double appoggiatura to dominant seventh chord  
+            colorizedProgression.push(finalCadence[0]);
+            colorizedProgression.push(finalCadence[2]);          
+        } else {
+             //adds single leaning tone to dominant five chord     
             colorizedProgression.push(finalCadence[1]);
             colorizedProgression.push(functions[2][0]);
-        } else {
-            //adds double appoggiatura to dominant seventh chord  
-            colorizedProgression.push(finalCadence[0]);
-            colorizedProgression.push(finalCadence[2]);
         }
     }    
     else {  //turns last dominant from five to seventh chord
