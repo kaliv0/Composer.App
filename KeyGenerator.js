@@ -22,7 +22,7 @@ function generateKey(tonality) {
     try {
         newKey = addChromaticSigns(newKey);
         console.log(newKey.join(' '));
-    }catch(err){
+    } catch (err) {
         console.log(err.message)
     }
 
@@ -52,9 +52,10 @@ function generateKey(tonality) {
         }
 
         let signCount = majorCircleOfFifts[tonic];
+        let isWithFlats = (tonic.charAt(1) === 'b' || tonic === 'F');
 
         if (mode === 'minor') {
-            if (tonic.charAt(1) === 'b' || tonic === 'F') {
+            if (isWithFlats) {
                 signCount += 3;
             }
             else {
@@ -66,8 +67,7 @@ function generateKey(tonality) {
             throw new Error("Invalid key");
         }
 
-        //todo => too verbose?! don't repeat yourself
-        if (tonic.charAt(1) === 'b' || tonic === 'F' || signCount < 0) {
+        if (isWithFlats || signCount < 0) {
             if (signCount < 0) {
                 signCount = Math.abs(signCount);
             }
@@ -91,4 +91,4 @@ function generateKey(tonality) {
     }
 }
 
-generateKey('Db minor')
+generateKey('G minor')
