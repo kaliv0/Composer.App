@@ -1,4 +1,6 @@
 function generateKey(tonality) {
+
+    //regex for valid keys => ^[A-G][#b]{0,1}\s(\bminor\b){0,1}(\bmajor\b){0,1}$
     const pitches = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
 
     const [tonic, mode] = tonality.split(' ');
@@ -87,5 +89,4 @@ function generateKey(tonality) {
         return scale;
     }
 }
-
 generateKey('G minor')
