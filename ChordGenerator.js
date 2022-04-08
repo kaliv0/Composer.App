@@ -30,12 +30,10 @@ function generate(tonalChords) {
                     (progression[progression.length - 1] === chord || progression[progression.length - 1] === chord - 2)) {
                     continue;
                 }
-
                 //avoids duplicates at penultimate index
                 if (progression.length >= 2 && progression[progression.length - 2] === chord) {
                     continue;
                 }
-
                 progression.push(chord);
             }
         }
@@ -46,11 +44,9 @@ function generate(tonalChords) {
                 break;
             }
         }
-
         if (progression.length === 16) {
             break;
         }
-
         //decides to go to next chord function or skip one
         funcIndex += Math.round(Math.random() + 1);
         if (funcIndex >= functions.length) {
@@ -81,16 +77,17 @@ function generate(tonalChords) {
             //adds single leaning tone to dominant five chord     
             colorizedProgression.push(finalCadence[1]);
             colorizedProgression.push(functions[2][0]);
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
         } else {
             //adds double appoggiatura to dominant seventh chord  
             colorizedProgression.push(finalCadence[0]);
             colorizedProgression.push(finalCadence[2]);
         }
-    }
-
-    //turns last dominant from five to seventh chord
-    if (colorizedProgression[colorizedProgression.length - 1] === 5) {
+    }    
+    else {  //turns last dominant from five to seventh chord
         colorizedProgression[colorizedProgression.length - 1] = finalCadence[2];
     }
 
