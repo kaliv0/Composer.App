@@ -63,7 +63,6 @@ function generate(tonalChords) {
         if (index === 0) {
             return;
         }
-
         if (colorizationIndex < 2 && chord !== 8 && Math.round(Math.random()) === 1) {
             colorizedProgression.push(chord * 10);
             colorizationIndex++;
@@ -91,8 +90,7 @@ function generate(tonalChords) {
     colorizedProgression.push(functions[0][0]);
 
     //maps progression to chords in particular key
-    //could be modified to any major or minor tonality    
-
+    //could be modified to any major or minor tonality
     let result = colorizedProgression.reduce((acc, val) => {
         return acc += `${tonalChords[val]}, `;
     }, '');
