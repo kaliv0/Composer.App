@@ -2,7 +2,7 @@ function generateKey(tonality) {
     const pitches = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
 
     const [tonic, mode] = tonality.split(' ');
-    let pitchIndex = pitches.indexOf(tonic.charAt(0)); //??
+    let pitchIndex = pitches.indexOf(tonic.charAt(0)); 
     let newKey = [];
     let counter = 0;
 
