@@ -2,11 +2,7 @@ function generateKey(tonality) {
     const pitches = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
 
     const [tonic, mode] = tonality.split(' ');
-<<<<<<< HEAD
-    let pitchIndex = pitches.indexOf(tonic.charAt(0)); //??
-=======
     let pitchIndex = pitches.indexOf(tonic.charAt(0)); 
->>>>>>> c5adb79dfe076ea9878e59beda22d4b7c4b9605e
     let newKey = [];
     let counter = 0;
 
@@ -19,10 +15,6 @@ function generateKey(tonality) {
         } else {
             pitchIndex = 0;
         }
-<<<<<<< HEAD
-
-=======
->>>>>>> c5adb79dfe076ea9878e59beda22d4b7c4b9605e
         counter++;
     }
 
@@ -78,10 +70,6 @@ function generateKey(tonality) {
             if (signCount < 0) {
                 signCount = Math.abs(signCount);
             }
-<<<<<<< HEAD
-=======
-
->>>>>>> c5adb79dfe076ea9878e59beda22d4b7c4b9605e
             //ads flats
             for (let i = signCount; i > 0; i--) {
                 let currNote = chromaticSigns[chromaticSigns.length - i];
@@ -100,8 +88,4 @@ function generateKey(tonality) {
     }
 }
 
-<<<<<<< HEAD
 generateKey('G minor')
-=======
-generateKey('G minor')
->>>>>>> c5adb79dfe076ea9878e59beda22d4b7c4b9605e
