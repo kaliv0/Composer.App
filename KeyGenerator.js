@@ -15,7 +15,6 @@ function generateKey(tonality) {
         } else {
             pitchIndex = 0;
         }
-
         counter++;
     }
 
@@ -86,7 +85,6 @@ function generateKey(tonality) {
                 newKey[degreeIndex] += '#';
             }
         }
-
         return scale;
     }
 }
