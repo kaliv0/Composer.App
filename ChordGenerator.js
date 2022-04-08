@@ -80,7 +80,7 @@ function generate(tonalChords) {
         if (Math.round(Math.random()) === 0) {
             //adds single leaning tone to dominant five chord     
             colorizedProgression.push(finalCadence[1]);
-            colorizedProgression.push(functions[2][0]);
+            colorizedProgression.push(functions[2][0]);//not working?????
 
         } else {
             //adds double appoggiatura to dominant seventh chord  
