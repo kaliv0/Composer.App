@@ -6,7 +6,7 @@
 - add sequences
 - add modal interchange (Neapolitan chord)
 - add random key implementation
-- add key creator
+- integrate creator
 */
 
 function generate(tonalChords) {
@@ -76,8 +76,12 @@ function generate(tonalChords) {
         if (Math.round(Math.random()) === 0) {
             //adds single leaning tone to dominant five chord     
             colorizedProgression.push(finalCadence[1]);
+<<<<<<< HEAD
             colorizedProgression.push(functions[2][0]);
 <<<<<<< Updated upstream
+=======
+            colorizedProgression.push(functions[2][0]);//not working?????
+>>>>>>> c5adb79dfe076ea9878e59beda22d4b7c4b9605e
 
 =======
 >>>>>>> Stashed changes
