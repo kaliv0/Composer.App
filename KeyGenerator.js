@@ -70,7 +70,7 @@ function generateKey(tonality) {
             if (signCount < 0) {
                 signCount = Math.abs(signCount);
             }
-            //ads flats
+            //adds flats
             for (let i = signCount; i > 0; i--) {
                 let currNote = chromaticSigns[chromaticSigns.length - i];
                 let degreeIndex = newKey.indexOf(currNote);
