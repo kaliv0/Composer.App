@@ -17,7 +17,7 @@ function addChromaticSigns(scale, tonic, mode) {
         'Eb': 3,
         'Bb': 2,
         'F': 1,
-        //non-existimg, added here for computational reasons
+        //non-existing, added here for computational reasons
         'G#': 8,
         'D#': 9,
         'A#': 10
