@@ -29,9 +29,10 @@ function generateKey(tonality) {
 
     try {
         newKey = chromatizator.addChromaticSigns(newKey, tonic, mode);
-        console.log(newKey.join(' '));
+        return newKey;
     } catch (err) {
         console.error(err.message)
     }
 }
-generateKey('G major')
+
+module.exports = { generateKey };
