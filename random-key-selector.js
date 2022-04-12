@@ -9,7 +9,6 @@ function selectKey() {
     let key = pitches[rndIndex];
 
     const rndInt = randomIntFromInterval(0, 3);
-
     if (rndInt === 1) {
         key += '#';
     }
