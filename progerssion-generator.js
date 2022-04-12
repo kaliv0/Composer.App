@@ -102,6 +102,7 @@ function generateProgression(tonalChords) {
 
 
 const [randomKey, randomMode] = keySelector.selectKey();
+//todo => what if app chooses invalid key?
 const scale = keyGenerator.generateKey(`${randomKey} ${randomMode}`);
 const chords = chordGenerator.generateChords(scale, randomMode);
 console.log(generateProgression(chords));

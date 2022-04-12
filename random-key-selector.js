@@ -5,9 +5,18 @@ function selectKey() {
         return Math.floor(Math.random() * (max - min) + min);
     }
 
-    const rndInt = randomIntFromInterval(0, 7);
+    const rndIndex = randomIntFromInterval(0, 7);
+    let key = pitches[rndIndex];
 
-    const key = pitches[rndInt];
+    const rndInt = randomIntFromInterval(0, 3);
+
+    if (rndInt === 1) {
+        key += '#';
+    }
+    if (rndInt === 2) {
+        key += 'b';
+    }
+
     const mode = (Math.round(Math.random()) === 0) ? 'major' : 'minor';
     return [key, mode];
 }
