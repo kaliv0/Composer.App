@@ -35,7 +35,8 @@ function generateChords(scale, mode) {
         }
 
         chords[90] = scale[4] + susSuffix;
-        chords[100] = scale[0] + '/' + scale[4];
+        //chords[100] = scale[0] + '/' + scale[4];
+        chords[100] = `${scale[0]}/${scale[4]}`;
     }
     else if (mode === 'minor') {
         //creates main chords
@@ -44,7 +45,7 @@ function generateChords(scale, mode) {
                 chords[i + 1] = scale[i] + dimSuffix
             }
             else if (i === 3) {
-                chords[i + 1] = scale[i] + minSuffix;
+                chords[i + 1] = scale[i] + minSuffix; //could be changed to half-diminished seventh chord
             }
             else {
                 chords[i + 1] = scale[i];
@@ -56,7 +57,7 @@ function generateChords(scale, mode) {
         let index = 5;
         for (let j = 20; j <= 80; j += 10) {
             if (index === 5) {
-                scale[index] += majSuffix; //could be refactored to French (flat five) chord
+                scale[index] += majSuffix; //could be changed to French (flat five) chord
             }
             if (index === 7) {
                 index = 0;
@@ -65,7 +66,8 @@ function generateChords(scale, mode) {
             index++;
         }
         chords[90] = scale[4] + susSuffix;
-        chords[100] = scale[0] + '/' + scale[4];
+        //chords[100] = scale[0] + '/' + scale[4];
+        chords[100] = `${scale[0]}/${scale[4]}`;
     }
     return chords;
 }

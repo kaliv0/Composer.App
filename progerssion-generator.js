@@ -5,8 +5,8 @@ TODO:
 - add phrase boundaries
 - add sequences
 - add modal interchange (Neapolitan chord)
-- add random key implementation
 */
+const keySelector = require("./random-key-selector");
 const keyGenerator = require("./key-generator");
 const chordGenerator = require("./chord-generator");
 
@@ -100,6 +100,8 @@ function generateProgression(tonalChords) {
     return result.toString();
 }
 
-const scale = keyGenerator.generateKey('A minor');
-const chords = chordGenerator.generateChords(scale, 'minor');
+
+const [randomKey, randomMode] = keySelector.selectKey();
+const scale = keyGenerator.generateKey(`${randomKey} ${randomMode}`);
+const chords = chordGenerator.generateChords(scale, randomMode);
 console.log(generateProgression(chords));
