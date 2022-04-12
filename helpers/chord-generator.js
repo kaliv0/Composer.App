@@ -3,7 +3,7 @@ function generateChords(scale, mode) {
     let majSuffix = 'maj';
     let minSuffix = 'm';
     let dimSuffix = 'dim';
-    let applDomSuffix = '7';
+    let seventhSuffix = '7';
     let susSuffix = 'sus';
 
     if (mode === 'major') {
@@ -30,7 +30,7 @@ function generateChords(scale, mode) {
             if (index === 7) {
                 index = 0;
             }
-            chords[j] = scale[index] + applDomSuffix;
+            chords[j] = scale[index] + seventhSuffix;
             index++;
         }
 
@@ -42,10 +42,11 @@ function generateChords(scale, mode) {
         //creates main chords
         for (let i = 1; i < scale.length; i++) {
             if (i === 1) {
-                chords[i + 1] = scale[i] + dimSuffix
+                //chords[i + 1] = scale[i] + dimSuffix + seventhSuffix; //could be omitted?!
+                chords[i + 1] = scale[i] + dimSuffix;
             }
             else if (i === 3) {
-                chords[i + 1] = scale[i] + minSuffix; //could be changed to half-diminished seventh chord
+                chords[i + 1] = scale[i] + minSuffix; //could be changed to half-diminished seventh chord?
             }
             else {
                 chords[i + 1] = scale[i];
@@ -62,7 +63,7 @@ function generateChords(scale, mode) {
             if (index === 7) {
                 index = 0;
             }
-            chords[j] = scale[index] + applDomSuffix;
+            chords[j] = scale[index] + seventhSuffix;
             index++;
         }
         chords[90] = scale[4] + susSuffix;

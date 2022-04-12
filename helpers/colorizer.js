@@ -13,17 +13,39 @@ function colorize(progression, tonalChords) {
     let colorizedProgression = [];
     colorizedProgression.push(progression[0]);
 
-    //adds up to two applied dominants
-    progression.forEach((chord, index) => {
-        if (index === 0) {
-            return;
+    //adds up to three applied dominants skipping first chord in given progression    
+    let chord;
+    for (let i = 1; i < progression.length; i++) {
+        chord = progression[i];
+
+        if (colorizationIndex === 3) {
+            colorizedProgression.push(chord);
+            continue;
         }
-        if (colorizationIndex < 2 && chord !== 8 && randomizer.randomBit() === 1) {
+
+        if (chord === 4 && progression[i - 1] === 8) {
+            let appliedChord = randomizer.randomIntFromInterval(0, 3);
+            if (appliedChord === 1) {
+                colorizedProgression.push(40);
+                colorizationIndex++;
+            }
+            //adds mediant between tonic and subdominant
+            else if (appliedChord === 2) {
+                colorizedProgression.push(3);
+                colorizationIndex++;
+            }
+            colorizedProgression.push(chord);
+            continue;
+        }
+
+       //todo => colorizing 6th degree
+
+        if (progression[i] !== 8 && randomizer.randomBit() === 1) {
             colorizedProgression.push(chord * 10);
             colorizationIndex++;
         }
         colorizedProgression.push(chord);
-    });
+    }
 
     //creates final authentic cadence
     if (colorizedProgression[colorizedProgression.length - 1] !== 5) {

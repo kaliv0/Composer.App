@@ -1,6 +1,5 @@
 /*
 TODO:
-- refactor colorization as separate function/module
 - colorization with applied subdominant and dominant => only one
 - add phrase boundaries
 - add sequences
@@ -60,12 +59,13 @@ function generateProgression(tonalChords) {
     }
 
     const result = colorizer.colorize(progression, tonalChords);
+    //const result = colorizer.colorize([4, 8, 4, 2, 5, 2, 6, 8], tonalChords);
     return result.toString();
 }
 
-// const randomKey = 'C';
-// const randomMode = 'minor'
-const [randomKey, randomMode] = keySelector.selectKey();
+const randomKey = 'A';
+const randomMode = 'minor'
+//const [randomKey, randomMode] = keySelector.selectKey();
 const scale = keyGenerator.generateKey(`${randomKey} ${randomMode}`);
 const chords = chordGenerator.generateChords(scale, randomMode);
 console.log(generateProgression(chords));
