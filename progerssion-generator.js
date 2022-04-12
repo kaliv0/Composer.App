@@ -1,7 +1,6 @@
 /*
 TODO:
 - colorization with applied subdominant and dominant => only one
-- colorization with dominant should be 1 or 2?
 - add phrase boundaries
 - add sequences
 - add modal interchange (Neapolitan chord)
