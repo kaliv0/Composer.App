@@ -1,6 +1,5 @@
 /*
 TODO:
-- colorization with applied subdominant and dominant => only one
 - add phrase boundaries
 - add sequences
 - add modal interchange (Neapolitan chord)
@@ -11,7 +10,7 @@ const chordGenerator = require("./helpers/chord-generator");
 const randomizer = require("./helpers/randomizer");
 const colorizer = require("./helpers/colorizer");
 
-function generateProgression(tonalChords) {
+function generateProgression(tonalChords, mode) {
     const functions = [
         [8, 6],  //Tonic => main tonic written as 8 instead of 1 for computational reasons   
         [4, 2],  //Subdominant    
@@ -58,14 +57,11 @@ function generateProgression(tonalChords) {
         }
     }
 
-    const result = colorizer.colorize(progression, tonalChords);
-    //const result = colorizer.colorize([4, 8, 4, 2, 5, 2, 6, 8], tonalChords);
+    const result = colorizer.colorize(progression, tonalChords, mode);
     return result.toString();
 }
 
-const randomKey = 'A';
-const randomMode = 'minor'
-//const [randomKey, randomMode] = keySelector.selectKey();
-const scale = keyGenerator.generateKey(`${randomKey} ${randomMode}`);
-const chords = chordGenerator.generateChords(scale, randomMode);
-console.log(generateProgression(chords));
+const [key, mode] = keySelector.selectKey();
+const scale = keyGenerator.generateKey(`${key} ${mode}`);
+const chords = chordGenerator.generateChords(scale, mode);
+console.log(generateProgression(chords, mode));

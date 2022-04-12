@@ -42,7 +42,7 @@ function generateChords(scale, mode) {
         //creates main chords
         for (let i = 1; i < scale.length; i++) {
             if (i === 1) {
-                //chords[i + 1] = scale[i] + dimSuffix + seventhSuffix; //could be omitted?!
+                //chords[i + 1] = scale[i] + dimSuffix + seventhSuffix;
                 chords[i + 1] = scale[i] + dimSuffix;
             }
             else if (i === 3) {

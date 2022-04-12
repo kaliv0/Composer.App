@@ -1,6 +1,6 @@
 const randomizer = require("./randomizer");
 
-function colorize(progression, tonalChords) {
+function colorize(progression, tonalChords, mode) {
     const functions = [
         [8, 6],  //Tonic => main tonic written as 8 instead of 1 for computational reasons   
         [4, 2],  //Subdominant    
@@ -22,24 +22,58 @@ function colorize(progression, tonalChords) {
             colorizedProgression.push(chord);
             continue;
         }
-
-        if (chord === 4 && progression[i - 1] === 8) {
+        
+        //colorizes 4th degree
+        if (chord === 4) {
             let appliedChord = randomizer.randomIntFromInterval(0, 3);
+            //adds applied dominant 7th
             if (appliedChord === 1) {
                 colorizedProgression.push(40);
                 colorizationIndex++;
             }
             //adds mediant between tonic and subdominant
-            else if (appliedChord === 2) {
+            else if (appliedChord === 2 && progression[i - 1] === 8) {
                 colorizedProgression.push(3);
                 colorizationIndex++;
             }
             colorizedProgression.push(chord);
             continue;
         }
+        
+        //avoids situations of type 'Gdim, G7, C7, Fm'
+        if (mode === 'minor' && chord === 5 && progression[i - 1] === 2) {
+            colorizedProgression.push(chord);
+            continue;
+        }
+        
+        //colorizes 6th degree
+        if (chord === 6) {
+            let appliedChord = randomizer.randomIntFromInterval(0, 4);
+            //adds applied dominant 7th
+            if (appliedChord === 1) {
+                colorizedProgression.push(60);
+                colorizationIndex++;
+            }
+            //adds mediant chord
+            else if (appliedChord === 2) {
+                colorizedProgression.push(3);
+                colorizationIndex++;
+            }
+            //adds ii-v transition after tonic
+            else if (appliedChord === 3 && progression[i - 1] === 8) {
+                colorizedProgression.push(7);
 
-       //todo => colorizing 6th degree
+                mode === 'major'
+                    ? colorizedProgression.push(60)
+                    : colorizedProgression.push(3);
 
+                colorizationIndex++;
+            }
+            colorizedProgression.push(chord);
+            continue;
+        }
+
+        //colorizes chord on other degrees
         if (progression[i] !== 8 && randomizer.randomBit() === 1) {
             colorizedProgression.push(chord * 10);
             colorizationIndex++;
