@@ -1,4 +1,4 @@
-const chromatizator = require("./chromatizator");
+const chromatizer = require("./chromatizer");
 
 function generateKey(tonality) {
     //regexp for valid keys 
@@ -29,7 +29,7 @@ function generateKey(tonality) {
 
     //error handling needed if user selects key manually
     try {
-        newKey = chromatizator.addChromaticSigns(newKey, tonic, mode);
+        newKey = chromatizer.addChromaticSigns(newKey, tonic, mode);
         return newKey;
     } catch (err) {
         console.error(err.message);
