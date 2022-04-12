@@ -100,7 +100,6 @@ function generateProgression(tonalChords) {
     return result.toString();
 }
 
-const scale = keyGenerator.generateKey('D major');
-const chords = chordGenerator.generateChords(scale, 'major')
-
+const scale = keyGenerator.generateKey('A minor');
+const chords = chordGenerator.generateChords(scale, 'minor');
 console.log(generateProgression(chords));
