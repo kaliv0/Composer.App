@@ -45,7 +45,7 @@ function colorize(progression, tonalChords, mode) {
             colorizedProgression.push(chord);
             continue;
         }
-        
+
         //colorizes 6th degree
         if (chord === 6) {
             let appliedChord = randomizer.randomIntFromInterval(0, 4);
@@ -73,7 +73,7 @@ function colorize(progression, tonalChords, mode) {
             continue;
         }
 
-        //colorizes chord on other degrees
+        //colorizes chords on other degrees
         if (progression[i] !== 8 && randomizer.randomBit() === 1) {
             colorizedProgression.push(chord * 10);
             colorizationIndex++;
