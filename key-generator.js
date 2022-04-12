@@ -27,6 +27,7 @@ function generateKey(tonality) {
         counter++;
     }
 
+    //error handling needed if user selects key manually
     try {
         newKey = chromatizator.addChromaticSigns(newKey, tonic, mode);
         return newKey;
