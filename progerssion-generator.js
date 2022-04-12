@@ -6,11 +6,11 @@ TODO:
 - add sequences
 - add modal interchange (Neapolitan chord)
 */
-const keySelector = require("./random-key-selector");
-const keyGenerator = require("./key-generator");
-const chordGenerator = require("./chord-generator");
-const randomizer = require("./randomizer");
-const colorizer = require("./colorizer");
+const keySelector = require("./helpers/random-key-selector");
+const keyGenerator = require("./helpers/key-generator");
+const chordGenerator = require("./helpers/chord-generator");
+const randomizer = require("./helpers/randomizer");
+const colorizer = require("./helpers/colorizer");
 
 function generateProgression(tonalChords) {
     const functions = [
