@@ -1,3 +1,5 @@
+const randomizer = require('./randomizer');
+
 function selectKey() {
     const pitches = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
     const invalidKeys = [
@@ -16,14 +18,10 @@ function selectKey() {
     ];
 
     //chooses random key
-    function randomIntFromInterval(min, max) { //max excluded 
-        return Math.floor(Math.random() * (max - min) + min);
-    }
-
-    const rndIndex = randomIntFromInterval(0, 7);
+    const rndIndex = randomizer.randomIntFromInterval(0, 7);
     let key = pitches[rndIndex];
 
-    const rndInt = randomIntFromInterval(0, 3);
+    const rndInt = randomizer.randomIntFromInterval(0, 3);
     if (rndInt === 1) {
         key += '#';
     }
@@ -33,7 +31,7 @@ function selectKey() {
 
     let mode = (Math.round(Math.random()) === 0) ? 'major' : 'minor';
 
-    //checks for invalid key and chooses new one via recursion if necessary
+    //checks for invalid key and chooses new one via recursion if necessary 
     if (invalidKeys.includes(`${key} ${mode}`)) {
         [key, mode] = selectKey();
     };
