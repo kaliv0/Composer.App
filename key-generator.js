@@ -31,7 +31,7 @@ function generateKey(tonality) {
         newKey = chromatizator.addChromaticSigns(newKey, tonic, mode);
         return newKey;
     } catch (err) {
-        console.error(err.message)
+        console.error(err.message);
     }
 }
 
