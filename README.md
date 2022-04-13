@@ -1,7 +1,7 @@
 # Composer.App
 
 A simple console application written in *JavaScript* that generates a chord progression in a given key.
-The progession could be used for imporvisation and educational purposes.
+The progession could be used for improvisation and educational purposes.
 
 Composer.App supports the following functionalities:
 - *_random-key-selector.js_* => chooses a random key to be constructed
