@@ -46,7 +46,7 @@ function generateChords(scale, mode) {
                 chords[i + 1] = scale[i] + dimSuffix;
             }
             else if (i === 3) {
-                chords[i + 1] = scale[i] + minSuffix; //could be changed to half-diminished seventh chord?
+                chords[i + 1] = scale[i] + minSuffix;
             }
             else {
                 chords[i + 1] = scale[i];
