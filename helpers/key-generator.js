@@ -1,3 +1,5 @@
+//creates main scale of given key
+
 const chromatizer = require("./chromatizer");
 
 function generateKey(tonality) {

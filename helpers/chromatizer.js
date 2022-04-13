@@ -1,3 +1,5 @@
+//appends required chromatic signs for a given key signature
+
 function addChromaticSigns(scale, tonic, mode) {
     const chromaticSigns = ['F', 'C', 'G', 'D', 'A', 'E', 'B'];
     const majorCircleOfFifts = {

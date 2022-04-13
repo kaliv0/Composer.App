@@ -1,3 +1,5 @@
+//generates all main chords in given key and all their applied dominants
+
 function generateChords(scale, mode) {
     let chords = {};
     let majSuffix = 'maj';

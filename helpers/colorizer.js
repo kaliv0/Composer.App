@@ -1,3 +1,6 @@
+//colorizes given progression by inserting applied dominants, ii-v 'movements'
+//and appends final cadence
+
 const randomizer = require("./randomizer");
 
 function colorize(progression, tonalChords, mode) {

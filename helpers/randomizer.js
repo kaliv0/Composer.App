@@ -1,3 +1,5 @@
+//helper function for random selection of integers
+
 function randomIntFromInterval(min, max) { //max excluded 
     return Math.floor(Math.random() * (max - min) + min);
 }

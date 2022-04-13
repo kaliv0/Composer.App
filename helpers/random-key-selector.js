@@ -1,3 +1,5 @@
+//randomly selects key to be constructed
+
 const randomizer = require('./randomizer');
 
 function selectKey() {

@@ -1,3 +1,6 @@
+//creates simple chord progression in randomly chosen key
+//applying traditional laws of tonal harmony
+
 /*
 TODO:
 - add phrase boundaries
