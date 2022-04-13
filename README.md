@@ -4,11 +4,11 @@ A simple console application written in *JavaScript* that generates a chord prog
 The progession could be used for imporvisation and educational purposes.
 
 Composer.App supports the following functionalities:
-- random-key-selector.js => chooses a random key to be constructed
-- key-generator.js => creates the main scale of the given key
-- chromatizer.js => appends the required chromatic signs for the chosen key signature
-- chord-generator.js => generates all main chords in the tonality with their applied dominants
-- generateProgression.js => creates simple chord progression in the chosen key applying the traditional laws of tonal harmony
-- colorizer.js => inserts applied dominants, ii-v 'movements' and appends final cadence
-- randomizer.js => helper function for random selection of integers used throughout the application
-- app.js => main starting point to get the application running
+- *_random-key-selector.js_* => chooses a random key to be constructed
+- *_key-generator.js_* => creates the main scale of the given key
+- *_chromatizer.js_* => appends the required chromatic signs for the chosen key signature
+- *_chord-generator.js_* => generates all main chords in the tonality with their applied dominants
+- *_generateProgression.js_* => creates simple chord progression in the chosen key applying the traditional laws of tonal harmony
+- *_colorizer.js_* => inserts applied dominants, ii-v 'movements' and appends final cadence
+- *_randomizer.js_* => helper function for random selection of integers used throughout the application
+- *_app.js_* => main starting point to get the application running
