@@ -1,3 +1,9 @@
+/*
+NB => imperative approach is used for easier debugging 
+      and testing various functionalities and edge cases.
+TODO => refactor applying declarative approach
+*/
+
 //starts application
 
 const keySelector = require("./random/random-key-selector");
