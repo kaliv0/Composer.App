@@ -10,18 +10,37 @@ function generateChords(scale, mode) {
 
     if (mode === 'major') {
         //creates main chords
-        for (let i = 1; i < scale.length; i++) {
-            if (i === 1 || i === 2 || i === 5) {
-                chords[i + 1] = scale[i] + minSuffix;
+        // for (let i = 1; i < scale.length; i++) {
+        //     if (i === 1 || i === 2 || i === 5) {
+        //         chords[i + 1] = scale[i] + minSuffix;
+        //     }
+        //     else if (i === 6) {
+        //         chords[i + 1] = scale[i] + dimSuffix
+        //     }
+        //     else {
+        //         chords[i + 1] = scale[i];
+        //     }
+        // }
+
+        //===============
+        chords = scale.reduce((acc, val, index) => {
+            if (index === 0) {
+                acc[8] = val;
             }
-            else if (i === 6) {
-                chords[i + 1] = scale[i] + dimSuffix
+            else if (index === 1 || index === 2 || index === 5) {
+                acc[index + 1] = val + minSuffix;
             }
-            else {
-                chords[i + 1] = scale[i];
+            else if (index === 6) {
+                acc[index + 1] = val + dimSuffix
             }
-        }
-        chords[8] = scale[0];
+            else if (index === 3 || index === 4 || index === 7) {
+                acc[index + 1] = val;
+            }
+            return acc;
+        }, {});
+        //==================
+
+        //chords[8] = scale[0];
 
         //creates applied dominants and cadential chords
         let index = 5;
