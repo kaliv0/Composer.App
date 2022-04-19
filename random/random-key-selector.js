@@ -1,5 +1,4 @@
 //randomly selects key to be constructed
-
 const randomizer = require('./randomizer');
 
 function selectKey() {
@@ -36,8 +35,7 @@ function selectKey() {
     //checks for invalid key and chooses new one via recursion if necessary 
     if (invalidKeys.includes(`${key} ${mode}`)) {
         [key, mode] = selectKey();
-    };
-
+    }
     return [key, mode];
 }
 

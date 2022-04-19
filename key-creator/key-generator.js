@@ -1,5 +1,4 @@
 //creates main scale of given key
-
 const chromatizer = require("./chromatizer");
 
 function generateKey(tonality) {
@@ -26,7 +25,6 @@ function generateKey(tonality) {
             pitchIndex = 0;
         }
     }
-
     //error handling needed if user selects key manually
     try {
         newKey = chromatizer.addChromaticSigns(newKey, tonic, mode);

@@ -1,24 +1,21 @@
 //generates all main chords in given key and all their applied dominants
-
 function generateChords(scale, mode) {
     const majSuffix = 'maj';
     const minSuffix = 'm';
     const dimSuffix = 'dim';
     const seventhSuffix = '7';
     const susSuffix = 'sus';
-
     let chords = {};
 
     if (mode === 'major') {
         chords = scale.reduce((acc, val, index) => {
             if (index === 0) {
                 acc[8] = val;
-            }
-            else {
+            } else {
                 if (index === 1 || index === 2 || index === 5) {
                     val += minSuffix;
                 }
-                else if (index === 6) {
+                if (index === 6) {
                     val += dimSuffix
                 }
                 acc[index + 1] = val;
@@ -38,21 +35,19 @@ function generateChords(scale, mode) {
             chords[j] = scale[index] + seventhSuffix;
             index++;
         }
-
         chords[90] = scale[4] + susSuffix;
         chords[100] = `${scale[0]}/${scale[4]}`;
     }
-    else if (mode === 'minor') {
+    if (mode === 'minor') {
         chords = scale.reduce((acc, val, index) => {
             if (index === 0) {
                 acc[8] = val + minSuffix;
-            }
-            else {
+            } else {
                 if (index === 1) {
                     //val += (dimSuffix + seventhSuffix);
                     val += dimSuffix
                 }
-                else if (index === 3) {
+                if (index === 3) {
                     val += minSuffix;
                 }
                 acc[index + 1] = val;

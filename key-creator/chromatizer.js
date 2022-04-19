@@ -29,8 +29,7 @@ function addChromaticSigns(scale, tonic, mode) {
     if (mode === 'minor') {
         if (isWithFlats) {
             signCount += 3;
-        }
-        else {
+        } else {
             signCount -= 3;
         }
     }
@@ -49,8 +48,7 @@ function addChromaticSigns(scale, tonic, mode) {
             let degreeIndex = scale.indexOf(currNote);
             scale[degreeIndex] += 'b';
         }
-    }
-    else {
+    } else {
         //adds sharps
         for (let i = 0; i < signCount; i++) {
             let degreeIndex = scale.indexOf(chromaticSigns[i]);

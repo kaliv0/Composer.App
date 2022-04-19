@@ -7,7 +7,6 @@ TODO:
 - add sequences
 - add modal interchange (Neapolitan chord)
 */
-
 const randomizer = require("../random/randomizer");
 const colorizer = require("./colorizer");
 
@@ -17,9 +16,7 @@ function generateProgression(tonalChords, mode) {
         [4, 2],  //Subdominant    
         [5]      //Dominant  
     ];
-
-    const finalCadence = [100, 90, 80] //final cadence
-
+    const finalCadence = [100, 90, 80] //final cadence    
     let progression = [];
     let funcIndex = 0;
 
@@ -41,7 +38,6 @@ function generateProgression(tonalChords, mode) {
                 progression.push(chord);
             }
         }
-
         //checks total length of progression and decides to continue or not
         if (progression.length >= 8) {
             if (randomizer.randomBit() === 0) {
@@ -57,7 +53,6 @@ function generateProgression(tonalChords, mode) {
             funcIndex = 0;
         }
     }
-
     const result = colorizer.colorize(progression, tonalChords, mode);
     return result.toString();
 }
