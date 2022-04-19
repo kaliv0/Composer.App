@@ -16,9 +16,8 @@ function generateKey(tonality) {
     let pitchIndex = pitches.indexOf(tonic.charAt(0));
 
     //populates scale degrees
-    let counter = 0;
     let newKey = [];
-    while (counter < 7) {
+    for (let i = 0; i < 7; i++) {
         newKey.push(pitches[pitchIndex]);
 
         if (pitchIndex < pitches.length - 1) {
@@ -26,7 +25,6 @@ function generateKey(tonality) {
         } else {
             pitchIndex = 0;
         }
-        counter++;
     }
 
     //error handling needed if user selects key manually

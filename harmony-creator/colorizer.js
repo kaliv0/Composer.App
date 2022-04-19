@@ -105,6 +105,7 @@ function colorize(progression, tonalChords, mode) {
 
     //maps progression to chords in particular key
     //could be modified to any major or minor tonality
+    
     let result = colorizedProgression.reduce((acc, val) => {
         return acc += `${tonalChords[val]}, `;
     }, '');
