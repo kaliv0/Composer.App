@@ -2,7 +2,7 @@
 //applying traditional laws of tonal harmony
 
 /*
-TODO:
+features that could be added:
 - add phrase boundaries
 - add sequences
 - add modal interchange (Neapolitan chord)
