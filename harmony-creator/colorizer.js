@@ -2,7 +2,7 @@
 //and appends final cadence
 
 const tonalMapper = require("../mappers/tonal-mapper");
-const randomizer = require("../random/randomizer");
+const randomizer = require("../random-generators/randomizer");
 
 function colorize(progression, tonalChords, mode, shouldApplyDominants) {
     const functions = [

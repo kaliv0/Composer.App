@@ -7,7 +7,7 @@ features that could be added:
 - add sequences
 - add modal interchange (Neapolitan chord)
 */
-const randomizer = require("../random/randomizer");
+const randomizer = require("../random-generators/randomizer");
 const colorizer = require("./colorizer");
 
 function generateProgression(tonalChords, mode, shouldApplyDominants) {

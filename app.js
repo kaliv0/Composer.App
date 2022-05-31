@@ -1,6 +1,6 @@
 //starts application
-const keySelector = require("./random/random-key-selector");
-const colorizeSelector = require("./random/randomizer");
+const keySelector = require("./random-generators/random-key-selector");
+const colorizeSelector = require("./random-generators/randomizer");
 const keyGenerator = require("./key-creator/key-generator");
 const chordGenerator = require("./key-creator/chord-generator");
 const progressionGenerator = require("./harmony-creator/progression-generator");
