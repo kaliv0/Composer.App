@@ -1,7 +1,7 @@
 //appends required chromatic signs for a given key signature
 function addChromaticSigns(scale, tonic, mode) {
     const chromaticSigns = ['F', 'C', 'G', 'D', 'A', 'E', 'B'];
-    const majorCircleOfFifts = {
+    const majorCircleOfFifths = {
         'C': 0,
         'G': 1,
         'D': 2,
@@ -23,7 +23,7 @@ function addChromaticSigns(scale, tonic, mode) {
         'A#': 10
     }
 
-    let signCount = majorCircleOfFifts[tonic];
+    let signCount = majorCircleOfFifths[tonic];
     let isWithFlats = (tonic.charAt(1) === 'b' || tonic === 'F');
 
     if (mode === 'minor') {
