@@ -16,7 +16,7 @@ function generateProgression(tonalChords, mode) {
         [4, 2],  //Subdominant    
         [5]      //Dominant  
     ];
-    const finalCadence = [100, 90, 80] //final cadence    
+    
     let progression = [];
     let funcIndex = 0;
 
