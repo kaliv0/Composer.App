@@ -10,13 +10,13 @@ features that could be added:
 const randomizer = require("../random/randomizer");
 const colorizer = require("./colorizer");
 
-function generateProgression(tonalChords, mode) {
+function generateProgression(tonalChords, mode, shouldApplyDominants) {
     const functions = [
         [8, 6],  //Tonic => main tonic written as 8 instead of 1 for computational reasons   
         [4, 2],  //Subdominant    
         [5]      //Dominant  
     ];
-    
+
     let progression = [];
     let funcIndex = 0;
 
@@ -52,9 +52,8 @@ function generateProgression(tonalChords, mode) {
         if (funcIndex >= functions.length) {
             funcIndex = 0;
         }
-    }
-    const result = colorizer.colorize(progression, tonalChords, mode);
-    return result.toString();
+    }    
+    return colorizer.colorize(progression, tonalChords, mode, shouldApplyDominants);
 }
 
 module.exports = { generateProgression };

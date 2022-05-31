@@ -27,8 +27,8 @@ function generateKey(tonality) {
     }
     //error handling needed if user selects key manually
     try {
-        newKey = chromatizer.addChromaticSigns(newKey, tonic, mode);
-        return newKey;
+        return chromatizer.addChromaticSigns(newKey, tonic, mode);
+        
     } catch (err) {
         console.error(err.message);
     }

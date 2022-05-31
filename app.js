@@ -1,10 +1,15 @@
 //starts application
 const keySelector = require("./random/random-key-selector");
+const colorizeSelector = require("./random/randomizer");
 const keyGenerator = require("./key-creator/key-generator");
 const chordGenerator = require("./key-creator/chord-generator");
 const progressionGenerator = require("./harmony-creator/progression-generator");
 
 const [key, mode] = keySelector.selectKey();
+const shouldApplyDominants = colorizeSelector.randomBit();
+
 const scale = keyGenerator.generateKey(`${key} ${mode}`);
 const chords = chordGenerator.generateChords(scale, mode);
-console.log(progressionGenerator.generateProgression(chords, mode));
+const progression = progressionGenerator.generateProgression(chords, mode, shouldApplyDominants);
+
+console.log(progression);
