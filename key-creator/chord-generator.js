@@ -26,11 +26,11 @@ function generateChords(scale, mode) {
         //creates applied dominants and cadential chords
         let index = 5;
         for (let j = 20; j <= 80; j += 10) {
-            if (index === 3) {
-                scale[index] += majSuffix;
-            }
             if (index === 7) {
                 index = 0;
+            }
+            if (index === 3) {
+                chords[j] = scale[index] + majSuffix + seventhSuffix;
             }
             chords[j] = scale[index] + seventhSuffix;
             index++;
