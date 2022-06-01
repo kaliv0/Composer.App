@@ -10,36 +10,15 @@ function translate(scale, root, mode) {
             currNote = scale[scaleIndex];
 
             if (j === 1 && (rootIndex === 1 || rootIndex === 2 || rootIndex === 5 || rootIndex === 6)) {
-                //should be extracted as separate function
-                if (currNote.includes('#')) {
-                    currNote = currNote[0] + 'x';
-                }
-                else if (currNote.includes('b')) {
-                    currNote = currNote[0];
-                }
-                else {
-                    currNote = currNote + '#';
-                }
+                currNote = raiseNote(currNote);
             }
 
             if (j === 2 && rootIndex === 6) {
-                if (currNote.includes('#')) {
-                    currNote = currNote[0] + 'x';
-                }
-                else if (currNote.includes('b')) {
-                    currNote = currNote[0];
-                }
-                else {
-                    currNote = currNote + '#';
-                }
+                currNote = raiseNote(currNote);
             }
 
             if (j === 3 && (rootIndex === 0 || rootIndex === 3)) {
-                if (currNote.includes('#')) {
-                    currNote = currNote[0];
-                } else {
-                    currNote = currNote + 'b';
-                }
+                currNote = lowerNote(currNote);
             }
 
             fullChord.push(currNote);
@@ -49,6 +28,30 @@ function translate(scale, root, mode) {
 
         return fullChord;
     }
+}
+
+function raiseNote(note) {
+    if (note.includes('#')) {
+        note = currNote[0] + 'x';
+    }
+    else if (note.includes('b')) {
+        note = note[0];
+    }
+    else {
+        note = note + '#';
+    }
+
+    return note;
+}
+
+function lowerNote(note) {
+    if (note.includes('#')) {
+        note = note[0];
+    } else {
+        note = note + 'b';
+    }
+
+    return note;
 }
 
 module.exports = { translate };
