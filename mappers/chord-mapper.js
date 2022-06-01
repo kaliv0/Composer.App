@@ -1,3 +1,5 @@
+//maps chord abbreviations to full representation of the chords
+
 /*TODO:
     add accidentals to applied dominant chords
 */
@@ -9,6 +11,7 @@ function display(progression, scale) {
 
     let chordTable = progression.reduce((acc, chord) => {
         signChar = chord.charAt(1);
+        //finds chord root
         if (signChar === '#' || signChar === 'b') {
             root = chord.substring(0, 2);
         } else {
@@ -19,9 +22,9 @@ function display(progression, scale) {
 
         fullChord = [];
         let scaleIndex = scale.indexOf(root);
+        //reads other notes above root
         for (let j = 0; j < notesCount; j++) {
             fullChord.push(scale[scaleIndex]);
-
             //refactor with ternary operator
             if (scaleIndex + 2 >= 7) {
                 scaleIndex -= 5;
@@ -30,6 +33,7 @@ function display(progression, scale) {
                 scaleIndex += 2;
             }
         }
+        //maps abbrevation to full chord
         acc.push({
             Name: chord,
             Content: fullChord,

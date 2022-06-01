@@ -13,11 +13,11 @@ const mode = 'major';
 const shouldApplyDominants = 1;
 
 const scale = keyGenerator.generateKey(`${key} ${mode}`);
-const chords = chordGenerator.generateChords(scale, mode);
-const progression = progressionGenerator.generateProgression(chords, mode, shouldApplyDominants);
+const chordsInKey = chordGenerator.generateChords(scale, mode);
+const progression = progressionGenerator.generateProgression(chordsInKey, mode, shouldApplyDominants);
 const result = chordMapper.display(progression, scale);
 
 console.log(progression);
-for (x of result) {
-    console.log(JSON.stringify(x));
+for (chord of result) {
+    console.log(JSON.stringify(chord));
 }
