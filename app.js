@@ -22,7 +22,10 @@ for (x of res) {
     console.log(JSON.stringify(x));
 }
 
-//
+/*TODO:
+    handle K64 chords,
+    add accidentals to applied dominant chords
+*/
 function translate(prog, sc) {
 
     let roots = [];
@@ -41,11 +44,7 @@ function translate(prog, sc) {
             curr = chord.charAt(0);
         }
 
-        if (chord.slice(-1) === '7') {
-            notesCount = 4;
-        } else {
-            notesCount = 3;
-        }
+        notesCount = chord.slice(-1) === '7' ? 4 : 3;
 
         fullChord = [];
         let scaleIndex = sc.indexOf(curr);
@@ -57,21 +56,23 @@ function translate(prog, sc) {
                 scaleIndex -= 7;
             }
         }
-
-        //could be done after the loop?!
-        if (chord.includes('sus')) {
-            let middleIndx = sc.indexOf(fullChord[1]);
-            middleIndx++;
-            if (middleIndx >= 7) {
-                middleIndx -= 7;
-            }
-            fullChord[1] = sc[middleIndx];
-        }
-
         roots.push({
-            [chord]: fullChord
+            Name: chord,
+            Content: fullChord,
         });
     });
+
+    if (roots.some(ch => ch.Name.includes('sus'))) {
+        //there is only one suspended chord in the progression
+        let susIndex = roots.findIndex(ch => ch.Name.includes('sus'));
+
+        let middleIndx = sc.indexOf(roots[susIndex].Content[1]);
+        middleIndx++;
+        if (middleIndx >= 7) {
+            middleIndx -= 7;
+        }
+        roots[susIndex].Content[1] = sc[middleIndx];
+    }
 
     return roots;
 }
