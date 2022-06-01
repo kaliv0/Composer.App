@@ -1,9 +1,12 @@
 //maps chord abbreviations to full representation of the chords
 
 /*TODO:
-    add accidentals to applied dominant chords
+    add accidentals to applied dominant chords in minor
 */
-function display(progression, scale) {
+
+const dominantMapper = require("./dominant-mapper");
+
+function display(progression, scale, mode) {
     let root;
     let signChar;
     let fullChord;
@@ -18,20 +21,27 @@ function display(progression, scale) {
             root = chord.charAt(0);
         }
 
+        //calculates if is triad or seventh chord
         notesCount = chord.slice(-1) === '7' ? 4 : 3;
+
+        if (notesCount === 4) {
+            fullChord = dominantMapper.translate(scale, root, mode);
+            acc.push({
+                Name: chord,
+                Content: fullChord,
+            });
+
+            return acc;
+        }
 
         fullChord = [];
         let scaleIndex = scale.indexOf(root);
         //reads other notes above root
         for (let j = 0; j < notesCount; j++) {
             fullChord.push(scale[scaleIndex]);
-            //refactor with ternary operator
-            if (scaleIndex + 2 >= 7) {
-                scaleIndex -= 5;
-            }
-            else {
-                scaleIndex += 2;
-            }
+
+            //keeps index within octave boundaries
+            scaleIndex = scaleIndex + 2 >= 7 ? scaleIndex - 5 : scaleIndex + 2;
         }
         //maps abbrevation to full chord
         acc.push({
@@ -48,13 +58,8 @@ function display(progression, scale) {
         let susIndex = chordTable.findIndex(ch => ch.Name.includes('sus'));
 
         let middleIndx = scale.indexOf(chordTable[susIndex].Content[1]);
-        //refactor with ternary operator
-        if (middleIndx + 1 >= 7) {
-            middleIndx -= 6;
-        }
-        else {
-            middleIndx++;
-        }
+        //keeps index within octave boundaries
+        middleIndx = middleIndx + 1 >= 7 ? middleIndx - 6 : middleIndx + 1;
 
         chordTable[susIndex].Content[1] = scale[middleIndx];
     }

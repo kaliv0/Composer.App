@@ -7,7 +7,7 @@ const progressionGenerator = require("./harmony-creator/progression-generator");
 const chordMapper = require("./mappers/chord-mapper");
 
 // const [key, mode] = keySelector.selectKey();
-const key = 'F';
+const key = 'C';
 const mode = 'major';
 // const shouldApplyDominants = colorizeSelector.randomBit();
 const shouldApplyDominants = 1;
@@ -15,7 +15,8 @@ const shouldApplyDominants = 1;
 const scale = keyGenerator.generateKey(`${key} ${mode}`);
 const chordsInKey = chordGenerator.generateChords(scale, mode);
 const progression = progressionGenerator.generateProgression(chordsInKey, mode, shouldApplyDominants);
-const result = chordMapper.display(progression, scale);
+const result = chordMapper.display(progression, scale, mode);
+// const result = chordMapper.display(Object.values(chordsInKey), scale, mode);
 
 console.log(progression);
 for (chord of result) {
