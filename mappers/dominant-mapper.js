@@ -5,7 +5,7 @@ function translate(scale, root, mode) {
         let scaleIndex = rootIndex;
         let currNote;
 
-        //reads other notes above root
+        //reads other notes above root and adds accidentals where necessary
         for (let j = 0; j < 4; j++) {
             currNote = scale[scaleIndex];
 
