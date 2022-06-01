@@ -50,8 +50,9 @@ function translate(prog, sc) {
         let scaleIndex = sc.indexOf(curr);
         for (let j = 0; j < notesCount; j++) {
             fullChord.push(sc[scaleIndex]);
+            
+            //to be optimized
             scaleIndex += 2;
-
             if (scaleIndex >= 7) {
                 scaleIndex -= 7;
             }
@@ -67,6 +68,8 @@ function translate(prog, sc) {
         let susIndex = roots.findIndex(ch => ch.Name.includes('sus'));
 
         let middleIndx = sc.indexOf(roots[susIndex].Content[1]);
+
+        //to be optimized
         middleIndx++;
         if (middleIndx >= 7) {
             middleIndx -= 7;
