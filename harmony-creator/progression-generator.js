@@ -39,12 +39,8 @@ function generateProgression(tonalChords, mode, shouldApplyDominants) {
             }
         }
         //checks total length of progression and decides to continue or not
-        if (progression.length >= 8) {
-            if (randomizer.randomBit() === 0) {
-                break;
-            }
-        }
-        if (progression.length === 16) {
+        if ((progression.length >= 8 && randomizer.randomBit() === 0)
+            || progression.length === 16) {
             break;
         }
         //decides to go to next chord function or skip one
@@ -52,7 +48,7 @@ function generateProgression(tonalChords, mode, shouldApplyDominants) {
         if (funcIndex >= functions.length) {
             funcIndex = 0;
         }
-    }    
+    }
     return colorizer.colorize(progression, tonalChords, mode, shouldApplyDominants);
 }
 

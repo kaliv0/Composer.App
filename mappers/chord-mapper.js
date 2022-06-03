@@ -22,7 +22,11 @@ function display(progression, scale, mode) {
         }
 
         //calculates if is triad or seventh chord
-        notesCount = chord.slice(-1) === '7' ? 4 : 3;
+        if (chord.slice(-1) === '7') {
+            notesCount = 4;
+        } else {
+            notesCount = 3;
+        }
 
         if (notesCount === 4) {
             fullChord = dominantMapper.translate(scale, root, mode);
@@ -41,7 +45,11 @@ function display(progression, scale, mode) {
             fullChord.push(scale[scaleIndex]);
 
             //keeps index within octave boundaries
-            scaleIndex = scaleIndex + 2 >= 7 ? scaleIndex - 5 : scaleIndex + 2;
+            if (scaleIndex + 2 >= 7) {
+                scaleIndex -= 5;
+            } else {
+                scaleIndex += 2;
+            }
         }
         //maps abbrevation to full chord
         acc.push({
@@ -59,7 +67,11 @@ function display(progression, scale, mode) {
 
         let middleIndx = scale.indexOf(chordTable[susIndex].Content[1]);
         //keeps index within octave boundaries
-        middleIndx = middleIndx + 1 >= 7 ? middleIndx - 6 : middleIndx + 1;
+        if (middleIndx + 1 >= 7) {
+            middleIndx -= 6;
+        } else {
+            middleIndx++;
+        }
 
         chordTable[susIndex].Content[1] = scale[middleIndx];
     }
