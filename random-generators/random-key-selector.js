@@ -30,7 +30,12 @@ function selectKey() {
         key += 'b';
     }
 
-    let mode = (Math.round(Math.random()) === 0) ? 'major' : 'minor';
+    let mode;
+    if (Math.round(Math.random()) === 0) {
+        mode = 'major';
+    } else {
+        mode = 'minor';
+    }
 
     //checks for invalid key and chooses new one via recursion if necessary 
     if (invalidKeys.includes(`${key} ${mode}`)) {
@@ -40,4 +45,3 @@ function selectKey() {
 }
 
 module.exports = { selectKey };
-

@@ -2,9 +2,9 @@ function translate(scale, root, mode) {
     if (mode === 'major') {
         const raiseThirdIndeces = [1, 2, 5, 6];
         const lowerSeventhIndeces = [0, 3];
-        let fullChord = [];
         let rootIndex = scale.indexOf(root);
         let scaleIndex = rootIndex;
+        let fullChord = [];
         let currNote;
 
         //reads other notes above root and adds accidentals where necessary

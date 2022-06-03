@@ -47,8 +47,7 @@ function generateChords(scale, mode) {
                 acc[8] = val + minSuffix;
             } else {
                 if (index === 1) {
-                    //val += (dimSuffix + seventhSuffix);
-                    val += dimSuffix
+                    val += dimSuffix //could be changed to diminished seventh chord
                 }
                 if (index === 3) {
                     val += minSuffix;
