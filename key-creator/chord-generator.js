@@ -5,21 +5,24 @@ function generateChords(scale, mode) {
     const dimSuffix = 'dim';
     const seventhSuffix = '7';
     const susSuffix = 'sus';
+    const minSuffixIndeces = [1, 2, 5];
     let chords = {};
 
     if (mode === 'major') {
         chords = scale.reduce((acc, val, index) => {
             if (index === 0) {
                 acc[8] = val;
-            } else {
-                if (index === 1 || index === 2 || index === 5) {
-                    val += minSuffix;
-                }
-                if (index === 6) {
-                    val += dimSuffix
-                }
-                acc[index + 1] = val;
+                return acc;
             }
+
+            if (minSuffixIndeces.includes(index)) {
+                val += minSuffix;
+            }
+            if (index === 6) {
+                val += dimSuffix
+            }
+            acc[index + 1] = val;
+
             return acc;
         }, {});
 
