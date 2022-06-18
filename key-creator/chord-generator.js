@@ -57,7 +57,8 @@ function generateInMinor(scale) {
             acc[8] = val + minSuffix;
         } else {
             if (index === 1) {
-                val += dimSuffix //could be changed to diminished seventh chord
+                //could be changed to diminished seventh chord
+                val += dimSuffix 
             }
             if (index === 3) {
                 val += minSuffix;
@@ -71,7 +72,8 @@ function generateInMinor(scale) {
     let index = 5;
     for (let j = 20; j <= 80; j += 10) {
         if (index === 5) {
-            chords[j] = scale[index] + majSuffix;   //could be changed to French (flat five) chord
+            //could be changed to French (flat five) chord
+            chords[j] = scale[index] + majSuffix;   
         }
         if (index === 7) {
             index = 0;
