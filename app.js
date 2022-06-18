@@ -1,8 +1,3 @@
-/*
-TODO: refactor nested if-else statements using early return approach
-    and extract separate functions for handling chords in major/ minor mode
-*/
-
 //starts application
 const keySelector = require("./random-generators/random-key-selector");
 const colorizeSelector = require("./random-generators/randomizer");
@@ -20,6 +15,6 @@ const progression = progressionGenerator.generateProgression(chordsInKey, mode, 
 const result = chordMapper.display(progression, scale, mode);
 
 console.log(progression);
-for (chord of result) {
+result.forEach(chord => {
     console.log(JSON.stringify(chord));
-}
+});
