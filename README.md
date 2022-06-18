@@ -10,5 +10,8 @@ Composer.App supports the following functionalities:
 - *_chord-generator.js_* => generates all main chords in the tonality with their applied dominants
 - *_progression-generator.js_* => creates simple chord progression in the chosen key applying the traditional laws of tonal harmony
 - *_colorizer.js_* => inserts applied dominants, ii-v 'movements' and appends final cadence
+- *_tonal-mapper.js_* => maps progression to chords in particular key
+- *_chord-mapper.js_* => maps chord abbreviations to full representation of the chords
+- *_dominant-mapper.js_* => reads dominant seventh chords and adds accidentals where necessary
 - *_randomizer.js_* => helper function for random selection of integers used throughout the application
 - *_app.js_* => main starting point to get the application running
