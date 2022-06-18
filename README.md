@@ -13,6 +13,6 @@ Composer.App supports the following functionalities:
 - *_tonal-mapper.js_* => maps progression to chords in particular key
 - *_chord-mapper.js_* => maps chord abbreviations to full representation of the chords
 - *_dominant-mapper.js_* => reads dominant seventh chords and modifies them where necessary
-- *_note-alterator.js_* => contains helper functions for adding accidentals
+- *_note-alterator.js_* => adds accidentals for raising or lowering chord tones
 - *_randomizer.js_* => helper function for random selection of integers used throughout the application
 - *_app.js_* => main entry point of the application
