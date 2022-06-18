@@ -1,6 +1,6 @@
 # Composer.App
 
-A simple console application written in *JavaScript* that generates a chord progression in a given key.
+A simple console application written in *JavaScript* that generates a chord progression in a given musical key.
 The progession could be used for improvisation and educational purposes.
 
 Composer.App supports the following functionalities:
@@ -14,4 +14,4 @@ Composer.App supports the following functionalities:
 - *_chord-mapper.js_* => maps chord abbreviations to full representation of the chords
 - *_dominant-mapper.js_* => reads dominant seventh chords and adds accidentals where necessary
 - *_randomizer.js_* => helper function for random selection of integers used throughout the application
-- *_app.js_* => main starting point to get the application running
+- *_app.js_* => main entry point of the application
