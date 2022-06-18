@@ -39,7 +39,7 @@ function translate(scale, root, mode) {
 
 function raiseNote(note) {
     if (note.includes('#')) {
-        note = note[0] + 'x'; //needs to be fixed!!!!!
+        note = note[0] + 'x'; 
     }
     else if (note.includes('b')) {
         note = note[0];

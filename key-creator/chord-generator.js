@@ -71,8 +71,7 @@ function generateInMinor(scale) {
     let index = 5;
     for (let j = 20; j <= 80; j += 10) {
         if (index === 5) {
-            //scale[index] += majSuffix; //could be changed to French (flat five) chord
-            chords[j] = scale[index] + majSuffix;
+            chords[j] = scale[index] + majSuffix;   //could be changed to French (flat five) chord
         }
         if (index === 7) {
             index = 0;
