@@ -1,5 +1,5 @@
 /*
-TODO: refactor nested if-else statements with early return approach
+TODO: refactor nested if-else statements using early return approach
     and extract separate functions for handling chords in major/ minor mode
 */
 

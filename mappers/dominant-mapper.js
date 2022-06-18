@@ -1,3 +1,5 @@
+const alterator = require('../alterators/note-alterator');
+
 function translate(scale, root, mode) {
     if (mode === 'major') {
         const raiseThirdIndeces = [1, 2, 5, 6];
@@ -12,15 +14,15 @@ function translate(scale, root, mode) {
             currNote = scale[scaleIndex];
 
             if (j === 1 && raiseThirdIndeces.includes(rootIndex)) {
-                currNote = raiseNote(currNote);
+                currNote = alterator.raiseNote(currNote);
             }
 
             if (j === 2 && rootIndex === 6) {
-                currNote = raiseNote(currNote);
+                currNote = alterator.raiseNote(currNote);
             }
 
             if (j === 3 && lowerSeventhIndeces.includes(rootIndex)) {
-                currNote = lowerNote(currNote);
+                currNote = alterator.lowerNote(currNote);
             }
 
             fullChord.push(currNote);
@@ -47,15 +49,15 @@ function translate(scale, root, mode) {
             currNote = scale[scaleIndex];
 
             if (j === 1 && raiseThirdIndeces.includes(rootIndex)) {
-                currNote = raiseNote(currNote);
+                currNote = alterator.raiseNote(currNote);
             }
 
             if (j === 2 && rootIndex === 1) {
-                currNote = raiseNote(currNote);
+                currNote = alterator.raiseNote(currNote);
             }
 
             if (j === 3 && lowerSeventhIndeces.includes(rootIndex)) {
-                currNote = lowerNote(currNote);
+                currNote = alterator.lowerNote(currNote);
             }
 
             fullChord.push(currNote);
@@ -70,29 +72,4 @@ function translate(scale, root, mode) {
     }
 }
 
-/*TODO => extract in separate module */
-function raiseNote(note) {
-    if (note.includes('#')) {
-        note = note[0] + 'x'; 
-    }
-    else if (note.includes('b')) {
-        note = note[0];
-    }
-    else {
-        note = note + '#';
-    }
-
-    return note;
-}
-
-function lowerNote(note) {
-    if (note.includes('#')) {
-        note = note[0];
-    } else {
-        note = note + 'b';
-    }
-
-    return note;
-}
-
-module.exports = { translate, raiseNote };
+module.exports = { translate };

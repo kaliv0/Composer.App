@@ -1,5 +1,6 @@
 //maps chord abbreviations to full representation of the chords
 const dominantMapper = require("./dominant-mapper");
+const alterator = require('../alterators/note-alterator');
 
 function display(progression, scale, mode) {
     let root;
@@ -36,12 +37,12 @@ function display(progression, scale, mode) {
         fullChord = [];
         const rootIndex = scale.indexOf(root);
         let scaleIndex = rootIndex;
-        
+
         //reads other notes above root
         for (let j = 0; j < notesCount; j++) {
             if (mode === 'minor' && rootIndex === 4 && j === 1) {
                 //alters chord on fifth degree in minor mode
-                fullChord.push(dominantMapper.raiseNote(scale[scaleIndex]));
+                fullChord.push(alterator.raiseNote(scale[scaleIndex]));
             } else {
                 fullChord.push(scale[scaleIndex]);
             }
