@@ -70,6 +70,7 @@ function translate(scale, root, mode) {
     }
 }
 
+/*TODO => extract in separate module */
 function raiseNote(note) {
     if (note.includes('#')) {
         note = note[0] + 'x'; 
