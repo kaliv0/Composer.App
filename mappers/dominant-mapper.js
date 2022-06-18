@@ -1,6 +1,8 @@
 const alterator = require('../alterators/note-alterator');
 
 function translate(scale, root, mode) {
+    /* TODO => refactor by setting different variables and boolenas depending on particular mode
+            => otherwise the algorithm is the same */
     if (mode === 'major') {
         const raiseThirdIndeces = [1, 2, 5, 6];
         const lowerSeventhIndeces = [0, 3];
