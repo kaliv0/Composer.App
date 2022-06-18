@@ -34,7 +34,40 @@ function translate(scale, root, mode) {
         return fullChord;
     }
 
-    //TODO: implement for minor tonalities
+    if (mode === 'minor') {
+        const raiseThirdIndeces = [0, 1, 3, 4];
+        const lowerSeventhIndeces = [2, 5];
+        let rootIndex = scale.indexOf(root);
+        let scaleIndex = rootIndex;
+        let fullChord = [];
+        let currNote;
+
+        //reads other notes above root and adds accidentals where necessary
+        for (let j = 0; j < 4; j++) {
+            currNote = scale[scaleIndex];
+
+            if (j === 1 && raiseThirdIndeces.includes(rootIndex)) {
+                currNote = raiseNote(currNote);
+            }
+
+            if (j === 2 && rootIndex === 1) {
+                currNote = raiseNote(currNote);
+            }
+
+            if (j === 3 && lowerSeventhIndeces.includes(rootIndex)) {
+                currNote = lowerNote(currNote);
+            }
+
+            fullChord.push(currNote);
+            //keeps index within octave boundaries
+            if (scaleIndex + 2 >= 7) {
+                scaleIndex -= 5;
+            } else {
+                scaleIndex += 2;
+            }
+        }
+        return fullChord;
+    }
 }
 
 function raiseNote(note) {
@@ -61,4 +94,4 @@ function lowerNote(note) {
     return note;
 }
 
-module.exports = { translate };
+module.exports = { translate, raiseNote };

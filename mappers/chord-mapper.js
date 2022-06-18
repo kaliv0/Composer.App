@@ -1,9 +1,4 @@
 //maps chord abbreviations to full representation of the chords
-
-/*TODO:
-    add accidentals to applied dominant chords in minor
-*/
-
 const dominantMapper = require("./dominant-mapper");
 
 function display(progression, scale, mode) {
@@ -39,10 +34,17 @@ function display(progression, scale, mode) {
         }
 
         fullChord = [];
-        let scaleIndex = scale.indexOf(root);
+        const rootIndex = scale.indexOf(root);
+        let scaleIndex = rootIndex;
+        
         //reads other notes above root
         for (let j = 0; j < notesCount; j++) {
-            fullChord.push(scale[scaleIndex]);
+            if (mode === 'minor' && rootIndex === 4 && j === 1) {
+                //alters chord on fifth degree in minor mode
+                fullChord.push(dominantMapper.raiseNote(scale[scaleIndex]));
+            } else {
+                fullChord.push(scale[scaleIndex]);
+            }
 
             //keeps index within octave boundaries
             if (scaleIndex + 2 >= 7) {
