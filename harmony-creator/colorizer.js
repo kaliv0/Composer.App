@@ -3,14 +3,9 @@
 
 const { materialize } = require("../mappers/tonal-mapper");
 const { randomIntFromInterval, randomBit } = require("../random-generators/randomizer");
+const { harmonicFunctions } = require("../constants/chords")
 
 function colorize(progression, tonalChords, mode, shouldApplyDominants) {
-    const functions = [
-        [8, 6],  //Tonic => main tonic written as 8 instead of 1 for computational reasons   
-        [4, 2],  //Subdominant    
-        [5]      //Dominant  
-    ];
-
     const finalCadence = [100, 90, 80] //final cadence
 
     let colorizationIndex = 0;
@@ -123,7 +118,7 @@ function colorize(progression, tonalChords, mode, shouldApplyDominants) {
         } else {
             //adds single leaning tone to dominant five chord     
             colorizedProgression.push(finalCadence[1]);
-            colorizedProgression.push(functions[2][0]);
+            colorizedProgression.push(harmonicFunctions.dominant[0]);
         }
     }
     else {  //turns last dominant from five to seventh chord
@@ -131,7 +126,7 @@ function colorize(progression, tonalChords, mode, shouldApplyDominants) {
     }
 
     //adds final tonic
-    colorizedProgression.push(functions[0][0]);
+    colorizedProgression.push(harmonicFunctions.tonic[0]);
     return materialize(colorizedProgression, tonalChords);
 }
 
