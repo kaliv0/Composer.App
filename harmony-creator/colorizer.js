@@ -22,9 +22,17 @@ function colorize(progression, tonalChords, mode, shouldApplyDominants) {
 
         //colorizes 4th degree
         if (chord === 4) {
+            if (shouldApplyDominants) {
+                colorizedProgression, colorizationIndex = colorizeFourthDegreeWithAppliedDominants(
+                    chord, colorizedProgression, colorizationIndex,
+                    progression, index, appliedChord
+                );
+                continue;
+            }
+
             colorizedProgression, colorizationIndex = colorizeFourthDegree(
-                chord, colorizedProgression, colorizationIndex, progression,
-                index, shouldApplyDominants, appliedChord
+                chord, colorizedProgression, colorizationIndex,
+                progression, index, appliedChord
             );
             continue;
         }
@@ -37,6 +45,14 @@ function colorize(progression, tonalChords, mode, shouldApplyDominants) {
 
         //colorizes 6th degree
         if (chord === 6) {
+            if (shouldApplyDominants) {
+                colorizedProgression, colorizationIndex = colorizeSixthDegreeWithAppliedDominants(
+                    chord, colorizedProgression, colorizationIndex,
+                    progression, index, appliedChord, mode
+                );
+                continue;
+            }
+
             colorizedProgression, colorizationIndex = colorizeSixthDegree(
                 chord, colorizedProgression, colorizationIndex, progression,
                 index, shouldApplyDominants, appliedChord, mode
@@ -66,23 +82,7 @@ function colorize(progression, tonalChords, mode, shouldApplyDominants) {
 
 function colorizeFourthDegree(
     chord, colorizedProgression, colorizationIndex, progression,
-    index, shouldApplyDominants, appliedChord) {
-
-    if (shouldApplyDominants) {
-        appliedChord = randomIntegerFromInterval(0, 3);
-        //adds applied dominant 7th
-        if (appliedChord === 1) {
-            colorizedProgression.push(40);
-            colorizationIndex++;
-        }
-        //adds mediant between tonic and subdominant
-        else if (appliedChord === 2 && progression[index - 1] === 8) {
-            colorizedProgression.push(3);
-            colorizationIndex++;
-        }
-        colorizedProgression.push(chord);
-        return colorizedProgression, colorizationIndex;
-    }
+    index, appliedChord) {
 
     appliedChord = randomIntegerFromInterval(0, 2);
     //adds mediant between tonic and subdominant
@@ -94,35 +94,28 @@ function colorizeFourthDegree(
     return colorizedProgression, colorizationIndex;
 }
 
-function colorizeSixthDegree(
+function colorizeFourthDegreeWithAppliedDominants(
     chord, colorizedProgression, colorizationIndex, progression,
-    index, shouldApplyDominants, appliedChord, mode) {
+    index, appliedChord) {
 
-    if (shouldApplyDominants) {
-        appliedChord = randomIntegerFromInterval(0, 4);
-        //adds applied dominant 7th
-        if (appliedChord === 1) {
-            colorizedProgression.push(60);
-            colorizationIndex++;
-        }
-        //adds mediant chord
-        else if (appliedChord === 2) {
-            colorizedProgression.push(3);
-            colorizationIndex++;
-        }
-        //adds ii-v transition after tonic
-        else if (appliedChord === 3 && progression[index - 1] === 8) {
-            colorizedProgression.push(7);
-
-            mode === 'major'
-                ? colorizedProgression.push(60)
-                : colorizedProgression.push(3);
-
-            colorizationIndex++;
-        }
-        colorizedProgression.push(chord);
-        return colorizedProgression, colorizationIndex;
+    appliedChord = randomIntegerFromInterval(0, 3);
+    //adds applied dominant 7th
+    if (appliedChord === 1) {
+        colorizedProgression.push(40);
+        colorizationIndex++;
     }
+    //adds mediant between tonic and subdominant
+    else if (appliedChord === 2 && progression[index - 1] === 8) {
+        colorizedProgression.push(3);
+        colorizationIndex++;
+    }
+    colorizedProgression.push(chord);
+    return colorizedProgression, colorizationIndex;
+}
+
+function colorizeSixthDegree(
+    chord, colorizedProgression, colorizationIndex,
+    progression, index, appliedChord, mode) {
 
     appliedChord = randomIntegerFromInterval(0, 3);
     //adds mediant chord
@@ -136,6 +129,37 @@ function colorizeSixthDegree(
         colorizedProgression.push(3);
         colorizationIndex++;
     }
+    colorizedProgression.push(chord);
+    return colorizedProgression, colorizationIndex;
+}
+
+function colorizeSixthDegreeWithAppliedDominants(
+    chord, colorizedProgression, colorizationIndex,
+    progression, index, appliedChord, mode) {
+
+    appliedChord = randomIntegerFromInterval(0, 4);
+    //adds applied dominant 7th
+    if (appliedChord === 1) {
+        colorizedProgression.push(60);
+        colorizationIndex++;
+    }
+    //adds mediant chord
+    else if (appliedChord === 2) {
+        colorizedProgression.push(3);
+        colorizationIndex++;
+    }
+    //adds ii-v transition after tonic
+    else if (appliedChord === 3 && progression[index - 1] === 8) {
+        colorizedProgression.push(7);
+
+        if (mode === 'major') {
+            colorizedProgression.push(60)
+        } else {
+            colorizedProgression.push(3);
+        }
+        colorizationIndex++;
+    }
+
     colorizedProgression.push(chord);
     return colorizedProgression, colorizationIndex;
 }

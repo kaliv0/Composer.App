@@ -41,9 +41,8 @@ function generateInMajor(scale) {
         chords[j] = scale[index] + seventhSuffix;
         index++;
     }
-    chords[90] = scale[4] + susSuffix;
-    chords[100] = `${scale[0]}/${scale[4]}`;
 
+    chords = addSuspendedDominant(chords, scale);
     return chords;
 }
 
@@ -77,9 +76,14 @@ function generateInMinor(scale) {
         chords[j] = scale[index] + seventhSuffix;
         index++;
     }
+
+    chords = addSuspendedDominant(chords, scale);
+    return chords;
+}
+
+function addSuspendedDominant(chords, scale) {
     chords[90] = scale[4] + susSuffix;
     chords[100] = `${scale[0]}/${scale[4]}`;
-
     return chords;
 }
 
