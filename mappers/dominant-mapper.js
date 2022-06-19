@@ -1,3 +1,4 @@
+//reads notes above root in dominant cords and adds accidentals where necessary
 const { raiseNote, lowerNote } = require('../alterators/note-alterator');
 
 function translateDominant(scale, root, mode) {
@@ -21,7 +22,6 @@ function translateDominant(scale, root, mode) {
     let fullChord = [];
     let currNote;
 
-    //reads other notes above root and adds accidentals where necessary
     for (let j = 0; j < 4; j++) {
         currNote = scale[scaleIndex];
 
