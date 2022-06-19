@@ -9,11 +9,11 @@ function selectKey() {
     const randomIndex = randomIntegerFromInterval(0, 7);
     let key = scalePitches[randomIndex];
 
-    const rndInt = randomIntegerFromInterval(0, 3);
-    if (rndInt === 1) {
+    const randomInteger = randomIntegerFromInterval(0, 3);
+    if (randomInteger === 1) {
         key += accidentals.SHARP;
     }
-    if (rndInt === 2) {
+    if (randomInteger === 2) {
         key += accidentals.FLAT;
     }
 

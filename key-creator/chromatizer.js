@@ -23,19 +23,34 @@ function addChromaticSigns(scale, tonic, mode) {
         if (signCount < 0) {
             signCount = Math.abs(signCount);
         }
-        //adds flats
-        for (let i = signCount; i > 0; i--) {
-            let currNote = chromaticSigns[chromaticSigns.length - i];
-            let degreeIndex = scale.indexOf(currNote);
-            scale[degreeIndex] += accidentals.FLAT;
-        }
+        scale = addFlats(scale, signCount);
+
     } else {
-        //adds sharps
-        for (let i = 0; i < signCount; i++) {
-            let degreeIndex = scale.indexOf(chromaticSigns[i]);
-            scale[degreeIndex] += accidentals.SHARP;
-        }
+        scale = addSharps(scale, signCount);
     }
+
+    return scale;
+}
+
+function addFlats(scale, signCount) {
+    let currNote;
+    let degreeIndex;
+    for (let i = signCount; i > 0; i--) {
+        currNote = chromaticSigns[chromaticSigns.length - i];
+        degreeIndex = scale.indexOf(currNote);
+        scale[degreeIndex] += accidentals.FLAT;
+    }
+
+    return scale;
+}
+
+function addSharps(scale, signCount) {
+    let degreeIndex;
+    for (let i = 0; i < signCount; i++) {
+        degreeIndex = scale.indexOf(chromaticSigns[i]);
+        scale[degreeIndex] += accidentals.SHARP;
+    }
+
     return scale;
 }
 

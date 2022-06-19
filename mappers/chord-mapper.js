@@ -7,6 +7,7 @@ function display(progression, scale, mode) {
     let root;
     let signChar;
     let fullChord;
+    let scaleIndex;
     let notesCount;
 
     let chordTable = progression.reduce((acc, chord) => {
@@ -35,26 +36,11 @@ function display(progression, scale, mode) {
             return acc;
         }
 
-        fullChord = [];
         const rootIndex = scale.indexOf(root);
-        let scaleIndex = rootIndex;
+        fullChord, scaleIndex = readOtherNotesAboveRoot(
+            fullChord = [], scaleIndex = rootIndex,
+            scale, rootIndex, notesCount, mode);
 
-        //reads other notes above root
-        for (let j = 0; j < notesCount; j++) {
-            if (mode === 'minor' && rootIndex === 4 && j === 1) {
-                //alters chord on fifth degree in minor mode
-                fullChord.push(raiseNote(scale[scaleIndex]));
-            } else {
-                fullChord.push(scale[scaleIndex]);
-            }
-
-            //keeps index within octave boundaries
-            if (scaleIndex + 2 >= 7) {
-                scaleIndex -= 5;
-            } else {
-                scaleIndex += 2;
-            }
-        }
         //maps abbrevation to full chord
         acc.push({
             name: chord,
@@ -69,26 +55,46 @@ function display(progression, scale, mode) {
         //there could be no more than one suspended chord in the progression
         let susIndex = chordTable.findIndex(ch => ch.name.includes('sus'));
 
-        let middleIndx = scale.indexOf(chordTable[susIndex].content[1]);
+        let middleIndex = scale.indexOf(chordTable[susIndex].content[1]);
         //keeps index within octave boundaries
-        if (middleIndx + 1 >= 7) {
-            middleIndx -= 6;
+        if (middleIndex + 1 >= 7) {
+            middleIndex -= 6;
         } else {
-            middleIndx++;
+            middleIndex++;
         }
 
-        chordTable[susIndex].content[1] = scale[middleIndx];
+        chordTable[susIndex].content[1] = scale[middleIndex];
     }
 
     //аdjusts K46 chord if any
     if (chordTable.some(ch => ch.name.includes('/'))) {
         //there could be no more than one K64 chord in the progression
-        let cadIndex = chordTable.findIndex(ch => ch.name.includes('/'));
-        let bassNote = chordTable[cadIndex].content.pop();
-        chordTable[cadIndex].content.unshift(bassNote);
+        let cadentialIndex = chordTable.findIndex(ch => ch.name.includes('/'));
+        let bassNote = chordTable[cadentialIndex].content.pop();
+        chordTable[cadentialIndex].content.unshift(bassNote);
     }
 
     return chordTable;
+}
+
+function readOtherNotesAboveRoot(fullChord, scaleIndex, scale, rootIndex, notesCount, mode) {
+    for (let j = 0; j < notesCount; j++) {
+        if (mode === 'minor' && rootIndex === 4 && j === 1) {
+            //alters chord on fifth degree in minor mode
+            fullChord.push(raiseNote(scale[scaleIndex]));
+        } else {
+            fullChord.push(scale[scaleIndex]);
+        }
+
+        //keeps index within octave boundaries
+        if (scaleIndex + 2 >= 7) {
+            scaleIndex -= 5;
+        } else {
+            scaleIndex += 2;
+        }
+    }
+
+    return fullChord, scaleIndex;
 }
 
 module.exports = { display };
