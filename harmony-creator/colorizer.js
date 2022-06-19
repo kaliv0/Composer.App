@@ -2,12 +2,10 @@
 //and appends final cadence
 
 const { materialize } = require("../mappers/tonal-mapper");
-const { randomIntFromInterval, randomBit } = require("../random-generators/randomizer");
-const { harmonicFunctions } = require("../constants/chords")
+const { randomIntegerFromInterval, randomBit } = require("../random-generators/randomizer");
+const { harmonicFunctions, finalCadence } = require("../constants/chords")
 
 function colorize(progression, tonalChords, mode, shouldApplyDominants) {
-    const finalCadence = [100, 90, 80] //final cadence
-
     let colorizationIndex = 0;
     let colorizedProgression = [];
     colorizedProgression.push(progression[0]);
@@ -26,7 +24,7 @@ function colorize(progression, tonalChords, mode, shouldApplyDominants) {
         //colorizes 4th degree
         if (chord === 4) {
             if (shouldApplyDominants) {
-                appliedChord = randomIntFromInterval(0, 3);
+                appliedChord = randomIntegerFromInterval(0, 3);
                 //adds applied dominant 7th
                 if (appliedChord === 1) {
                     colorizedProgression.push(40);
@@ -41,7 +39,7 @@ function colorize(progression, tonalChords, mode, shouldApplyDominants) {
                 continue;
             }
 
-            appliedChord = randomIntFromInterval(0, 2);
+            appliedChord = randomIntegerFromInterval(0, 2);
             //adds mediant between tonic and subdominant
             if (appliedChord === 1 && progression[i - 1] === 8) {
                 colorizedProgression.push(3);
@@ -60,7 +58,7 @@ function colorize(progression, tonalChords, mode, shouldApplyDominants) {
         //colorizes 6th degree
         if (chord === 6) {
             if (shouldApplyDominants) {
-                appliedChord = randomIntFromInterval(0, 4);
+                appliedChord = randomIntegerFromInterval(0, 4);
                 //adds applied dominant 7th
                 if (appliedChord === 1) {
                     colorizedProgression.push(60);
@@ -85,7 +83,7 @@ function colorize(progression, tonalChords, mode, shouldApplyDominants) {
                 continue;
             }
 
-            appliedChord = randomIntFromInterval(0, 3);
+            appliedChord = randomIntegerFromInterval(0, 3);
             //adds mediant chord
             if (appliedChord === 1) {
                 colorizedProgression.push(3);

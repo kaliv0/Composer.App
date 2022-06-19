@@ -1,25 +1,24 @@
 //creates main scale of given key
 const { addChromaticSigns } = require("./chromatizer");
+const { scalePitches } = require("../constants/pitches");
+const { validKeyName } = require("../constants/keyValidations");
+const { invalidKeyError } = require("../constants/errorMessages");
 
 function generateKey(tonality) {
-    //regexp for valid keys 
-    const validKey = /^[A-G][#b]?\s(\bminor\b)?(\bmajor\b)?$/;
-    if (!validKey.test(tonality)) {
-        console.error('Invalid key');
+    if (!validKeyName.test(tonality)) {
+        console.error(invalidKeyError);
         return;
     }
 
-    const pitches = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
-
     const [tonic, mode] = tonality.split(' ');
-    let pitchIndex = pitches.indexOf(tonic.charAt(0));
+    let pitchIndex = scalePitches.indexOf(tonic.charAt(0));
 
     //populates scale degrees
     let newKey = [];
     for (let i = 0; i < 7; i++) {
-        newKey.push(pitches[pitchIndex]);
+        newKey.push(scalePitches[pitchIndex]);
 
-        if (pitchIndex < pitches.length - 1) {
+        if (pitchIndex < scalePitches.length - 1) {
             pitchIndex++;
         } else {
             pitchIndex = 0;

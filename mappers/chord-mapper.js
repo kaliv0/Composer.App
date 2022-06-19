@@ -1,5 +1,5 @@
 //maps chord abbreviations to full representation of the chords
-const { accidentals } = require("../constants/accidentals");
+const { accidentals } = require("../constants/chromaticSings");
 const { translateDominant } = require("./dominant-mapper");
 const { raiseNote } = require('../alterators/note-alterator');
 
@@ -28,8 +28,8 @@ function display(progression, scale, mode) {
         if (notesCount === 4) {
             fullChord = translateDominant(scale, root, mode);
             acc.push({
-                Name: chord,
-                Content: fullChord,
+                name: chord,
+                content: fullChord,
             });
 
             return acc;
@@ -57,19 +57,19 @@ function display(progression, scale, mode) {
         }
         //maps abbrevation to full chord
         acc.push({
-            Name: chord,
-            Content: fullChord,
+            name: chord,
+            content: fullChord,
         });
 
         return acc;
     }, []);
 
     //adjusts suspended chord if any 
-    if (chordTable.some(ch => ch.Name.includes('sus'))) {
+    if (chordTable.some(ch => ch.name.includes('sus'))) {
         //there could be no more than one suspended chord in the progression
-        let susIndex = chordTable.findIndex(ch => ch.Name.includes('sus'));
+        let susIndex = chordTable.findIndex(ch => ch.name.includes('sus'));
 
-        let middleIndx = scale.indexOf(chordTable[susIndex].Content[1]);
+        let middleIndx = scale.indexOf(chordTable[susIndex].content[1]);
         //keeps index within octave boundaries
         if (middleIndx + 1 >= 7) {
             middleIndx -= 6;
@@ -77,15 +77,15 @@ function display(progression, scale, mode) {
             middleIndx++;
         }
 
-        chordTable[susIndex].Content[1] = scale[middleIndx];
+        chordTable[susIndex].content[1] = scale[middleIndx];
     }
 
     //аdjusts K46 chord if any
-    if (chordTable.some(ch => ch.Name.includes('/'))) {
+    if (chordTable.some(ch => ch.name.includes('/'))) {
         //there could be no more than one K64 chord in the progression
-        let cadIndex = chordTable.findIndex(ch => ch.Name.includes('/'));
-        let bassNote = chordTable[cadIndex].Content.pop();
-        chordTable[cadIndex].Content.unshift(bassNote);
+        let cadIndex = chordTable.findIndex(ch => ch.name.includes('/'));
+        let bassNote = chordTable[cadIndex].content.pop();
+        chordTable[cadIndex].content.unshift(bassNote);
     }
 
     return chordTable;

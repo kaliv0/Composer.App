@@ -1,29 +1,15 @@
 //randomly selects key to be constructed
-const { accidentals } = require("../constants/accidentals");
-const { randomIntFromInterval } = require('./randomizer');
+const { accidentals } = require("../constants/chromaticSings");
+const { scalePitches } = require("../constants/pitches");
+const { invalidKeys } = require("../constants/keyValidations");
+const { randomIntegerFromInterval } = require('./randomizer');
 
 function selectKey() {
-    const pitches = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
-    const invalidKeys = [
-        'Cb minor',
-        'Db minor',
-        'D# major',
-        'E# major',
-        'E# minor',
-        'Fb major',
-        'Fb minor',
-        'Gb minor',
-        'G# major',
-        'A# major',
-        'B# major',
-        'B# minor'
-    ];
-
     //chooses random key
-    const rndIndex = randomIntFromInterval(0, 7);
-    let key = pitches[rndIndex];
+    const randomIndex = randomIntegerFromInterval(0, 7);
+    let key = scalePitches[randomIndex];
 
-    const rndInt = randomIntFromInterval(0, 3);
+    const rndInt = randomIntegerFromInterval(0, 3);
     if (rndInt === 1) {
         key += accidentals.SHARP;
     }

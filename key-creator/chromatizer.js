@@ -1,30 +1,9 @@
 //appends required chromatic signs for a given key signature
-const { accidentals } = require("../constants/accidentals");
+const { accidentals, chromaticSigns } = require("../constants/chromaticSings");
+const { majorCircleOfFifths } = require("../constants/pitches");
+const { invalidKeyError } = require("../constants/errorMessages");
 
 function addChromaticSigns(scale, tonic, mode) {
-    const chromaticSigns = ['F', 'C', 'G', 'D', 'A', 'E', 'B'];
-    const majorCircleOfFifths = {
-        'C': 0,
-        'G': 1,
-        'D': 2,
-        'A': 3,
-        'E': 4,
-        'B': 5,
-        'F#': 6,
-        'C#': 7,
-        'Cb': 7,
-        'Gb': 6,
-        'Db': 5,
-        'Ab': 4,
-        'Eb': 3,
-        'Bb': 2,
-        'F': 1,
-        //non-existing, added here for computational reasons
-        'G#': 8,
-        'D#': 9,
-        'A#': 10
-    }
-
     let signCount = majorCircleOfFifths[tonic];
     let isWithFlats = (tonic.charAt(1) === accidentals.FLAT || tonic === 'F');
 
@@ -37,7 +16,7 @@ function addChromaticSigns(scale, tonic, mode) {
     }
 
     if (signCount > 7) {
-        throw new Error("Invalid key");
+        throw new Error(invalidKeyError);
     }
 
     if (isWithFlats || signCount < 0) {

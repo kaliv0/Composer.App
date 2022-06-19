@@ -1,11 +1,7 @@
-const majSuffix = 'maj';
-const minSuffix = 'm';
-const dimSuffix = 'dim';
-const seventhSuffix = '7';
-const susSuffix = 'sus';
-const minSuffixIndeces = [1, 2, 5];
-
 //generates all main chords in given key and all their applied dominants
+const { majSuffix, minSuffix, dimSuffix, seventhSuffix, susSuffix, minSuffixIndeces }
+    = require("../constants/chordSuffixes");
+
 function generateChords(scale, mode) {
     if (mode === 'major') {
         return generateInMajor(scale);
@@ -58,7 +54,7 @@ function generateInMinor(scale) {
         } else {
             if (index === 1) {
                 /* could be changed to diminished seventh chord */
-                val += dimSuffix 
+                val += dimSuffix
             }
             if (index === 3) {
                 val += minSuffix;
@@ -73,7 +69,7 @@ function generateInMinor(scale) {
     for (let j = 20; j <= 80; j += 10) {
         if (index === 5) {
             /* could be changed to French (flat five) chord */
-            chords[j] = scale[index] + majSuffix;   
+            chords[j] = scale[index] + majSuffix;
         }
         if (index === 7) {
             index = 0;

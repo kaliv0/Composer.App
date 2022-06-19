@@ -4,4 +4,6 @@ const harmonicFunctions = {
     'dominant': [5]
 };
 
-module.exports = { harmonicFunctions };
+const finalCadence = [100, 90, 80];
+
+module.exports = { harmonicFunctions, finalCadence };
