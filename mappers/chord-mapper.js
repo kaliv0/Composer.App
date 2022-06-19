@@ -1,5 +1,5 @@
 //maps chord abbreviations to full representation of the chords
-const { accidentals } = require("../constants/chromaticSings");
+const { accidentals } = require("../constants/chromaticSigns");
 const { translateDominant } = require("./dominant-mapper");
 const { raiseNote } = require('../alterators/note-alterator');
 

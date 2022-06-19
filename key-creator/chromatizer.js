@@ -1,5 +1,5 @@
 //appends required chromatic signs for a given key signature
-const { accidentals, chromaticSigns } = require("../constants/chromaticSings");
+const { accidentals, chromaticSigns } = require("../constants/chromaticSigns");
 const { majorCircleOfFifths } = require("../constants/pitches");
 const { invalidKeyError } = require("../constants/errorMessages");
 

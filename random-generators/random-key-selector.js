@@ -1,5 +1,5 @@
 //randomly selects key to be constructed
-const { accidentals } = require("../constants/chromaticSings");
+const { accidentals } = require("../constants/chromaticSigns");
 const { scalePitches } = require("../constants/pitches");
 const { invalidKeys } = require("../constants/keyValidations");
 const { randomIntegerFromInterval } = require('./randomizer');

@@ -1,4 +1,4 @@
-const { accidentals } = require("../constants/chromaticSings");
+const { accidentals } = require("../constants/chromaticSigns");
 
 function raiseNote(note) {
     if (note.includes(accidentals.SHARP)) {
