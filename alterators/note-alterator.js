@@ -1,22 +1,24 @@
+const { accidentals } = require("../constants/accidentals");
+
 function raiseNote(note) {
-    if (note.includes('#')) {
-        note = note[0] + 'x';
+    if (note.includes(accidentals.SHARP)) {
+        note = note[0] + accidentals.DOUBLE_SHARP;
     }
-    else if (note.includes('b')) {
+    else if (note.includes(accidentals.FLAT)) {
         note = note[0];
     }
     else {
-        note = note + '#';
+        note = note + accidentals.SHARP;
     }
 
     return note;
 }
 
 function lowerNote(note) {
-    if (note.includes('#')) {
+    if (note.includes(accidentals.SHARP)) {
         note = note[0];
     } else {
-        note = note + 'b';
+        note = note + accidentals.FLAT;
     }
 
     return note;

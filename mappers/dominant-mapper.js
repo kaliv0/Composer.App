@@ -1,6 +1,6 @@
-const alterator = require('../alterators/note-alterator');
+const { raiseNote, lowerNote } = require('../alterators/note-alterator');
 
-function translate(scale, root, mode) {
+function translateDominant(scale, root, mode) {
     let raiseThirdIndeces;
     let lowerSeventhIndeces;
     let raisedFiveIndex;
@@ -26,15 +26,15 @@ function translate(scale, root, mode) {
         currNote = scale[scaleIndex];
 
         if (j === 1 && raiseThirdIndeces.includes(rootIndex)) {
-            currNote = alterator.raiseNote(currNote);
+            currNote = raiseNote(currNote);
         }
 
         if (j === 2 && rootIndex === raisedFiveIndex) {
-            currNote = alterator.raiseNote(currNote);
+            currNote = raiseNote(currNote);
         }
 
         if (j === 3 && lowerSeventhIndeces.includes(rootIndex)) {
-            currNote = alterator.lowerNote(currNote);
+            currNote = lowerNote(currNote);
         }
 
         fullChord.push(currNote);
@@ -48,4 +48,4 @@ function translate(scale, root, mode) {
     return fullChord;
 }
 
-module.exports = { translate };
+module.exports = { translateDominant };

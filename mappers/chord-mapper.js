@@ -1,6 +1,7 @@
 //maps chord abbreviations to full representation of the chords
-const dominantMapper = require("./dominant-mapper");
-const alterator = require('../alterators/note-alterator');
+const { accidentals } = require("../constants/accidentals");
+const { translateDominant } = require("./dominant-mapper");
+const { raiseNote } = require('../alterators/note-alterator');
 
 function display(progression, scale, mode) {
     let root;
@@ -11,7 +12,7 @@ function display(progression, scale, mode) {
     let chordTable = progression.reduce((acc, chord) => {
         signChar = chord.charAt(1);
         //finds chord root
-        if (signChar === '#' || signChar === 'b') {
+        if (signChar === accidentals.SHARP || signChar === accidentals.FLAT) {
             root = chord.substring(0, 2);
         } else {
             root = chord.charAt(0);
@@ -25,7 +26,7 @@ function display(progression, scale, mode) {
         }
 
         if (notesCount === 4) {
-            fullChord = dominantMapper.translate(scale, root, mode);
+            fullChord = translateDominant(scale, root, mode);
             acc.push({
                 Name: chord,
                 Content: fullChord,
@@ -42,7 +43,7 @@ function display(progression, scale, mode) {
         for (let j = 0; j < notesCount; j++) {
             if (mode === 'minor' && rootIndex === 4 && j === 1) {
                 //alters chord on fifth degree in minor mode
-                fullChord.push(alterator.raiseNote(scale[scaleIndex]));
+                fullChord.push(raiseNote(scale[scaleIndex]));
             } else {
                 fullChord.push(scale[scaleIndex]);
             }

@@ -1,5 +1,5 @@
 //creates main scale of given key
-const chromatizer = require("./chromatizer");
+const { addChromaticSigns } = require("./chromatizer");
 
 function generateKey(tonality) {
     //regexp for valid keys 
@@ -27,8 +27,8 @@ function generateKey(tonality) {
     }
     //error handling needed if user selects key manually
     try {
-        return chromatizer.addChromaticSigns(newKey, tonic, mode);
-        
+        return addChromaticSigns(newKey, tonic, mode);
+
     } catch (err) {
         console.error(err.message);
     }

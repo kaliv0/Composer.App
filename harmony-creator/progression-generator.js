@@ -7,8 +7,8 @@ features that could be added:
 - add sequences
 - add modal interchange (Neapolitan chord)
 */
-const randomizer = require("../random-generators/randomizer");
-const colorizer = require("./colorizer");
+const { randomBit } = require("../random-generators/randomizer");
+const { colorize } = require("./colorizer");
 
 function generateProgression(tonalChords, mode, shouldApplyDominants) {
     const functions = [
@@ -23,7 +23,7 @@ function generateProgression(tonalChords, mode, shouldApplyDominants) {
     while (true) {
         for (let chord of functions[funcIndex]) {
             //decides to include new chord in progression
-            if (randomizer.randomBit() === 1) {
+            if (randomBit() === 1) {
                 //avoids duplicates
                 if (progression.length > 0 &&
                     (progression[progression.length - 1] === chord
@@ -39,17 +39,17 @@ function generateProgression(tonalChords, mode, shouldApplyDominants) {
             }
         }
         //checks total length of progression and decides to continue or not
-        if ((progression.length >= 8 && randomizer.randomBit() === 0)
+        if ((progression.length >= 8 && randomBit() === 0)
             || progression.length === 16) {
             break;
         }
         //decides to go to next chord function or skip one
-        funcIndex += (randomizer.randomBit() + 1);
+        funcIndex += (randomBit() + 1);
         if (funcIndex >= functions.length) {
             funcIndex = 0;
         }
     }
-    return colorizer.colorize(progression, tonalChords, mode, shouldApplyDominants);
+    return colorize(progression, tonalChords, mode, shouldApplyDominants);
 }
 
 module.exports = { generateProgression };

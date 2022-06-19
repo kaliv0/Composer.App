@@ -1,5 +1,6 @@
 //randomly selects key to be constructed
-const randomizer = require('./randomizer');
+const { accidentals } = require("../constants/accidentals");
+const { randomIntFromInterval } = require('./randomizer');
 
 function selectKey() {
     const pitches = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
@@ -19,15 +20,15 @@ function selectKey() {
     ];
 
     //chooses random key
-    const rndIndex = randomizer.randomIntFromInterval(0, 7);
+    const rndIndex = randomIntFromInterval(0, 7);
     let key = pitches[rndIndex];
 
-    const rndInt = randomizer.randomIntFromInterval(0, 3);
+    const rndInt = randomIntFromInterval(0, 3);
     if (rndInt === 1) {
-        key += '#';
+        key += accidentals.SHARP;
     }
     if (rndInt === 2) {
-        key += 'b';
+        key += accidentals.FLAT;
     }
 
     let mode;

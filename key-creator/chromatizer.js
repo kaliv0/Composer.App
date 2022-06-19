@@ -1,4 +1,6 @@
 //appends required chromatic signs for a given key signature
+const { accidentals } = require("../constants/accidentals");
+
 function addChromaticSigns(scale, tonic, mode) {
     const chromaticSigns = ['F', 'C', 'G', 'D', 'A', 'E', 'B'];
     const majorCircleOfFifths = {
@@ -24,7 +26,7 @@ function addChromaticSigns(scale, tonic, mode) {
     }
 
     let signCount = majorCircleOfFifths[tonic];
-    let isWithFlats = (tonic.charAt(1) === 'b' || tonic === 'F');
+    let isWithFlats = (tonic.charAt(1) === accidentals.FLAT || tonic === 'F');
 
     if (mode === 'minor') {
         if (isWithFlats) {
@@ -46,13 +48,13 @@ function addChromaticSigns(scale, tonic, mode) {
         for (let i = signCount; i > 0; i--) {
             let currNote = chromaticSigns[chromaticSigns.length - i];
             let degreeIndex = scale.indexOf(currNote);
-            scale[degreeIndex] += 'b';
+            scale[degreeIndex] += accidentals.FLAT;
         }
     } else {
         //adds sharps
         for (let i = 0; i < signCount; i++) {
             let degreeIndex = scale.indexOf(chromaticSigns[i]);
-            scale[degreeIndex] += '#';
+            scale[degreeIndex] += accidentals.SHARP;
         }
     }
     return scale;
