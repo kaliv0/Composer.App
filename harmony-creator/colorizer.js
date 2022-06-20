@@ -71,12 +71,12 @@ function colorize(progression, tonalChords, mode, shouldApplyDominants) {
 
     if (colorizedProgression[colorizedProgression.length - 1] !== 5) {
         colorizedProgression = createFinalAuthenticCadence(colorizedProgression);
+        //adds final tonic
+        colorizedProgression.push(harmonicFunctions.TONIC[0]);
+        return materialize(colorizedProgression, tonalChords);
     }
-    else {  //turns last dominant from five to seventh chord
-        colorizedProgression[colorizedProgression.length - 1] = finalCadence[2];
-    }
-
-    //adds final tonic
+    //turns last dominant from five to seventh chord
+    colorizedProgression[colorizedProgression.length - 1] = finalCadence[2];
     colorizedProgression.push(harmonicFunctions.TONIC[0]);
     return materialize(colorizedProgression, tonalChords);
 }
