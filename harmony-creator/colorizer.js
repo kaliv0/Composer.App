@@ -125,7 +125,7 @@ function colorizeSixthDegree(
         colorizationIndex++;
     }
     //adds ii-v transition after tonic
-    else if (appliedChord === 2 && progression[index - 1] === 8 && mode === modeTypes.MINOR) {
+    else if (mode === modeTypes.MINOR && appliedChord === 2 && progression[index - 1] === 8) {
         colorizedProgression.push(7);
         colorizedProgression.push(3);
         colorizationIndex++;
