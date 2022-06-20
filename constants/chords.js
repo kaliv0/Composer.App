@@ -1,5 +1,9 @@
-/* TODO => refactor finalCadence to object */
-const finalCadence = [100, 90, 80];
+const finalCadence = {
+    'DOMINANT_SEVENTH': 80,
+    'SUSPENDED_DOMINANT': 90,
+    'CADENTIAL_SIX_FOUR_CHORD': 100
+};
+
 const harmonicFunctions = {
     'TONIC': [8, 6],  //main tonic written as 8 instead of 1 for computational reasons   
     'SUBDOMINANT': [4, 2],

@@ -76,7 +76,7 @@ function colorize(progression, tonalChords, mode, shouldApplyDominants) {
         return materialize(colorizedProgression, tonalChords);
     }
     //turns last dominant from five to seventh chord
-    colorizedProgression[colorizedProgression.length - 1] = finalCadence[2];
+    colorizedProgression[colorizedProgression.length - 1] = finalCadence.DOMINANT_SEVENTH;
     colorizedProgression.push(harmonicFunctions.TONIC[0]);
     return materialize(colorizedProgression, tonalChords);
 }
@@ -168,12 +168,12 @@ function colorizeSixthDegreeWithAppliedDominants(
 function createFinalAuthenticCadence(colorizedProgression) {
     if (randomBit() === 0 && colorizedProgression[colorizedProgression.length - 1] !== 8) {
         //adds double appoggiatura to dominant seventh chord  
-        colorizedProgression.push(finalCadence[0]);
-        colorizedProgression.push(finalCadence[2]);
+        colorizedProgression.push(finalCadence.CADENTIAL_SIX_FOUR_CHORD);
+        colorizedProgression.push(finalCadence.DOMINANT_SEVENTH);
         return colorizedProgression;
     }
     //adds single leaning tone to dominant five chord     
-    colorizedProgression.push(finalCadence[1]);
+    colorizedProgression.push(finalCadence.SUSPENDED_DOMINANT);
     colorizedProgression.push(harmonicFunctions.DOMINANT[0]);
     return colorizedProgression;
 }
