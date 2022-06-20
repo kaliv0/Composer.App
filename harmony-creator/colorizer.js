@@ -169,11 +169,11 @@ function createFinalAuthenticCadence(colorizedProgression) {
         //adds double appoggiatura to dominant seventh chord  
         colorizedProgression.push(finalCadence[0]);
         colorizedProgression.push(finalCadence[2]);
-    } else {
-        //adds single leaning tone to dominant five chord     
-        colorizedProgression.push(finalCadence[1]);
-        colorizedProgression.push(harmonicFunctions.dominant[0]);
+        return colorizedProgression;
     }
+    //adds single leaning tone to dominant five chord     
+    colorizedProgression.push(finalCadence[1]);
+    colorizedProgression.push(harmonicFunctions.dominant[0]);
     return colorizedProgression;
 }
 

@@ -23,13 +23,10 @@ function addChromaticSigns(scale, tonic, mode) {
         if (signCount < 0) {
             signCount = Math.abs(signCount);
         }
-        scale = addFlats(scale, signCount);
-
-    } else {
-        scale = addSharps(scale, signCount);
+        return addFlats(scale, signCount);
     }
 
-    return scale;
+    return addSharps(scale, signCount);
 }
 
 function addFlats(scale, signCount) {

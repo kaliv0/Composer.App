@@ -25,7 +25,6 @@ function generateInMajor(scale) {
             val += dimSuffix
         }
         acc[index + 1] = val;
-
         return acc;
     }, {});
 
@@ -42,24 +41,24 @@ function generateInMajor(scale) {
         index++;
     }
 
-    chords = addSuspendedDominant(chords, scale);
-    return chords;
+    return addSuspendedDominant(chords, scale);
 }
 
 function generateInMinor(scale) {
     let chords = scale.reduce((acc, val, index) => {
         if (index === 0) {
             acc[8] = val + minSuffix;
-        } else {
-            if (index === 1) {
-                /* could be changed to diminished seventh chord */
-                val += dimSuffix
-            }
-            if (index === 3) {
-                val += minSuffix;
-            }
-            acc[index + 1] = val;
+            return acc;
         }
+
+        if (index === 1) {
+            /* could be changed to diminished seventh chord */
+            val += dimSuffix
+        }
+        if (index === 3) {
+            val += minSuffix;
+        }
+        acc[index + 1] = val;
         return acc;
     }, {});
 
