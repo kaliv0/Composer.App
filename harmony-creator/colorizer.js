@@ -2,7 +2,8 @@
 //and appends final cadence
 const { materialize } = require("../mappers/tonal-mapper");
 const { randomIntegerFromInterval, randomBit } = require("../random-generators/randomizer");
-const { harmonicFunctions, finalCadence } = require("../constants/chords")
+const { harmonicFunctions, finalCadence } = require("../constants/chords");
+const { modeTypes } = require("../constants/modes");
 
 function colorize(progression, tonalChords, mode, shouldApplyDominants) {
     let colorizationIndex = 0;
@@ -38,7 +39,7 @@ function colorize(progression, tonalChords, mode, shouldApplyDominants) {
         }
 
         //avoids situations of type 'Gdim, G7, C7, Fm'
-        if (mode === 'minor' && chord === 5 && progression[index - 1] === 2) {
+        if (mode === modeTypes.MINOR && chord === 5 && progression[index - 1] === 2) {
             colorizedProgression.push(chord);
             continue;
         }
@@ -76,7 +77,7 @@ function colorize(progression, tonalChords, mode, shouldApplyDominants) {
     }
 
     //adds final tonic
-    colorizedProgression.push(harmonicFunctions.tonic[0]);
+    colorizedProgression.push(harmonicFunctions.TONIC[0]);
     return materialize(colorizedProgression, tonalChords);
 }
 
@@ -124,7 +125,7 @@ function colorizeSixthDegree(
         colorizationIndex++;
     }
     //adds ii-v transition after tonic
-    else if (appliedChord === 2 && progression[index - 1] === 8 && mode === 'minor') {
+    else if (appliedChord === 2 && progression[index - 1] === 8 && mode === modeTypes.MINOR) {
         colorizedProgression.push(7);
         colorizedProgression.push(3);
         colorizationIndex++;
@@ -152,7 +153,7 @@ function colorizeSixthDegreeWithAppliedDominants(
     else if (appliedChord === 3 && progression[index - 1] === 8) {
         colorizedProgression.push(7);
 
-        if (mode === 'major') {
+        if (mode === modeTypes.MAJOR) {
             colorizedProgression.push(60)
         } else {
             colorizedProgression.push(3);
@@ -173,7 +174,7 @@ function createFinalAuthenticCadence(colorizedProgression) {
     }
     //adds single leaning tone to dominant five chord     
     colorizedProgression.push(finalCadence[1]);
-    colorizedProgression.push(harmonicFunctions.dominant[0]);
+    colorizedProgression.push(harmonicFunctions.DOMINANT[0]);
     return colorizedProgression;
 }
 

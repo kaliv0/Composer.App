@@ -1,7 +1,9 @@
 //maps chord abbreviations to full representation of the chords
-const { accidentals } = require("../constants/chromaticSigns");
 const { translateDominant } = require("./dominant-mapper");
 const { raiseNote } = require('../alterators/note-alterator');
+const { accidentals } = require("../constants/chromaticSigns");
+const { chordSuffixes } = require("../constants/chords");
+const { modeTypes } = require("../constants/modes");
 
 function display(progression, scale, mode) {
     let root;
@@ -32,7 +34,6 @@ function display(progression, scale, mode) {
                 name: chord,
                 content: fullChord,
             });
-
             return acc;
         }
 
@@ -46,14 +47,13 @@ function display(progression, scale, mode) {
             name: chord,
             content: fullChord,
         });
-
         return acc;
     }, []);
 
     //adjusts suspended chord if any 
-    if (chordTable.some(ch => ch.name.includes('sus'))) {
+    if (chordTable.some(ch => ch.name.includes(chordSuffixes.SUSPENDED))) {
         //there could be no more than one suspended chord in the progression
-        let susIndex = chordTable.findIndex(ch => ch.name.includes('sus'));
+        let susIndex = chordTable.findIndex(ch => ch.name.includes(chordSuffixes.SUSPENDED));
 
         let middleIndex = scale.indexOf(chordTable[susIndex].content[1]);
         //keeps index within octave boundaries
@@ -73,13 +73,12 @@ function display(progression, scale, mode) {
         let bassNote = chordTable[cadentialIndex].content.pop();
         chordTable[cadentialIndex].content.unshift(bassNote);
     }
-
     return chordTable;
 }
 
 function readOtherNotesAboveRoot(fullChord, scaleIndex, scale, rootIndex, notesCount, mode) {
     for (let j = 0; j < notesCount; j++) {
-        if (mode === 'minor' && rootIndex === 4 && j === 1) {
+        if (mode === modeTypes.MINOR && rootIndex === 4 && j === 1) {
             //alters chord on fifth degree in minor mode
             fullChord.push(raiseNote(scale[scaleIndex]));
         } else {
@@ -93,7 +92,6 @@ function readOtherNotesAboveRoot(fullChord, scaleIndex, scale, rootIndex, notesC
             scaleIndex += 2;
         }
     }
-
     return fullChord, scaleIndex;
 }
 

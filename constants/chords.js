@@ -1,9 +1,17 @@
+const finalCadence = [100, 90, 80];
 const harmonicFunctions = {
-    'tonic': [8, 6],  //main tonic written as 8 instead of 1 for computational reasons   
-    'subdominant': [4, 2],
-    'dominant': [5]
+    'TONIC': [8, 6],  //main tonic written as 8 instead of 1 for computational reasons   
+    'SUBDOMINANT': [4, 2],
+    'DOMINANT': [5]
 };
 
-const finalCadence = [100, 90, 80];
+const chordSuffixes = {
+    'MAJOR': 'maj',
+    'MINOR': 'm',
+    'DIMINISHED': 'dim',
+    'SEVENTH': '7',
+    'SUSPENDED': 'sus',
+    'MINOR_INDECES': [1, 2, 5]
+}
 
-module.exports = { harmonicFunctions, finalCadence };
+module.exports = { finalCadence, harmonicFunctions, chordSuffixes };

@@ -1,8 +1,9 @@
 //randomly selects key to be constructed
+const { randomIntegerFromInterval } = require('./randomizer');
 const { accidentals } = require("../constants/chromaticSigns");
 const { scalePitches } = require("../constants/pitches");
+const { modeTypes } = require("../constants/modes");
 const { invalidKeys } = require("../constants/keyValidations");
-const { randomIntegerFromInterval } = require('./randomizer');
 
 function selectKey() {
     //chooses random key
@@ -19,9 +20,9 @@ function selectKey() {
 
     let mode;
     if (Math.round(Math.random()) === 0) {
-        mode = 'major';
+        mode = modeTypes.MAJOR
     } else {
-        mode = 'minor';
+        mode = modeTypes.MINOR;
     }
 
     //checks for invalid key and chooses new one via recursion if necessary 

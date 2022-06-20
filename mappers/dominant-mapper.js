@@ -1,12 +1,13 @@
 //reads notes above root in dominant cords and adds accidentals where necessary
 const { raiseNote, lowerNote } = require('../alterators/note-alterator');
+const { modeTypes } = require("../constants/modes");
 
 function translateDominant(scale, root, mode) {
     let raiseThirdIndeces;
     let lowerSeventhIndeces;
     let raisedFiveIndex;
 
-    if (mode === 'major') {
+    if (mode === modeTypes.MAJOR) {
         raiseThirdIndeces = [1, 2, 5, 6];
         lowerSeventhIndeces = [0, 3];
         raisedFiveIndex = 6;

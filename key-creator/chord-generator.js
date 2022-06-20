@@ -1,12 +1,12 @@
 //generates all main chords in given key and all their applied dominants
-const { majSuffix, minSuffix, dimSuffix, seventhSuffix, susSuffix, minSuffixIndeces }
-    = require("../constants/chordSuffixes");
+const { modeTypes } = require("../constants/modes");
+const { chordSuffixes } = require("../constants/chords");
 
 function generateChords(scale, mode) {
-    if (mode === 'major') {
+    if (mode === modeTypes.MAJOR) {
         return generateInMajor(scale);
     }
-    if (mode === 'minor') {
+    if (mode === modeTypes.MINOR) {
         return generateInMinor(scale);
     }
 }
@@ -18,11 +18,11 @@ function generateInMajor(scale) {
             return acc;
         }
 
-        if (minSuffixIndeces.includes(index)) {
-            val += minSuffix;
+        if (chordSuffixes.MINOR_INDECES.includes(index)) {
+            val += chordSuffixes.MINOR;
         }
         if (index === 6) {
-            val += dimSuffix
+            val += chordSuffixes.DIMINISHED
         }
         acc[index + 1] = val;
         return acc;
@@ -35,9 +35,9 @@ function generateInMajor(scale) {
             index = 0;
         }
         if (index === 3) {
-            chords[j] = scale[index] + majSuffix + seventhSuffix;
+            chords[j] = scale[index] + chordSuffixes.MAJOR + chordSuffixes.SEVENTH;
         }
-        chords[j] = scale[index] + seventhSuffix;
+        chords[j] = scale[index] + chordSuffixes.SEVENTH;
         index++;
     }
 
@@ -47,16 +47,16 @@ function generateInMajor(scale) {
 function generateInMinor(scale) {
     let chords = scale.reduce((acc, val, index) => {
         if (index === 0) {
-            acc[8] = val + minSuffix;
+            acc[8] = val + chordSuffixes.MINOR;
             return acc;
         }
 
         if (index === 1) {
             /* could be changed to diminished seventh chord */
-            val += dimSuffix
+            val += chordSuffixes.DIMINISHED
         }
         if (index === 3) {
-            val += minSuffix;
+            val += chordSuffixes.MINOR;
         }
         acc[index + 1] = val;
         return acc;
@@ -67,12 +67,12 @@ function generateInMinor(scale) {
     for (let j = 20; j <= 80; j += 10) {
         if (index === 5) {
             /* could be changed to French (flat five) chord */
-            chords[j] = scale[index] + majSuffix;
+            chords[j] = scale[index] + chordSuffixes.MAJOR;
         }
         if (index === 7) {
             index = 0;
         }
-        chords[j] = scale[index] + seventhSuffix;
+        chords[j] = scale[index] + chordSuffixes.SEVENTH;
         index++;
     }
 
@@ -81,7 +81,7 @@ function generateInMinor(scale) {
 }
 
 function addSuspendedDominant(chords, scale) {
-    chords[90] = scale[4] + susSuffix;
+    chords[90] = scale[4] + chordSuffixes.SUSPENDED;
     chords[100] = `${scale[0]}/${scale[4]}`;
     return chords;
 }
