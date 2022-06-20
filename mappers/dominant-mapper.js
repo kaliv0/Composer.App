@@ -11,11 +11,11 @@ function translateDominant(scale, root, mode) {
     if (mode === modeTypes.MAJOR) {
         raiseThirdIndeces = majorDominant.RAISE_THIRD_INDECES;
         lowerSeventhIndeces = majorDominant.LOWER_SEVENTH_INDECES;
-        raiseFiveIndex = majorDominant.RAISE_FIVE_INDEX;
+        raiseFiveIndex = majorDominant.RAISE_FIVE_INDECES;
     } else {
         raiseThirdIndeces = minorDominant.RAISE_THIRD_INDECES;
         lowerSeventhIndeces = minorDominant.LOWER_SEVENTH_INDECES;
-        raiseFiveIndex = minorDominant.RAISE_FIVE_INDEX;
+        raiseFiveIndex = minorDominant.RAISE_FIVE_INDECES;
     }
 
     let rootIndex = scale.indexOf(root);
