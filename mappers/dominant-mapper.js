@@ -5,17 +5,17 @@ const { majorDominant, minorDominant } = require("../constants/dominantIndeces")
 
 function translateDominant(scale, root, mode) {
     let raiseThirdIndeces;
+    let raiseFifthIndex;
     let lowerSeventhIndeces;
-    let raiseFiveIndex;
 
     if (mode === modeTypes.MAJOR) {
         raiseThirdIndeces = majorDominant.RAISE_THIRD_INDECES;
+        raiseFifthIndex = majorDominant.RAISE_FIFTH_INDECES;
         lowerSeventhIndeces = majorDominant.LOWER_SEVENTH_INDECES;
-        raiseFiveIndex = majorDominant.RAISE_FIVE_INDECES;
     } else {
         raiseThirdIndeces = minorDominant.RAISE_THIRD_INDECES;
+        raiseFifthIndex = minorDominant.RAISE_FIFTH_INDECES;
         lowerSeventhIndeces = minorDominant.LOWER_SEVENTH_INDECES;
-        raiseFiveIndex = minorDominant.RAISE_FIVE_INDECES;
     }
 
     let rootIndex = scale.indexOf(root);
@@ -30,7 +30,7 @@ function translateDominant(scale, root, mode) {
             currNote = raiseNote(currNote);
         }
 
-        if (j === 2 && raiseFiveIndex.includes(rootIndex)) {
+        if (j === 2 && raiseFifthIndex.includes(rootIndex)) {
             currNote = raiseNote(currNote);
         }
 
