@@ -29,18 +29,17 @@ function generateInMajor(scale) {
     }, {});
 
     //creates applied dominants and cadential chords
-    let index = 5;
+    let degreeIndex = 5;
     for (let j = 20; j <= 80; j += 10) {
-        if (index === 7) {
-            index = 0;
+        if (degreeIndex === 7) {
+            degreeIndex = 0;
         }
-        if (index === 3) {
-            chords[j] = scale[index] + chordSuffixes.MAJOR + chordSuffixes.SEVENTH;
+        if (degreeIndex === 3) {
+            chords[j] = scale[degreeIndex] + chordSuffixes.MAJOR + chordSuffixes.SEVENTH;
         }
-        chords[j] = scale[index] + chordSuffixes.SEVENTH;
-        index++;
+        chords[j] = scale[degreeIndex] + chordSuffixes.SEVENTH;
+        degreeIndex++;
     }
-
     return addSuspendedDominant(chords, scale);
 }
 
@@ -63,21 +62,19 @@ function generateInMinor(scale) {
     }, {});
 
     //creates applied dominants and cadential chords
-    let index = 5;
+    let degreeIndex = 5;
     for (let j = 20; j <= 80; j += 10) {
-        if (index === 5) {
+        if (degreeIndex === 5) {
             /* could be changed to French (flat five) chord */
-            chords[j] = scale[index] + chordSuffixes.MAJOR;
+            chords[j] = scale[degreeIndex] + chordSuffixes.MAJOR;
         }
-        if (index === 7) {
-            index = 0;
+        if (degreeIndex === 7) {
+            degreeIndex = 0;
         }
-        chords[j] = scale[index] + chordSuffixes.SEVENTH;
-        index++;
+        chords[j] = scale[degreeIndex] + chordSuffixes.SEVENTH;
+        degreeIndex++;
     }
-
-    chords = addSuspendedDominant(chords, scale);
-    return chords;
+    return addSuspendedDominant(chords, scale);
 }
 
 function addSuspendedDominant(chords, scale) {
