@@ -1,11 +1,12 @@
-const finalCadence = {
+const chordIndeces = {
     'DOMINANT_SEVENTH': 80,
     'SUSPENDED_DOMINANT': 90,
     'CADENTIAL_SIX_FOUR_CHORD': 100,
 };
 
 const harmonicFunctions = {
-    'TONIC': [8, 6],  //main tonic written as 8 instead of 1 for computational reasons   
+    //main tonic written as 8 instead of 1 for computational reasons 
+    'TONIC': [8, 6],
     'SUBDOMINANT': [4, 2],
     'DOMINANT': [5],
 };
@@ -24,4 +25,4 @@ const progressionLength = {
     'MAX': 16,
 }
 
-module.exports = { finalCadence, harmonicFunctions, chordSuffixes, progressionLength };
+module.exports = { chordIndeces, harmonicFunctions, chordSuffixes, progressionLength };

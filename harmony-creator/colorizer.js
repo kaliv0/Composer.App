@@ -1,6 +1,6 @@
 //colorizes given progression by inserting applied dominants, ii-v 'movements'
 //and appends final cadence
-const { harmonicFunctions, finalCadence } = require("../constants/chords");
+const { harmonicFunctions, chordIndeces } = require("../constants/chords");
 const { modeTypes } = require("../constants/modes");
 const { materialize } = require("../mappers/tonal-mapper");
 const { randomIntegerFromInterval, randomBit } = require("../random-generators/randomizer");
@@ -76,7 +76,7 @@ function colorize(progression, tonalChords, mode, shouldApplyDominants) {
         return materialize(colorizedProgression, tonalChords);
     }
     //turns last dominant from five to seventh chord
-    colorizedProgression[colorizedProgression.length - 1] = finalCadence.DOMINANT_SEVENTH;
+    colorizedProgression[colorizedProgression.length - 1] = chordIndeces.DOMINANT_SEVENTH;
     colorizedProgression.push(harmonicFunctions.TONIC[0]);
     return materialize(colorizedProgression, tonalChords);
 }
@@ -168,12 +168,12 @@ function colorizeSixthDegreeWithAppliedDominants(
 function createFinalAuthenticCadence(colorizedProgression) {
     if (randomBit() === 0 && colorizedProgression[colorizedProgression.length - 1] !== 8) {
         //adds double appoggiatura to dominant seventh chord  
-        colorizedProgression.push(finalCadence.CADENTIAL_SIX_FOUR_CHORD);
-        colorizedProgression.push(finalCadence.DOMINANT_SEVENTH);
+        colorizedProgression.push(chordIndeces.CADENTIAL_SIX_FOUR_CHORD);
+        colorizedProgression.push(chordIndeces.DOMINANT_SEVENTH);
         return colorizedProgression;
     }
     //adds single leaning tone to dominant five chord     
-    colorizedProgression.push(finalCadence.SUSPENDED_DOMINANT);
+    colorizedProgression.push(chordIndeces.SUSPENDED_DOMINANT);
     colorizedProgression.push(harmonicFunctions.DOMINANT[0]);
     return colorizedProgression;
 }
