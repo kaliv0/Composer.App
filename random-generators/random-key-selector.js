@@ -1,25 +1,26 @@
 //randomly selects key to be constructed
-const { randomIntegerFromInterval } = require('./randomizer');
 const { accidentals } = require("../constants/chromaticSigns");
 const { scalePitches } = require("../constants/pitches");
 const { modeTypes } = require("../constants/modes");
 const { invalidKeys } = require("../constants/keyValidations");
+const { randomIndexIntervals, randomIntegerIndeces } = require("../constants/randoms");
+const { randomIntegerFromInterval } = require('./randomizer');
 
 function selectKey() {
     //chooses random key
-    const randomIndex = randomIntegerFromInterval(0, 7);
+    const randomIndex = randomIntegerFromInterval(randomIndexIntervals.MIN, randomIndexIntervals.MAX);
     let key = scalePitches[randomIndex];
 
-    const randomInteger = randomIntegerFromInterval(0, 3);
-    if (randomInteger === 1) {
+    const randomInteger = randomIntegerFromInterval(randomIntegerIndeces.MIN, randomIntegerIndeces.MAX);
+    if (randomInteger === randomIntegerIndeces.FIRST) {
         key += accidentals.SHARP;
     }
-    if (randomInteger === 2) {
+    if (randomInteger === randomIntegerIndeces.SECOND) {
         key += accidentals.FLAT;
     }
 
     let mode;
-    if (Math.round(Math.random()) === 0) {
+    if (Math.round(Math.random()) === randomIntegerIndeces.MIN) {
         mode = modeTypes.MAJOR
     } else {
         mode = modeTypes.MINOR;

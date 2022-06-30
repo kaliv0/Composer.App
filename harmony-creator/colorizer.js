@@ -1,9 +1,9 @@
 //colorizes given progression by inserting applied dominants, ii-v 'movements'
 //and appends final cadence
-const { materialize } = require("../mappers/tonal-mapper");
-const { randomIntegerFromInterval, randomBit } = require("../random-generators/randomizer");
 const { harmonicFunctions, finalCadence } = require("../constants/chords");
 const { modeTypes } = require("../constants/modes");
+const { materialize } = require("../mappers/tonal-mapper");
+const { randomIntegerFromInterval, randomBit } = require("../random-generators/randomizer");
 
 function colorize(progression, tonalChords, mode, shouldApplyDominants) {
     let colorizationIndex = 0;

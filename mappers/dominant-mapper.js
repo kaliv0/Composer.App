@@ -1,7 +1,7 @@
 //reads notes above root in dominant cords and adds accidentals where necessary
-const { raiseNote, lowerNote } = require('../alterators/note-alterator');
 const { modeTypes } = require("../constants/modes");
 const { majorDominant, minorDominant } = require("../constants/dominantIndeces");
+const { raiseNote, lowerNote } = require('../alterators/note-alterator');
 
 function translateDominant(scale, root, mode) {
     let raiseThirdIndeces;

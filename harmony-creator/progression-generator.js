@@ -7,7 +7,7 @@ features that could be added:
 - add sequences
 - add modal interchange (Neapolitan chord)
 */
-const { harmonicFunctions } = require("../constants/chords");
+const { harmonicFunctions, progressionLength } = require("../constants/chords");
 const { randomBit } = require("../random-generators/randomizer");
 const { colorize } = require("./colorizer");
 
@@ -35,8 +35,8 @@ function generateProgression(tonalChords, mode, shouldApplyDominants) {
             }
         }
         //checks total length of progression and decides to continue or not
-        if ((progression.length >= 8 && randomBit() === 0)
-            || progression.length === 16) {
+        if ((progression.length >= progressionLength.MIN && randomBit() === 0)
+            || progression.length === progressionLength.MAX) {
             break;
         }
         //decides to go to next chord function or skip one

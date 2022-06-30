@@ -1,8 +1,8 @@
 //creates main scale of given key
-const { addChromaticSigns } = require("./chromatizer");
 const { scalePitches } = require("../constants/pitches");
 const { validKeyName } = require("../constants/keyValidations");
 const { invalidKeyError } = require("../constants/errorMessages");
+const { addChromaticSigns } = require("./chromatizer");
 
 function generateKey(tonality) {
     if (!validKeyName.test(tonality)) {

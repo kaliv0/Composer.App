@@ -1,9 +1,9 @@
 //maps chord abbreviations to full representation of the chords
-const { translateDominant } = require("./dominant-mapper");
-const { raiseNote } = require('../alterators/note-alterator');
 const { accidentals } = require("../constants/chromaticSigns");
 const { chordSuffixes } = require("../constants/chords");
 const { modeTypes } = require("../constants/modes");
+const { translateDominant } = require("./dominant-mapper");
+const { raiseNote } = require('../alterators/note-alterator');
 
 function display(progression, scale, mode) {
     let root;
@@ -22,7 +22,7 @@ function display(progression, scale, mode) {
         }
 
         //calculates if is triad or seventh chord
-        if (chord.slice(-1) === '7') {
+        if (chord.slice(-1) === chordSuffixes.SEVENTH) {
             notesCount = 4;
         } else {
             notesCount = 3;
