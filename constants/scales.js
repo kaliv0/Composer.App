@@ -8,12 +8,5 @@ const scaleCounter = {
     'DEGREE_COUNT': 7,
 };
 
-const scaleDegrees = {
-    'SUBDOMINANT': 4,
-    'DOMINANT': 5,
-    'SUBMEDIANT': 6,
-
-}
-
-module.exports = { scaleCounter, scaleDegrees };
+module.exports = { scaleCounter };
 

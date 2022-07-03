@@ -1,7 +1,6 @@
 //colorizes given progression by inserting applied dominants, ii-v 'movements'
 //and appends final cadence
 const { modeTypes } = require("../constants/modes");
-const { scaleDegrees } = require("../constants/scales");
 const { randomBitStates } = require("../constants/randoms");
 const { harmonicFunctions, chordIndeces } = require("../constants/chords");
 const { materialize } = require("../mappers/tonal-mapper");
@@ -24,7 +23,7 @@ function colorize(progression, tonalChords, mode, shouldApplyDominants) {
         }
 
         //colorizes 4th degree
-        if (chord === scaleDegrees.SUBDOMINANT) {
+        if (chord === 4) {
             if (shouldApplyDominants) {
                 [colorizedProgression, colorizationIndex] = colorizeFourthDegreeWithAppliedDominants(
                     chord, colorizedProgression, colorizationIndex,
@@ -41,13 +40,13 @@ function colorize(progression, tonalChords, mode, shouldApplyDominants) {
         }
 
         //avoids situations of type 'Gdim, G7, C7, Fm'
-        if (mode === modeTypes.MINOR && chord === scaleDegrees.DOMINANT && progression[index - 1] === 2) {
+        if (mode === modeTypes.MINOR && chord === 5 && progression[index - 1] === 2) {
             colorizedProgression.push(chord);
             continue;
         }
 
         //colorizes 6th degree
-        if (chord === scaleDegrees.SUBMEDIANT) {
+        if (chord === 6) {
             if (shouldApplyDominants) {
                 [colorizedProgression, colorizationIndex] = colorizeSixthDegreeWithAppliedDominants(
                     chord, colorizedProgression, colorizationIndex,
