@@ -1,15 +1,15 @@
 //randomly selects key to be constructed
+const { INVALID_KEYS } = require("../constants/keyValidations");
+const { SCALE_PITCHES } = require("../constants/pitches");
 const { accidentals } = require("../constants/chromaticSigns");
-const { scalePitches } = require("../constants/pitches");
 const { modeTypes } = require("../constants/modes");
-const { invalidKeys } = require("../constants/keyValidations");
 const { randomIndexIntervals, randomIntegerIndeces } = require("../constants/randoms");
 const { randomIntegerFromInterval } = require('./randomizer');
 
 function selectKey() {
     //chooses random key
     const randomIndex = randomIntegerFromInterval(randomIndexIntervals.MIN, randomIndexIntervals.MAX);
-    let key = scalePitches[randomIndex];
+    let key = SCALE_PITCHES[randomIndex];
 
     const randomInteger = randomIntegerFromInterval(randomIntegerIndeces.MIN, randomIntegerIndeces.MAX);
     if (randomInteger === randomIntegerIndeces.FIRST) {
@@ -27,7 +27,7 @@ function selectKey() {
     }
 
     //checks for invalid key and chooses new one via recursion if necessary 
-    if (invalidKeys.includes(`${key} ${mode}`)) {
+    if (INVALID_KEYS.includes(`${key} ${mode}`)) {
         [key, mode] = selectKey();
     }
     return [key, mode];

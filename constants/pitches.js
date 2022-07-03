@@ -1,4 +1,4 @@
-const scalePitches = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+const SCALE_PITCHES = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
 const majorCircleOfFifths = {
     'C': 0,
     'G': 1,
@@ -21,4 +21,4 @@ const majorCircleOfFifths = {
     'A#': 10
 };
 
-module.exports = { scalePitches, majorCircleOfFifths };
+module.exports = { SCALE_PITCHES, majorCircleOfFifths };

@@ -1,3 +1,3 @@
-const invalidKeyError = "Invalid key";
+const INVALID_KEY_ERROR = "Invalid key";
 
-module.exports = { invalidKeyError };
+module.exports = { INVALID_KEY_ERROR };

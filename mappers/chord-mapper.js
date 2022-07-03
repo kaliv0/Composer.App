@@ -1,8 +1,8 @@
 //maps chord abbreviations to full representation of the chords
-const { accidentals } = require("../constants/chromaticSigns");
-const { scaleAttributes } = require("../constants/scales");
-const { modeTypes } = require("../constants/modes");
+const { scaleCounter, scaleDegrees } = require("../constants/scales");
 const { chordSuffixes, chordToneIndexes } = require("../constants/chords");
+const { accidentals } = require("../constants/chromaticSigns");
+const { modeTypes } = require("../constants/modes");
 const { translateDominant } = require("./dominant-mapper");
 const { raiseNote } = require('../alterators/note-alterator');
 
@@ -56,19 +56,19 @@ function display(progression, scale, mode) {
 
         let middleIndex = scale.indexOf(chordTable[susIndex].content[1]);
         //keeps index within octave boundaries
-        if (middleIndex + scaleAttributes.SUSPENDED_CHORD_INCREMENTER >= scaleAttributes.DEGREE_COUNT) {
-            middleIndex -= scaleAttributes.SUSPENDED_CHORD_DECREMENTER;
+        if (middleIndex + scaleCounter.SUSPENDED_CHORD_INCREMENTER >= scaleCounter.DEGREE_COUNT) {
+            middleIndex -= scaleCounter.SUSPENDED_CHORD_DECREMENTER;
         } else {
-            middleIndex += scaleAttributes.SUSPENDED_CHORD_INCREMENTER;
+            middleIndex += scaleCounter.SUSPENDED_CHORD_INCREMENTER;
         }
 
         chordTable[susIndex].content[1] = scale[middleIndex];
     }
 
     //аdjusts K46 chord if any
-    if (chordTable.some(ch => ch.name.includes('/'))) {
+    if (chordTable.some(ch => ch.name.includes(chordSuffixes.SLASH_CHORD))) {
         //there could be no more than one K64 chord in the progression
-        let cadentialIndex = chordTable.findIndex(ch => ch.name.includes('/'));
+        let cadentialIndex = chordTable.findIndex(ch => ch.name.includes(chordSuffixes.SLASH_CHORD));
         let bassNote = chordTable[cadentialIndex].content.pop();
         chordTable[cadentialIndex].content.unshift(bassNote);
     }
@@ -79,7 +79,7 @@ function readOtherNotesAboveRoot(scale, rootIndex, notesCount, mode) {
     let fullChord = [];
     let scaleIndex = rootIndex;
     for (let j = chordToneIndexes.ROOT; j < notesCount; j++) {
-        if (mode === modeTypes.MINOR && rootIndex === 4 && j === chordToneIndexes.THIRD) {
+        if (mode === modeTypes.MINOR && rootIndex === scaleDegrees.SUBDOMINANT && j === chordToneIndexes.THIRD) {
             //alters chord on fifth degree in minor mode
             fullChord.push(raiseNote(scale[scaleIndex]));
         } else {
@@ -87,10 +87,10 @@ function readOtherNotesAboveRoot(scale, rootIndex, notesCount, mode) {
         }
 
         //keeps index within octave boundaries
-        if (scaleIndex + scaleAttributes.INCREMENTER >= scaleAttributes.DEGREE_COUNT) {
-            scaleIndex -= scaleAttributes.DECREMENTER;
+        if (scaleIndex + scaleCounter.INCREMENTER >= scaleCounter.DEGREE_COUNT) {
+            scaleIndex -= scaleCounter.DECREMENTER;
         } else {
-            scaleIndex += scaleAttributes.INCREMENTER;
+            scaleIndex += scaleCounter.INCREMENTER;
         }
     }
     return fullChord;

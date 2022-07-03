@@ -3,7 +3,7 @@ const randomIndexIntervals = {
     'MAX': 7,
 };
 
-const randomBitIntervals = {
+const randomBitStates = {
     'NEGATIVE': 0,
     'POSITIVE': 1
 };
@@ -16,4 +16,4 @@ const randomIntegerIndeces = {
     'RANGE_UPPER_BOUND': 4,
 };
 
-module.exports = { randomIndexIntervals, randomBitIntervals, randomIntegerIndeces }
+module.exports = { randomIndexIntervals, randomBitStates, randomIntegerIndeces }

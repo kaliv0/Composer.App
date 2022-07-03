@@ -1,8 +1,8 @@
 //appends required chromatic signs for a given key signature
-const { accidentals, chromaticSigns } = require("../constants/chromaticSigns");
+const { accidentals, CHROMATIC_SIGNS } = require("../constants/chromaticSigns");
 const { majorCircleOfFifths } = require("../constants/pitches");
 const { modeTypes } = require("../constants/modes");
-const { invalidKeyError } = require("../constants/errorMessages");
+const { INVALID_KEY_ERROR } = require("../constants/errorMessages");
 
 function addChromaticSigns(scale, tonic, mode) {
     let signCount = majorCircleOfFifths[tonic];
@@ -17,7 +17,7 @@ function addChromaticSigns(scale, tonic, mode) {
     }
 
     if (signCount > 7) {
-        throw new Error(invalidKeyError);
+        throw new Error(INVALID_KEY_ERROR);
     }
 
     if (isWithFlats || signCount < 0) {
@@ -34,7 +34,7 @@ function addFlats(scale, signCount) {
     let currNote;
     let degreeIndex;
     for (let i = signCount; i > 0; i--) {
-        currNote = chromaticSigns[chromaticSigns.length - i];
+        currNote = CHROMATIC_SIGNS[CHROMATIC_SIGNS.length - i];
         degreeIndex = scale.indexOf(currNote);
         scale[degreeIndex] += accidentals.FLAT;
     }
@@ -44,7 +44,7 @@ function addFlats(scale, signCount) {
 function addSharps(scale, signCount) {
     let degreeIndex;
     for (let i = 0; i < signCount; i++) {
-        degreeIndex = scale.indexOf(chromaticSigns[i]);
+        degreeIndex = scale.indexOf(CHROMATIC_SIGNS[i]);
         scale[degreeIndex] += accidentals.SHARP;
     }
     return scale;

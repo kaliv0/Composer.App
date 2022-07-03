@@ -1,6 +1,6 @@
 //generates all main chords in given key and all their applied dominants
 const { modeTypes } = require("../constants/modes");
-const { chordSuffixes } = require("../constants/chords");
+const { chordSuffixes, MINOR_CHORD_DEGREE_INDECES } = require("../constants/chords");
 
 function generateChords(scale, mode) {
     if (mode === modeTypes.MAJOR) {
@@ -18,7 +18,7 @@ function generateInMajor(scale) {
             return acc;
         }
 
-        if (chordSuffixes.MINOR_INDECES.includes(index)) {
+        if (MINOR_CHORD_DEGREE_INDECES.includes(index)) {
             val += chordSuffixes.MINOR;
         }
         if (index === 6) {

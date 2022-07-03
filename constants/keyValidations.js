@@ -1,5 +1,5 @@
-const validKeyName = /^[A-G][#b]?\s(\bminor\b)?(\bmajor\b)?$/;
-const invalidKeys = [
+const VALID_KEY_NAME = /^[A-G][#b]?\s(\bminor\b)?(\bmajor\b)?$/;
+const INVALID_KEYS = [
     'Cb minor',
     'Db minor',
     'D# major',
@@ -14,4 +14,4 @@ const invalidKeys = [
     'B# minor'
 ];
 
-module.exports = { validKeyName, invalidKeys };
+module.exports = { VALID_KEY_NAME, INVALID_KEYS };

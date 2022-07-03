@@ -1,3 +1,4 @@
+const MINOR_CHORD_DEGREE_INDECES = [1, 2, 5];
 const chordIndeces = {
     'DOMINANT_SEVENTH': 80,
     'SUSPENDED_DOMINANT': 90,
@@ -26,7 +27,7 @@ const chordSuffixes = {
     'DIMINISHED': 'dim',
     'SEVENTH': '7',
     'SUSPENDED': 'sus',
-    'MINOR_INDECES': [1, 2, 5], //should be refactored
+    'SLASH_CHORD': '/'
 }
 
 const progressionLength = {
@@ -36,6 +37,7 @@ const progressionLength = {
 
 module.exports = {
     chordIndeces,
+    MINOR_CHORD_DEGREE_INDECES,
     chordToneIndexes,
     harmonicFunctions,
     chordSuffixes,

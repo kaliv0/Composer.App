@@ -1,27 +1,29 @@
 //creates main scale of given key
-const { scalePitches } = require("../constants/pitches");
-const { validKeyName } = require("../constants/keyValidations");
-const { invalidKeyError } = require("../constants/errorMessages");
+const { KEY_SEPARATOR } = require("../constants/modes");
+const { INVALID_KEY_ERROR } = require("../constants/errorMessages");
+const { VALID_KEY_NAME } = require("../constants/keyValidations");
+const { SCALE_PITCHES } = require("../constants/pitches");
+const { scaleCounter } = require("../constants/scales");
 const { addChromaticSigns } = require("./chromatizer");
 
 function generateKey(tonality) {
-    if (!validKeyName.test(tonality)) {
-        console.error(invalidKeyError);
+    if (!VALID_KEY_NAME.test(tonality)) {
+        console.error(INVALID_KEY_ERROR);
         return;
     }
 
-    const [tonic, mode] = tonality.split(' ');
-    let pitchIndex = scalePitches.indexOf(tonic.charAt(0));
+    const [tonic, mode] = tonality.split(KEY_SEPARATOR);
+    let pitchIndex = SCALE_PITCHES.indexOf(tonic.charAt(0));
 
     //populates scale degrees
     let newKey = [];
-    for (let i = 0; i < 7; i++) {
-        newKey.push(scalePitches[pitchIndex]);
+    for (let i = scaleCounter.START_INDEX; i < scaleCounter.UPPER_BOUND; i++) {
+        newKey.push(SCALE_PITCHES[pitchIndex]);
 
-        if (pitchIndex < scalePitches.length - 1) {
+        if (pitchIndex < SCALE_PITCHES.length - 1) {
             pitchIndex++;
         } else {
-            pitchIndex = 0;
+            pitchIndex = scaleCounter.START_INDEX;
         }
     }
     //error handling needed if user selects key manually
