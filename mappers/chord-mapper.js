@@ -79,7 +79,10 @@ function readOtherNotesAboveRoot(scale, rootIndex, notesCount, mode) {
     let fullChord = [];
     let scaleIndex = rootIndex;
     for (let j = chordToneIndexes.ROOT; j < notesCount; j++) {
-        if (mode === modeTypes.MINOR && rootIndex === scaleDegrees.SUBDOMINANT && j === chordToneIndexes.THIRD) {
+        if (mode === modeTypes.MINOR
+            && rootIndex === scaleDegrees.SUBDOMINANT
+            && j === chordToneIndexes.THIRD) {
+
             //alters chord on fifth degree in minor mode
             fullChord.push(raiseNote(scale[scaleIndex]));
         } else {

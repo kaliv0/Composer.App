@@ -168,7 +168,9 @@ function colorizeSixthDegreeWithAppliedDominants(
 }
 
 function createFinalAuthenticCadence(colorizedProgression) {
-    if (randomBit() === randomBitStates.NEGATIVE && colorizedProgression[colorizedProgression.length - 1] !== 8) {
+    if (randomBit() === randomBitStates.NEGATIVE
+        && colorizedProgression[colorizedProgression.length - 1] !== 8) {
+
         //adds double appoggiatura to dominant seventh chord  
         colorizedProgression.push(chordIndeces.CADENTIAL_SIX_FOUR_CHORD);
         colorizedProgression.push(chordIndeces.DOMINANT_SEVENTH);

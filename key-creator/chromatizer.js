@@ -1,8 +1,8 @@
 //appends required chromatic signs for a given key signature
-const { accidentals, CHROMATIC_SIGNS } = require("../constants/chromaticSigns");
+const { SIGN_INCREMENTAL_STEP, accidentals, chromaticSigns, chromaticSignCount } = require("../constants/chromaticSigns");
+const { INVALID_KEY_ERROR } = require("../constants/errorMessages");
 const { majorCircleOfFifths } = require("../constants/pitches");
 const { modeTypes } = require("../constants/modes");
-const { INVALID_KEY_ERROR } = require("../constants/errorMessages");
 
 function addChromaticSigns(scale, tonic, mode) {
     let signCount = majorCircleOfFifths[tonic];
@@ -10,18 +10,18 @@ function addChromaticSigns(scale, tonic, mode) {
 
     if (mode === modeTypes.MINOR) {
         if (isWithFlats) {
-            signCount += 3;
+            signCount += SIGN_INCREMENTAL_STEP;
         } else {
-            signCount -= 3;
+            signCount -= SIGN_INCREMENTAL_STEP;
         }
     }
 
-    if (signCount > 7) {
+    if (signCount > chromaticSignCount.MAX) {
         throw new Error(INVALID_KEY_ERROR);
     }
 
-    if (isWithFlats || signCount < 0) {
-        if (signCount < 0) {
+    if (isWithFlats || signCount < chromaticSignCount.MIN) {
+        if (signCount < chromaticSignCount.MIN) {
             signCount = Math.abs(signCount);
         }
         return addFlats(scale, signCount);
@@ -33,8 +33,8 @@ function addChromaticSigns(scale, tonic, mode) {
 function addFlats(scale, signCount) {
     let currNote;
     let degreeIndex;
-    for (let i = signCount; i > 0; i--) {
-        currNote = CHROMATIC_SIGNS[CHROMATIC_SIGNS.length - i];
+    for (let i = signCount; i > chromaticSignCount.MIN; i--) {
+        currNote = chromaticSigns[chromaticSigns.length - i];
         degreeIndex = scale.indexOf(currNote);
         scale[degreeIndex] += accidentals.FLAT;
     }
@@ -43,8 +43,8 @@ function addFlats(scale, signCount) {
 
 function addSharps(scale, signCount) {
     let degreeIndex;
-    for (let i = 0; i < signCount; i++) {
-        degreeIndex = scale.indexOf(CHROMATIC_SIGNS[i]);
+    for (let i = chromaticSignCount.MIN; i < signCount; i++) {
+        degreeIndex = scale.indexOf(chromaticSigns[i]);
         scale[degreeIndex] += accidentals.SHARP;
     }
     return scale;
