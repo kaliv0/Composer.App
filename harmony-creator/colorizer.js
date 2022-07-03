@@ -1,7 +1,8 @@
 //colorizes given progression by inserting applied dominants, ii-v 'movements'
 //and appends final cadence
-const { harmonicFunctions, chordIndeces } = require("../constants/chords");
 const { modeTypes } = require("../constants/modes");
+const { randomBitIntervals } = require("../constants/randoms");
+const { harmonicFunctions, chordIndeces } = require("../constants/chords");
 const { materialize } = require("../mappers/tonal-mapper");
 const { randomIntegerFromInterval, randomBit } = require("../random-generators/randomizer");
 
@@ -24,14 +25,14 @@ function colorize(progression, tonalChords, mode, shouldApplyDominants) {
         //colorizes 4th degree
         if (chord === 4) {
             if (shouldApplyDominants) {
-                colorizedProgression, colorizationIndex = colorizeFourthDegreeWithAppliedDominants(
+                [colorizedProgression, colorizationIndex] = colorizeFourthDegreeWithAppliedDominants(
                     chord, colorizedProgression, colorizationIndex,
                     progression, index, appliedChord
                 );
                 continue;
             }
 
-            colorizedProgression, colorizationIndex = colorizeFourthDegree(
+            [colorizedProgression, colorizationIndex] = colorizeFourthDegree(
                 chord, colorizedProgression, colorizationIndex,
                 progression, index, appliedChord
             );
@@ -47,14 +48,14 @@ function colorize(progression, tonalChords, mode, shouldApplyDominants) {
         //colorizes 6th degree
         if (chord === 6) {
             if (shouldApplyDominants) {
-                colorizedProgression, colorizationIndex = colorizeSixthDegreeWithAppliedDominants(
+                [colorizedProgression, colorizationIndex] = colorizeSixthDegreeWithAppliedDominants(
                     chord, colorizedProgression, colorizationIndex,
                     progression, index, appliedChord, mode
                 );
                 continue;
             }
 
-            colorizedProgression, colorizationIndex = colorizeSixthDegree(
+            [colorizedProgression, colorizationIndex] = colorizeSixthDegree(
                 chord, colorizedProgression, colorizationIndex, progression,
                 index, shouldApplyDominants, appliedChord, mode
             );
@@ -62,7 +63,7 @@ function colorize(progression, tonalChords, mode, shouldApplyDominants) {
         }
 
         //colorizes chords on other degrees
-        if (shouldApplyDominants && progression[index] !== 8 && randomBit() === 1) {
+        if (shouldApplyDominants && progression[index] !== 8 && randomBit() === randomBitIntervals.POSITIVE) {
             colorizedProgression.push(chord * 10);
             colorizationIndex++;
         }
@@ -92,7 +93,7 @@ function colorizeFourthDegree(
         colorizationIndex++;
     }
     colorizedProgression.push(chord);
-    return colorizedProgression, colorizationIndex;
+    return [colorizedProgression, colorizationIndex];
 }
 
 function colorizeFourthDegreeWithAppliedDominants(
@@ -111,7 +112,7 @@ function colorizeFourthDegreeWithAppliedDominants(
         colorizationIndex++;
     }
     colorizedProgression.push(chord);
-    return colorizedProgression, colorizationIndex;
+    return [colorizedProgression, colorizationIndex];
 }
 
 function colorizeSixthDegree(
@@ -131,7 +132,7 @@ function colorizeSixthDegree(
         colorizationIndex++;
     }
     colorizedProgression.push(chord);
-    return colorizedProgression, colorizationIndex;
+    return [colorizedProgression, colorizationIndex];
 }
 
 function colorizeSixthDegreeWithAppliedDominants(
@@ -162,7 +163,7 @@ function colorizeSixthDegreeWithAppliedDominants(
     }
 
     colorizedProgression.push(chord);
-    return colorizedProgression, colorizationIndex;
+    return [colorizedProgression, colorizationIndex];
 }
 
 function createFinalAuthenticCadence(colorizedProgression) {
