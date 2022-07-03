@@ -26,7 +26,7 @@ const chordSuffixes = {
     'DIMINISHED': 'dim',
     'SEVENTH': '7',
     'SUSPENDED': 'sus',
-    'MINOR_INDECES': [1, 2, 5],
+    'MINOR_INDECES': [1, 2, 5], //should be refactored
 }
 
 const progressionLength = {

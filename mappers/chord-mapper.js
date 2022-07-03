@@ -28,7 +28,7 @@ function display(progression, scale, mode) {
             notesCount = chordToneIndexes.TRIAD_NOTE_COUNT;
         }
 
-        if (notesCount === 4) {
+        if (notesCount === chordToneIndexes.DOMINANT_NOTE_COUNT) {
             fullChord = translateDominant(scale, root, mode);
             acc.push({
                 name: chord,
@@ -56,10 +56,10 @@ function display(progression, scale, mode) {
 
         let middleIndex = scale.indexOf(chordTable[susIndex].content[1]);
         //keeps index within octave boundaries
-        if (middleIndex + 1 >= scaleAttributes.DEGREE_COUNT) {
-            middleIndex -= 6;
+        if (middleIndex + scaleAttributes.SUSPENDED_CHORD_INCREMENTER >= scaleAttributes.DEGREE_COUNT) {
+            middleIndex -= scaleAttributes.SUSPENDED_CHORD_DECREMENTER;
         } else {
-            middleIndex++;
+            middleIndex += scaleAttributes.SUSPENDED_CHORD_INCREMENTER;
         }
 
         chordTable[susIndex].content[1] = scale[middleIndex];
@@ -78,7 +78,7 @@ function display(progression, scale, mode) {
 function readOtherNotesAboveRoot(scale, rootIndex, notesCount, mode) {
     let fullChord = [];
     let scaleIndex = rootIndex;
-    for (let j = 0; j < notesCount; j++) {
+    for (let j = chordToneIndexes.ROOT; j < notesCount; j++) {
         if (mode === modeTypes.MINOR && rootIndex === 4 && j === chordToneIndexes.THIRD) {
             //alters chord on fifth degree in minor mode
             fullChord.push(raiseNote(scale[scaleIndex]));
