@@ -1,5 +1,7 @@
 //reads notes above root in dominant cords and adds accidentals where necessary
 const { modeTypes } = require("../constants/modes");
+const { chordToneIndexes } = require("../constants/chords");
+const { scaleAttributes } = require("../constants/scales");
 const { majorDominant, minorDominant } = require("../constants/dominantIndeces");
 const { raiseNote, lowerNote } = require('../alterators/note-alterator');
 
@@ -22,28 +24,27 @@ function translateDominant(scale, root, mode) {
     let scaleIndex = rootIndex;
     let fullChord = [];
     let currNote;
-
-    for (let j = 0; j < 4; j++) {
+    for (let j = chordToneIndexes.ROOT; j < chordToneIndexes.DOMINANT_NOTE_COUNT; j++) {
         currNote = scale[scaleIndex];
 
-        if (j === 1 && raiseThirdIndeces.includes(rootIndex)) {
+        if (j === chordToneIndexes.THIRD && raiseThirdIndeces.includes(rootIndex)) {
             currNote = raiseNote(currNote);
         }
 
-        if (j === 2 && raiseFifthIndex.includes(rootIndex)) {
+        if (j === chordToneIndexes.FIFTH && raiseFifthIndex.includes(rootIndex)) {
             currNote = raiseNote(currNote);
         }
 
-        if (j === 3 && lowerSeventhIndeces.includes(rootIndex)) {
+        if (j === chordToneIndexes.SEVENTH && lowerSeventhIndeces.includes(rootIndex)) {
             currNote = lowerNote(currNote);
         }
 
         fullChord.push(currNote);
         //keeps index within octave boundaries
-        if (scaleIndex + 2 >= 7) {
-            scaleIndex -= 5;
+        if (scaleIndex + scaleAttributes.INCREMENTER >= scaleAttributes.DEGREE_COUNT) {
+            scaleIndex -= scaleAttributes.DECREMENTER;
         } else {
-            scaleIndex += 2;
+            scaleIndex += scaleAttributes.INCREMENTER;
         }
     }
     return fullChord;
