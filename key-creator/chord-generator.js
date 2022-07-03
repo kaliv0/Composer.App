@@ -1,6 +1,6 @@
 //generates all main chords in given key and all their applied dominants
-const { modeTypes } = require("../constants/modes");
 const { chordSuffixes, MINOR_CHORD_DEGREE_INDECES } = require("../constants/chords");
+const { modeTypes } = require("../constants/modes");
 
 function generateChords(scale, mode) {
     if (mode === modeTypes.MAJOR) {
@@ -12,20 +12,20 @@ function generateChords(scale, mode) {
 }
 
 function generateInMajor(scale) {
-    let chords = scale.reduce((acc, val, index) => {
+    let chords = scale.reduce((chordList, scaleDegree, index) => {
         if (index === 0) {
-            acc[8] = val;
-            return acc;
+            chordList[8] = scaleDegree;
+            return chordList;
         }
 
         if (MINOR_CHORD_DEGREE_INDECES.includes(index)) {
-            val += chordSuffixes.MINOR;
+            scaleDegree += chordSuffixes.MINOR;
         }
         if (index === 6) {
-            val += chordSuffixes.DIMINISHED
+            scaleDegree += chordSuffixes.DIMINISHED
         }
-        acc[index + 1] = val;
-        return acc;
+        chordList[index + 1] = scaleDegree;
+        return chordList;
     }, {});
 
     //creates applied dominants and cadential chords
@@ -44,21 +44,21 @@ function generateInMajor(scale) {
 }
 
 function generateInMinor(scale) {
-    let chords = scale.reduce((acc, val, index) => {
+    let chords = scale.reduce((chordList, scaleDegree, index) => {
         if (index === 0) {
-            acc[8] = val + chordSuffixes.MINOR;
-            return acc;
+            chordList[8] = scaleDegree + chordSuffixes.MINOR;
+            return chordList;
         }
 
         if (index === 1) {
             /* could be changed to diminished seventh chord */
-            val += chordSuffixes.DIMINISHED
+            scaleDegree += chordSuffixes.DIMINISHED
         }
         if (index === 3) {
-            val += chordSuffixes.MINOR;
+            scaleDegree += chordSuffixes.MINOR;
         }
-        acc[index + 1] = val;
-        return acc;
+        chordList[index + 1] = scaleDegree;
+        return chordList;
     }, {});
 
     //creates applied dominants and cadential chords
