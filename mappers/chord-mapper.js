@@ -1,5 +1,5 @@
 //maps chord abbreviations to full representation of the chords
-const { scaleCounter } = require("../constants/scales");
+const { scaleCounter, scaleDegrees } = require("../constants/scales");
 const { chordSuffixes, chordToneIndexes } = require("../constants/chords");
 const { accidentals } = require("../constants/chromaticSigns");
 const { modeTypes } = require("../constants/modes");
@@ -80,7 +80,7 @@ function readOtherNotesAboveRoot(scale, rootIndex, notesCount, mode) {
     let scaleIndex = rootIndex;
     for (let j = chordToneIndexes.ROOT; j < notesCount; j++) {
         if (mode === modeTypes.MINOR
-            && rootIndex === 4
+            && rootIndex === scaleDegrees.DOMINANT
             && j === chordToneIndexes.THIRD) {
 
             //alters chord on fifth degree in minor mode

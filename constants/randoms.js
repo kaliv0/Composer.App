@@ -8,12 +8,13 @@ const randomBitStates = {
     'POSITIVE': 1
 };
 
+const RANDOM_BIT_INCREMENTER = 1;
 const randomIntegerIndeces = {
     'MIN': 0,
-    'FIRST': 1,
-    'SECOND': 2,
+    'PRIMARY': 1,
+    'SECONDARY': 2,
     'MAX': 3,
     'RANGE_UPPER_BOUND': 4,
 };
 
-module.exports = { randomIndexIntervals, randomBitStates, randomIntegerIndeces }
+module.exports = { RANDOM_BIT_INCREMENTER, randomIndexIntervals, randomBitStates, randomIntegerIndeces }

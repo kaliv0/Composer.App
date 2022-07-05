@@ -1,13 +1,13 @@
 //colorizes given progression by inserting applied dominants, ii-v 'movements'
 //and appends final cadence
+const { harmonicFunctions, chordIndeces, rootDegrees, APPLIED_DOMINANT_COEFFICIENT, COLORIZATION_RANGE } = require("../constants/chords");
+const { randomBitStates, randomIntegerIndeces } = require("../constants/randoms");
 const { modeTypes } = require("../constants/modes");
-const { randomBitStates } = require("../constants/randoms");
-const { harmonicFunctions, chordIndeces } = require("../constants/chords");
-const { materialize } = require("../mappers/tonal-mapper");
 const { randomIntegerFromInterval, randomBit } = require("../random-generators/randomizer");
+const { materialize } = require("../mappers/tonal-mapper");
 
 function colorize(progression, tonalChords, mode, shouldApplyDominants) {
-    let colorizationIndex = 0;
+    let colorizationIndex = COLORIZATION_RANGE.MAX;
     let colorizedProgression = [];
     colorizedProgression.push(progression[0]);
 
@@ -17,13 +17,13 @@ function colorize(progression, tonalChords, mode, shouldApplyDominants) {
     for (let index = 1; index < progression.length; index++) {
         chord = progression[index];
 
-        if (colorizationIndex === 3) {
+        if (colorizationIndex === COLORIZATION_RANGE.MAX) {
             colorizedProgression.push(chord);
             continue;
         }
 
         //colorizes 4th degree
-        if (chord === 4) {
+        if (chord === rootDegrees.SUBDOMINANT) {
             if (shouldApplyDominants) {
                 [colorizedProgression, colorizationIndex] = colorizeFourthDegreeWithAppliedDominants(
                     chord, colorizedProgression, colorizationIndex,
@@ -40,13 +40,16 @@ function colorize(progression, tonalChords, mode, shouldApplyDominants) {
         }
 
         //avoids situations of type 'Gdim, G7, C7, Fm'
-        if (mode === modeTypes.MINOR && chord === 5 && progression[index - 1] === 2) {
+        if (mode === modeTypes.MINOR
+            && chord === rootDegrees.DOMINANT
+            && progression[index - 1] === rootDegrees.SUPERTONIC) {
+
             colorizedProgression.push(chord);
             continue;
         }
 
         //colorizes 6th degree
-        if (chord === 6) {
+        if (chord === rootDegrees.SUBMEDIANT) {
             if (shouldApplyDominants) {
                 [colorizedProgression, colorizationIndex] = colorizeSixthDegreeWithAppliedDominants(
                     chord, colorizedProgression, colorizationIndex,
@@ -63,14 +66,17 @@ function colorize(progression, tonalChords, mode, shouldApplyDominants) {
         }
 
         //colorizes chords on other degrees
-        if (shouldApplyDominants && progression[index] !== 8 && randomBit() === randomBitStates.POSITIVE) {
-            colorizedProgression.push(chord * 10);
+        if (shouldApplyDominants
+            && progression[index] !== rootDegrees.KEY_CENTER
+            && randomBit() === randomBitStates.POSITIVE) {
+
+            colorizedProgression.push(chord * APPLIED_DOMINANT_COEFFICIENT);
             colorizationIndex++;
         }
         colorizedProgression.push(chord);
     }
 
-    if (colorizedProgression[colorizedProgression.length - 1] !== 5) {
+    if (colorizedProgression[colorizedProgression.length - 1] !== rootDegrees.DOMINANT) {
         colorizedProgression = createFinalAuthenticCadence(colorizedProgression);
         //adds final tonic
         colorizedProgression.push(harmonicFunctions.TONIC[0]);
@@ -86,10 +92,12 @@ function colorizeFourthDegree(
     chord, colorizedProgression, colorizationIndex, progression,
     index, appliedChord) {
 
-    appliedChord = randomIntegerFromInterval(0, 2);
+    appliedChord = randomIntegerFromInterval(randomIntegerIndeces.MIN, randomIntegerIndeces.SECONDARY);
     //adds mediant between tonic and subdominant
-    if (appliedChord === 1 && progression[index - 1] === 8) {
-        colorizedProgression.push(3);
+    if (appliedChord === randomIntegerIndeces.PRIMARY
+        && progression[index - 1] === rootDegrees.KEY_CENTER) {
+
+        colorizedProgression.push(rootDegrees.MEDIANT);
         colorizationIndex++;
     }
     colorizedProgression.push(chord);
@@ -100,15 +108,17 @@ function colorizeFourthDegreeWithAppliedDominants(
     chord, colorizedProgression, colorizationIndex, progression,
     index, appliedChord) {
 
-    appliedChord = randomIntegerFromInterval(0, 3);
+    appliedChord = randomIntegerFromInterval(randomIntegerIndeces.MIN, randomIntegerIndeces.MAX);
     //adds applied dominant 7th
-    if (appliedChord === 1) {
-        colorizedProgression.push(40);
+    if (appliedChord === randomIntegerIndeces.PRIMARY) {
+        colorizedProgression.push(chordIndeces.ALTERED_TONIC);
         colorizationIndex++;
     }
     //adds mediant between tonic and subdominant
-    else if (appliedChord === 2 && progression[index - 1] === 8) {
-        colorizedProgression.push(3);
+    else if (appliedChord === randomIntegerIndeces.SECONDARY
+        && progression[index - 1] === rootDegrees.KEY_CENTER) {
+
+        colorizedProgression.push(rootDegrees.MEDIANT);
         colorizationIndex++;
     }
     colorizedProgression.push(chord);
@@ -119,16 +129,19 @@ function colorizeSixthDegree(
     chord, colorizedProgression, colorizationIndex,
     progression, index, appliedChord, mode) {
 
-    appliedChord = randomIntegerFromInterval(0, 3);
+    appliedChord = randomIntegerFromInterval(randomIntegerIndeces.MIN, randomIntegerIndeces.MAX);
     //adds mediant chord
-    if (appliedChord === 1) {
-        colorizedProgression.push(3);
+    if (appliedChord === randomIntegerIndeces.PRIMARY) {
+        colorizedProgression.push(rootDegrees.MEDIANT);
         colorizationIndex++;
     }
     //adds ii-v transition after tonic
-    else if (mode === modeTypes.MINOR && appliedChord === 2 && progression[index - 1] === 8) {
-        colorizedProgression.push(7);
-        colorizedProgression.push(3);
+    else if (mode === modeTypes.MINOR
+        && appliedChord === randomIntegerIndeces.SECONDARY
+        && progression[index - 1] === rootDegrees.KEY_CENTER) {
+
+        colorizedProgression.push(rootDegrees.SUBTONIC);
+        colorizedProgression.push(rootDegrees.MEDIANT);
         colorizationIndex++;
     }
     colorizedProgression.push(chord);
@@ -139,25 +152,27 @@ function colorizeSixthDegreeWithAppliedDominants(
     chord, colorizedProgression, colorizationIndex,
     progression, index, appliedChord, mode) {
 
-    appliedChord = randomIntegerFromInterval(0, 4);
+    appliedChord = randomIntegerFromInterval(
+        randomIntegerIndeces.MIN, randomIntegerIndeces.RANGE_UPPER_BOUND);
     //adds applied dominant 7th
-    if (appliedChord === 1) {
-        colorizedProgression.push(60);
+    if (appliedChord === randomIntegerIndeces.PRIMARY) {
+        colorizedProgression.push(chordIndeces.ALTERED_MEDIANT);
         colorizationIndex++;
     }
     //adds mediant chord
-    else if (appliedChord === 2) {
-        colorizedProgression.push(3);
+    else if (appliedChord === randomIntegerIndeces.SECONDARY) {
+        colorizedProgression.push(rootDegrees.MEDIANT);
         colorizationIndex++;
     }
     //adds ii-v transition after tonic
-    else if (appliedChord === 3 && progression[index - 1] === 8) {
-        colorizedProgression.push(7);
+    else if (appliedChord === randomIntegerIndeces.MAX
+        && progression[index - 1] === rootDegrees.KEY_CENTER) {
 
+        colorizedProgression.push(rootDegrees.SUBTONIC);
         if (mode === modeTypes.MAJOR) {
-            colorizedProgression.push(60)
+            colorizedProgression.push(chordIndeces.ALTERED_MEDIANT)
         } else {
-            colorizedProgression.push(3);
+            colorizedProgression.push(rootDegrees.MEDIANT);
         }
         colorizationIndex++;
     }
@@ -168,7 +183,7 @@ function colorizeSixthDegreeWithAppliedDominants(
 
 function createFinalAuthenticCadence(colorizedProgression) {
     if (randomBit() === randomBitStates.NEGATIVE
-        && colorizedProgression[colorizedProgression.length - 1] !== 8) {
+        && colorizedProgression[colorizedProgression.length - 1] !== rootDegrees.KEY_CENTER) {
 
         //adds double appoggiatura to dominant seventh chord  
         colorizedProgression.push(chordIndeces.CADENTIAL_SIX_FOUR_CHORD);

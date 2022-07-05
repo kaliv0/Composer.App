@@ -1,6 +1,8 @@
 //generates all main chords in given key and all their applied dominants
-const { chordSuffixes, MINOR_CHORD_DEGREE_INDECES } = require("../constants/chords");
+const { MINOR_CHORD_DEGREE_INDECES, APPLIED_DOMINANT_COEFFICIENT,
+    chordIndeces, rootDegrees, chordSuffixes } = require("../constants/chords");
 const { modeTypes } = require("../constants/modes");
+const { scaleDegrees } = require("../constants/scales");
 
 function generateChords(scale, mode) {
     if (mode === modeTypes.MAJOR) {
@@ -12,29 +14,29 @@ function generateChords(scale, mode) {
 }
 
 function generateInMajor(scale) {
-    let chords = scale.reduce((chordList, scaleDegree, index) => {
-        if (index === 0) {
-            chordList[8] = scaleDegree;
+    let chords = scale.reduce((chordList, currScaleDegree, index) => {
+        if (index === scaleDegrees.TONIC) {
+            chordList[rootDegrees.KEY_CENTER] = currScaleDegree;
             return chordList;
         }
 
         if (MINOR_CHORD_DEGREE_INDECES.includes(index)) {
-            scaleDegree += chordSuffixes.MINOR;
+            currScaleDegree += chordSuffixes.MINOR;
         }
-        if (index === 6) {
-            scaleDegree += chordSuffixes.DIMINISHED
+        if (index === scaleDegrees.SUBTONIC) {
+            currScaleDegree += chordSuffixes.DIMINISHED
         }
-        chordList[index + 1] = scaleDegree;
+        chordList[index + 1] = currScaleDegree;
         return chordList;
     }, {});
 
     //creates applied dominants and cadential chords
-    let degreeIndex = 5;
-    for (let j = 20; j <= 80; j += 10) {
-        if (degreeIndex === 7) {
-            degreeIndex = 0;
+    let degreeIndex = scaleDegrees.SUBMEDIANT;
+    for (let j = chordIndeces.ALTERED_SUBMEDIANT; j <= chordIndeces.DOMINANT_SEVENTH; j += APPLIED_DOMINANT_COEFFICIENT) {
+        if (degreeIndex === scaleDegrees.UPPER_BOUND) {
+            degreeIndex = scaleDegrees.TONIC;
         }
-        if (degreeIndex === 3) {
+        if (degreeIndex === scaleDegrees.SUBDOMINANT) {
             chords[j] = scale[degreeIndex] + chordSuffixes.MAJOR + chordSuffixes.SEVENTH;
         }
         chords[j] = scale[degreeIndex] + chordSuffixes.SEVENTH;
@@ -44,32 +46,32 @@ function generateInMajor(scale) {
 }
 
 function generateInMinor(scale) {
-    let chords = scale.reduce((chordList, scaleDegree, index) => {
-        if (index === 0) {
-            chordList[8] = scaleDegree + chordSuffixes.MINOR;
+    let chords = scale.reduce((chordList, currScaleDegree, index) => {
+        if (index === scaleDegrees.TONIC) {
+            chordList[rootDegrees.KEY_CENTER] = currScaleDegree + chordSuffixes.MINOR;
             return chordList;
         }
 
-        if (index === 1) {
+        if (index === scaleDegrees.SUPERTONIC) {
             /* could be changed to diminished seventh chord */
-            scaleDegree += chordSuffixes.DIMINISHED
+            currScaleDegree += chordSuffixes.DIMINISHED
         }
-        if (index === 3) {
-            scaleDegree += chordSuffixes.MINOR;
+        if (index === scaleDegrees.SUBDOMINANT) {
+            currScaleDegree += chordSuffixes.MINOR;
         }
-        chordList[index + 1] = scaleDegree;
+        chordList[index + 1] = currScaleDegree;
         return chordList;
     }, {});
 
     //creates applied dominants and cadential chords
-    let degreeIndex = 5;
-    for (let j = 20; j <= 80; j += 10) {
-        if (degreeIndex === 5) {
+    let degreeIndex = scaleDegrees.SUBMEDIANT;
+    for (let j = chordIndeces.ALTERED_SUBMEDIANT; j <= chordIndeces.DOMINANT_SEVENTH; j += APPLIED_DOMINANT_COEFFICIENT) {
+        if (degreeIndex === scaleDegrees.SUBMEDIANT) {
             /* could be changed to French (flat five) chord */
             chords[j] = scale[degreeIndex] + chordSuffixes.MAJOR;
         }
-        if (degreeIndex === 7) {
-            degreeIndex = 0;
+        if (degreeIndex === scaleDegrees.UPPER_BOUND) {
+            degreeIndex = scaleDegrees.TONIC;
         }
         chords[j] = scale[degreeIndex] + chordSuffixes.SEVENTH;
         degreeIndex++;
@@ -78,8 +80,9 @@ function generateInMinor(scale) {
 }
 
 function addSuspendedDominant(chords, scale) {
-    chords[90] = scale[4] + chordSuffixes.SUSPENDED;
-    chords[100] = `${scale[0]}/${scale[4]}`;
+    chords[chordIndeces.SUSPENDED_DOMINANT] = scale[scaleDegrees.DOMINANT] + chordSuffixes.SUSPENDED;
+    chords[chordIndeces.CADENTIAL_SIX_FOUR_CHORD] =
+        `${scale[scaleDegrees.TONIC]}/${scale[scaleDegrees.DOMINANT]}`;
     return chords;
 }
 

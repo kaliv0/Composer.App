@@ -1,9 +1,9 @@
 //randomly selects key to be constructed
+const { randomIndexIntervals, randomIntegerIndeces } = require("../constants/randoms");
 const { INVALID_KEYS } = require("../constants/keyValidations");
 const { SCALE_PITCHES } = require("../constants/pitches");
 const { accidentals } = require("../constants/chromaticSigns");
 const { modeTypes } = require("../constants/modes");
-const { randomIndexIntervals, randomIntegerIndeces } = require("../constants/randoms");
 const { randomIntegerFromInterval } = require('./randomizer');
 
 function selectKey() {
@@ -12,10 +12,10 @@ function selectKey() {
     let key = SCALE_PITCHES[randomIndex];
 
     const randomInteger = randomIntegerFromInterval(randomIntegerIndeces.MIN, randomIntegerIndeces.MAX);
-    if (randomInteger === randomIntegerIndeces.FIRST) {
+    if (randomInteger === randomIntegerIndeces.PRIMARY) {
         key += accidentals.SHARP;
     }
-    if (randomInteger === randomIntegerIndeces.SECOND) {
+    if (randomInteger === randomIntegerIndeces.SECONDARY) {
         key += accidentals.FLAT;
     }
 
