@@ -8,5 +8,16 @@ const scaleCounter = {
     'DEGREE_COUNT': 7,
 };
 
-module.exports = { scaleCounter };
+const scaleDegrees = {
+    'TONIC': 0,
+    'SUPERTONIC': 1,
+    'MEDIANT': 2,
+    'SUBDOMINANT': 3,
+    'DOMINANT': 4,
+    'SUBMEDIANT': 5,
+    'SUBTONIC': 6,
+    'UPPER_BOUND': 7,
+};
+
+module.exports = { scaleCounter, scaleDegrees };
 

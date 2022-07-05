@@ -7,8 +7,8 @@ features that could be added:
 - add sequences
 - add modal interchange (Neapolitan chord)
 */
-const { harmonicFunctions, progressionLength } = require("../constants/chords");
-const { randomBitStates } = require("../constants/randoms");
+const { harmonicFunctions, PROGRESSION_LENGTH, CHORD_DECREMENTER } = require("../constants/chords");
+const { randomBitStates, RANDOM_BIT_INCREMENTER } = require("../constants/randoms");
 const { randomBit } = require("../random-generators/randomizer");
 const { colorize } = require("./colorizer");
 
@@ -25,23 +25,24 @@ function generateProgression(tonalChords, mode, shouldApplyDominants) {
                 if (progression.length > 0 &&
                     (progression[progression.length - 1] === chord
                         //avoids putting main chord after subsidiary one e.g. F after D min
-                        || progression[progression.length - 1] === chord - 2)) {
+                        || progression[progression.length - 1] === chord - CHORD_DECREMENTER)) {
                     continue;
                 }
                 //avoids duplicates at penultimate index
-                if (progression.length >= 2 && progression[progression.length - 2] === chord) {
+                if (progression.length >= PROGRESSION_LENGTH.DUPLICATE_THRESHOLD
+                    && progression[progression.length - 2] === chord) {
                     continue;
                 }
                 progression.push(chord);
             }
         }
         //checks total length of progression and decides to continue or not
-        if ((progression.length >= progressionLength.MIN && randomBit() === randomBitStates.NEGATIVE)
-            || progression.length === progressionLength.MAX) {
+        if ((progression.length >= PROGRESSION_LENGTH.MIN && randomBit() === randomBitStates.NEGATIVE)
+            || progression.length === PROGRESSION_LENGTH.MAX) {
             break;
         }
         //decides to go to next chord function or skip one
-        funcIndex += (randomBit() + 1);
+        funcIndex += (randomBit() + RANDOM_BIT_INCREMENTER);
         if (funcIndex >= functionValues.length) {
             funcIndex = 0;
         }

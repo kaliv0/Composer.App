@@ -2,11 +2,11 @@
 const { SIGN_INCREMENTAL_STEP, CHROMATIC_SIGNS, accidentals, chromaticSignCount } = require("../constants/chromaticSigns");
 const { INVALID_KEY_ERROR } = require("../constants/errorMessages");
 const { majorCircleOfFifths } = require("../constants/pitches");
-const { modeTypes } = require("../constants/modes");
+const { modeTypes, F_KEY } = require("../constants/modes");
 
 function addChromaticSigns(scale, tonic, mode) {
     let signCount = majorCircleOfFifths[tonic];
-    let isWithFlats = (tonic.charAt(1) === accidentals.FLAT || tonic === 'F');
+    let isWithFlats = (tonic.charAt(1) === accidentals.FLAT || tonic === F_KEY);
 
     if (mode === modeTypes.MINOR) {
         if (isWithFlats) {
