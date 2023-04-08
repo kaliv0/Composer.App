@@ -79,10 +79,15 @@ function generateInMinor(scale) {
     return addSuspendedDominant(chords, scale);
 }
 
-function addSuspendedDominant(chords, scale) {
+function addSuspendedDominant(chords, scale, isMinor) {
     chords[chordIndeces.SUSPENDED_DOMINANT] = scale[scaleDegrees.DOMINANT] + chordSuffixes.SUSPENDED;
-    chords[chordIndeces.CADENTIAL_SIX_FOUR_CHORD] =
+    if (isMinor){
+        chords[chordIndeces.CADENTIAL_SIX_FOUR_CHORD] =
+        `${scale[scaleDegrees.TONIC]}m/${scale[scaleDegrees.DOMINANT]}`;
+    }else{
+        chords[chordIndeces.CADENTIAL_SIX_FOUR_CHORD] =
         `${scale[scaleDegrees.TONIC]}/${scale[scaleDegrees.DOMINANT]}`;
+    }
     return chords;
 }
 

@@ -7,7 +7,7 @@ const { randomIntegerFromInterval, randomBit } = require("../random-generators/r
 const { materialize } = require("../mappers/tonal-mapper");
 
 function colorize(progression, tonalChords, mode, shouldApplyDominants) {
-    let colorizationIndex = COLORIZATION_RANGE.MAX;
+    let colorizationIndex = COLORIZATION_RANGE.MIN;
     let colorizedProgression = [];
     colorizedProgression.push(progression[0]);
 
@@ -27,14 +27,14 @@ function colorize(progression, tonalChords, mode, shouldApplyDominants) {
             if (shouldApplyDominants) {
                 [colorizedProgression, colorizationIndex] = colorizeFourthDegreeWithAppliedDominants(
                     chord, colorizedProgression, colorizationIndex,
-                    progression, index, appliedChord
+                    progression, index
                 );
                 continue;
             }
 
             [colorizedProgression, colorizationIndex] = colorizeFourthDegree(
                 chord, colorizedProgression, colorizationIndex,
-                progression, index, appliedChord
+                progression, index
             );
             continue;
         }
@@ -53,14 +53,14 @@ function colorize(progression, tonalChords, mode, shouldApplyDominants) {
             if (shouldApplyDominants) {
                 [colorizedProgression, colorizationIndex] = colorizeSixthDegreeWithAppliedDominants(
                     chord, colorizedProgression, colorizationIndex,
-                    progression, index, appliedChord, mode
+                    progression, index, mode
                 );
                 continue;
             }
 
             [colorizedProgression, colorizationIndex] = colorizeSixthDegree(
                 chord, colorizedProgression, colorizationIndex, progression,
-                index, shouldApplyDominants, appliedChord, mode
+                index, shouldApplyDominants, mode
             );
             continue;
         }
@@ -88,10 +88,7 @@ function colorize(progression, tonalChords, mode, shouldApplyDominants) {
     return materialize(colorizedProgression, tonalChords);
 }
 
-function colorizeFourthDegree(
-    chord, colorizedProgression, colorizationIndex, progression,
-    index, appliedChord) {
-
+function colorizeFourthDegree(chord, colorizedProgression, colorizationIndex, progression,index) {
     appliedChord = randomIntegerFromInterval(randomIntegerIndeces.MIN, randomIntegerIndeces.SECONDARY);
     //adds mediant between tonic and subdominant
     if (appliedChord === randomIntegerIndeces.PRIMARY
@@ -104,10 +101,7 @@ function colorizeFourthDegree(
     return [colorizedProgression, colorizationIndex];
 }
 
-function colorizeFourthDegreeWithAppliedDominants(
-    chord, colorizedProgression, colorizationIndex, progression,
-    index, appliedChord) {
-
+function colorizeFourthDegreeWithAppliedDominants(chord, colorizedProgression, colorizationIndex, progression, index) {
     appliedChord = randomIntegerFromInterval(randomIntegerIndeces.MIN, randomIntegerIndeces.MAX);
     //adds applied dominant 7th
     if (appliedChord === randomIntegerIndeces.PRIMARY) {
@@ -125,10 +119,7 @@ function colorizeFourthDegreeWithAppliedDominants(
     return [colorizedProgression, colorizationIndex];
 }
 
-function colorizeSixthDegree(
-    chord, colorizedProgression, colorizationIndex,
-    progression, index, appliedChord, mode) {
-
+function colorizeSixthDegree(chord, colorizedProgression, colorizationIndex, progression, index, mode) {
     appliedChord = randomIntegerFromInterval(randomIntegerIndeces.MIN, randomIntegerIndeces.MAX);
     //adds mediant chord
     if (appliedChord === randomIntegerIndeces.PRIMARY) {
@@ -148,10 +139,7 @@ function colorizeSixthDegree(
     return [colorizedProgression, colorizationIndex];
 }
 
-function colorizeSixthDegreeWithAppliedDominants(
-    chord, colorizedProgression, colorizationIndex,
-    progression, index, appliedChord, mode) {
-
+function colorizeSixthDegreeWithAppliedDominants(chord, colorizedProgression, colorizationIndex, progression, index, mode) {
     appliedChord = randomIntegerFromInterval(
         randomIntegerIndeces.MIN, randomIntegerIndeces.RANGE_UPPER_BOUND);
     //adds applied dominant 7th
